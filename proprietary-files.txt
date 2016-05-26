@@ -309,8 +309,6 @@ vendor/firmware/libpn548ad_fw.so
 
 # Sensors
 etc/sensors/sensor_def_qcomdev.conf
-lib64/hw/lights.msm8996.so
-lib/hw/lights.msm8996.so
 
 # VR
 lib64/hw/vr.default.so
