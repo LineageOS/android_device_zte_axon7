@@ -294,6 +294,7 @@ PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg
 
 PRODUCT_PACKAGES += \
+    wificond \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf \
