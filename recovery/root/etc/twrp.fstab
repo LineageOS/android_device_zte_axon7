@@ -1,0 +1,12 @@
+/boot              emmc         /dev/block/bootdevice/by-name/boot
+/cache             ext4         /dev/block/bootdevice/by-name/cache
+/data              ext4         /dev/block/bootdevice/by-name/userdata     flags=encryptable=/dev/block/bootdevice/by-name/cryptkey;length=-16384
+/misc              emmc         /dev/block/bootdevice/by-name/misc
+/recovery          emmc         /dev/block/bootdevice/by-name/recovery     flags=backup=1
+/system            ext4         /dev/block/bootdevice/by-name/system
+/system_image      emmc         /dev/block/bootdevice/by-name/system
+/efs1              emmc         /dev/block/bootdevice/by-name/modemst1     flags=backup=1;display=EFS
+/efs2              emmc         /dev/block/bootdevice/by-name/modemst2     flags=backup=1;subpartitionof=/efs1
+
+/external_sd       vfat         /dev/block/mmcblk0p1   /dev/block/mmcblk0  flags=storage;wipeingui;removable;encryptable=footer
+/usb_otg           vfat         /dev/block/sdg1        /dev/block/sdg      flags=display="USB-OTG";storage;wipeingui;removable

@@ -1,0 +1,40 @@
+#
+# Goodix fingerprint
+#
+service gx_fpd /system/bin/gx_fpd
+    class late_start
+    user root
+    group system
+    onrestart restart fingerprintd_gx
+
+#fingerprintd
+service fingerprintd_gx /system/bin/fingerprintd_gx
+    class late_start
+    user system
+    onrestart restart gx_fpd
+
+#synaFpTest for Emode test
+service goodixFpTest /system/bin/goodixFpTest
+    class late_start
+    user root
+    group system
+    oneshot
+    disabled
+
+on property:debug.synafp.test-start=1
+    #stop gx_fpd
+    #stop fingerprintd_gx
+    #start gx_fpd
+    #start fingerprintd_gx
+    start goodixFpTest
+
+on property:debug.synafp.test-start=0
+    stop goodixFpTest
+    #stop gx_fpd
+    #stop fingerprintd_gx
+    #start gx_fpd
+    #start fingerprintd_gx
+
+service alipayServiced /system/bin/alipayServiced
+   class late_start
+   user system
