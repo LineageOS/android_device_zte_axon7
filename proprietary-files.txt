@@ -38,22 +38,37 @@ etc/firmware/ak4961_pram_wide.bin
 
 # Camera
 bin/mm-qcamera-daemon
+etc/camera/msm8996_camera.xml
+etc/camera/ov8856_chromatix.xml
 etc/camera/P996A01_camera.xml
 etc/camera/s5k2t8_chromatix.xml
-etc/camera/ov8856_chromatix.xml
 #etc/camera/t4k35_chromatix.xml
-etc/camera/msm8996_camera.xml
 lib/hw/camera.msm8996.so
-vendor/lib/libFNVfbEngineHAL.so
-vendor/lib/libtsvideoprocess.so
-vendor/lib/libImgFvDetect.so
-lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
+lib/libmm-qcamera.so
 lib/libqomx_core.so
+vendor/lib/libFNVfbEngineHAL.so
+vendor/lib/libImgFvDetect.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
+vendor/lib/libmmcamera2_c2d_module.so
+vendor/lib/libmmcamera2_cpp_module.so
+vendor/lib/libmmcamera2_frame_algorithm.so
+vendor/lib/libmmcamera2_iface_modules.so
+vendor/lib/libmmcamera2_imglib_modules.so
+vendor/lib/libmmcamera2_isp_modules.so
+vendor/lib/libmmcamera2_is.so
+vendor/lib/libmmcamera2_mct.so
+vendor/lib/libmmcamera2_pp_buf_mgr.so
+vendor/lib/libmmcamera2_pproc_modules.so
+vendor/lib/libmmcamera2_q3a_core.so
+vendor/lib/libmmcamera2_sensor_modules.so
+vendor/lib/libmmcamera2_stats_algorithm.so
+vendor/lib/libmmcamera2_stats_modules.so
+vendor/lib/libmmcamera2_vpe_module.so
+vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmcamera_common_ov8856_eeprom.so
 vendor/lib/libmmcamera_common_s5k2t8_eeprom.so
 #vendor/lib/libmmcamera_common_t4k35_eeprom.so
@@ -81,22 +96,6 @@ vendor/lib/libmmcamera_tintless_bg_pca_algo.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_vpu_module.so
-vendor/lib/libmmcamera2_c2d_module.so
-vendor/lib/libmmcamera2_cpp_module.so
-vendor/lib/libmmcamera2_frame_algorithm.so
-vendor/lib/libmmcamera2_iface_modules.so
-vendor/lib/libmmcamera2_imglib_modules.so
-vendor/lib/libmmcamera2_is.so
-vendor/lib/libmmcamera2_isp_modules.so
-vendor/lib/libmmcamera2_mct.so
-vendor/lib/libmmcamera2_pp_buf_mgr.so
-vendor/lib/libmmcamera2_pproc_modules.so
-vendor/lib/libmmcamera2_q3a_core.so
-vendor/lib/libmmcamera2_sensor_modules.so
-vendor/lib/libmmcamera2_stats_algorithm.so
-vendor/lib/libmmcamera2_stats_modules.so
-vendor/lib/libmmcamera2_vpe_module.so
-vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
@@ -110,6 +109,7 @@ vendor/lib/libois_bu63165.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libtsvideoprocess.so
 vendor/lib/libZEffectLib.so
 
 # Camera actuators
@@ -215,9 +215,9 @@ vendor/lib/libchromatix_s5k2t8_zsl_video_bu63165.so
 #vendor/lib/libchromatix_t4k35_zsl_video.so
 
 # Camera firmware
+etc/firmware/cpp_firmware_v1_10_0.fw
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
-etc/firmware/cpp_firmware_v1_10_0.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_5_0.fw

@@ -251,23 +251,23 @@ vendor/lib/libsd_sdk_display.so|77339f0b41eaa4e8b8ff8c2312636ba3aadd878b
 etc/firmware/a530_gpmu.fw2
 etc/firmware/a530_pfp.fw
 etc/firmware/a530_pm4.fw
-etc/firmware/a530_zap.b00
-etc/firmware/a530_zap.b01
-etc/firmware/a530_zap.b02
-etc/firmware/a530_zap.elf
-etc/firmware/a530_zap.mdt
 etc/firmware/a530v1_pfp.fw
 etc/firmware/a530v1_pm4.fw
 etc/firmware/a530v2_seq.fw2
 etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
+etc/firmware/a530_zap.b00
+etc/firmware/a530_zap.b01
+etc/firmware/a530_zap.b02
+etc/firmware/a530_zap.elf
+etc/firmware/a530_zap.mdt
 
 # HVDCP
 bin/hvdcp_opti
 
 # Keystore
-vendor/lib/hw/keystore.msm8996.so
 vendor/lib64/hw/keystore.msm8996.so
+vendor/lib/hw/keystore.msm8996.so
 
 # Listen
 vendor/lib/hw/sound_trigger.primary.msm8996.so
@@ -278,19 +278,19 @@ vendor/lib/libsmwrapper.so
 lib/libOmxVpp.so
 lib/libvpplibrary.so
 vendor/lib/libI420colorconvert.so
+vendor/lib/libmm-color-convertor.so
+vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
 vendor/lib/libvpphvx.so
 vendor/lib/libvqzip.so
 
 # Network
 -priv-app/QtiTetherService/QtiTetherService.apk
-vendor/lib/libconnctrl.so
 vendor/lib64/libconnctrl.so
 vendor/lib64/libQtiTether.so
+vendor/lib/libconnctrl.so
 
 # Perf
 bin/energy-awareness
@@ -299,8 +299,8 @@ bin/msm_irqbalance
 # Peripheral manager
 bin/pm-proxy
 bin/pm-service
-vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
+vendor/lib/libperipheral_client.so
 
 # Postprocessing
 etc/permissions/com.qti.snapdragon.sdk.display.xml
@@ -313,26 +313,6 @@ vendor/lib64/libdisp-aba.so
 bin/irsc_util
 etc/permissions/qti_permissions.xml
 vendor/bin/pd-mapper
-vendor/lib/libdiag.so
-vendor/lib/libdsi_netctrl.so
-vendor/lib/libdsutils.so
-vendor/lib/libidl.so
-vendor/lib/libqcci_legacy.so
-vendor/lib/libqcmaputils.so
-vendor/lib/libqdi.so
-vendor/lib/libqdp.so
-vendor/lib/libqmi.so
-vendor/lib/libqmi_cci.so
-vendor/lib/libqmi_client_helper.so
-vendor/lib/libqmi_client_qmux.so
-vendor/lib/libqmi_common_so.so
-vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_encdec.so
-vendor/lib/libqmiservices.so
-vendor/lib/libqti-wl.so
-vendor/lib/libquipc_os_api.so
-vendor/lib/libsmemlog.so
-vendor/lib/libvqzip.so
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
@@ -341,7 +321,6 @@ vendor/lib64/libqcci_legacy.so
 vendor/lib64/libqcmaputils.so
 vendor/lib64/libqdi.so
 vendor/lib64/libqdp.so
-vendor/lib64/libqmi.so
 vendor/lib64/libqmi_cci.so
 vendor/lib64/libqmi_client_helper.so
 vendor/lib64/libqmi_client_qmux.so
@@ -349,9 +328,30 @@ vendor/lib64/libqmi_common_so.so
 vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
+vendor/lib64/libqmi.so
 vendor/lib64/libqti-wl.so
 vendor/lib64/libquipc_os_api.so
 vendor/lib64/libsmemlog.so
+vendor/lib/libdiag.so
+vendor/lib/libdsi_netctrl.so
+vendor/lib/libdsutils.so
+vendor/lib/libidl.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqcmaputils.so
+vendor/lib/libqdi.so
+vendor/lib/libqdp.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_helper.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqmiservices.so
+vendor/lib/libqmi.so
+vendor/lib/libqti-wl.so
+vendor/lib/libquipc_os_api.so
+vendor/lib/libsmemlog.so
+vendor/lib/libvqzip.so
 
 # Radio
 -app/datastatusnotification/datastatusnotification.apk
@@ -391,47 +391,40 @@ vendor/lib64/libsystem_health_mon.so
 vendor/qcril.db
 
 # Radio - IMS
-bin/ims_rtp_daemon
 bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
+bin/ims_rtp_daemon
 -vendor/app/ims/ims.apk
 -vendor/app/imssettings/imssettings.apk
 vendor/lib64/lib-dplmedia.so
-vendor/lib64/lib-ims-rcscmjni.so
-vendor/lib64/lib-imsSDP.so
+vendor/lib64/libimscamera_jni.so
 vendor/lib64/lib-imscamera.so
 vendor/lib64/lib-imsdpl.so
+vendor/lib64/libimsmedia_jni.so
 vendor/lib64/lib-imsqimf.so
-vendor/lib64/lib-imsrcs.so
-vendor/lib64/lib-imsrcscm.so
 vendor/lib64/lib-imsrcscmclient.so
+vendor/lib64/lib-ims-rcscmjni.so
 vendor/lib64/lib-imsrcscmservice.so
+vendor/lib64/lib-imsrcscm.so
+vendor/lib64/lib-imsrcs.so
+vendor/lib64/lib-imsSDP.so
 vendor/lib64/lib-imss.so
 vendor/lib64/lib-imsvt.so
 vendor/lib64/lib-imsxml.so
+vendor/lib64/librcc.so
 vendor/lib64/lib-rcsimssjni.so
 vendor/lib64/lib-rcsjni.so
 vendor/lib64/lib-rtpcommon.so
 vendor/lib64/lib-rtpcore.so
 vendor/lib64/lib-rtpdaemoninterface.so
 vendor/lib64/lib-rtpsl.so
-vendor/lib64/libimscamera_jni.so
-vendor/lib64/libimsmedia_jni.so
-vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
 
 # Sensors
 bin/sensors.qcom
-lib/hw/sensors.msm8996.so
 lib64/hw/sensors.msm8996.so
-vendor/lib/hw/activity_recognition.msm8996.so
-vendor/lib/libsensor1.so
-vendor/lib/libsensor_reg.so
-#vendor/lib/libsensor_thresh.so
-#vendor/lib/libsensor_user_cal.so
-vendor/lib/sensors.oem.so
-vendor/lib/sensors.ssc.so
+lib/hw/sensors.msm8996.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
@@ -439,25 +432,32 @@ vendor/lib64/libsensor_reg.so
 #vendor/lib64/libsensor_user_cal.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
+vendor/lib/hw/activity_recognition.msm8996.so
+vendor/lib/libsensor1.so
+vendor/lib/libsensor_reg.so
+#vendor/lib/libsensor_thresh.so
+#vendor/lib/libsensor_user_cal.so
+vendor/lib/sensors.oem.so
+vendor/lib/sensors.ssc.so
 
 # Thermal
 etc/thermal-engine.conf
 vendor/bin/thermal-engine
--vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
+-vendor/lib/libthermalclient.so
 
 # Time services
 -app/TimeService/TimeService.apk
 bin/time_daemon
--vendor/lib/libtime_genoff.so
-vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
+-vendor/lib/libtime_genoff.so
+vendor/lib/libTimeService.so
 
 # Widevine
-vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/libwvdrm_L3.so
+vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wifi
