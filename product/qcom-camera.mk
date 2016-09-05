@@ -12,5 +12,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.preview.ubwc=0 \
     persist.camera.video.ubwc=0 \
     persist.camera.stats.test=5 \
-    camera.disable_zsl_mode=1 \
-    vidc.enc.dcvs.extra-buff-count=2
+    camera.disable_zsl_mode=1

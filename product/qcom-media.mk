@@ -16,4 +16,6 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    drm.service.enabled=1
+    drm.service.enabled=1 \
+    vidc.debug.perf.mode=2 \
+    vidc.enc.dcvs.extra-buff-count=2

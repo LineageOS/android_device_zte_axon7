@@ -1,5 +1,3 @@
-# Firmware
-
 # Permissions
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/idc/synaptics_dsx.idc:system/usr/idc/synaptics_dsx.idc \
