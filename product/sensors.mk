@@ -1,8 +1,6 @@
-# Fingerprint sensor
+# Sensors
 PRODUCT_PACKAGES += \
-    init.fingerprint.goodix_fp.rc \
-    init.fingerprint.synafp.rc \
-    fingerprintd
+    sensors.msm8996
 
 # Permissions
 PRODUCT_COPY_FILES += \
