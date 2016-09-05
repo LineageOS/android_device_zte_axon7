@@ -25,5 +25,5 @@ $(call inherit-product, device/zte/ailsa_ii/device.mk)
 PRODUCT_DEVICE := ailsa_ii
 PRODUCT_NAME := full_ailsa_ii
 PRODUCT_BRAND := ZTE
-PRODUCT_MODEL := A2017U
+PRODUCT_MODEL := ZTE A2017U
 PRODUCT_MANUFACTURER := ZTE

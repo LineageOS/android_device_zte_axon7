@@ -95,6 +95,9 @@ void vendor_load_properties() {
     if (!rc || strncmp(device, "ailsa_ii", PROP_VALUE_MAX))
         return;
 
+    /* US */
+    property_set("ro.product.name", "P996A01");
+
     init_alarm_boot_properties();
 }
 
