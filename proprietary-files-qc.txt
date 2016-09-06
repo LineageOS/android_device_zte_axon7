@@ -369,7 +369,10 @@ framework/embmslibrary.jar
 -framework/qcrilhook.jar
 framework/qti-telephony-common.jar
 framework/QtiTelephonyServicelibrary.jar
-#lib64/libparam.so
+lib64/libmodemapi.so
+lib64/libztecfg.so
+lib/libmodemapi.so
+lib/libztecfg.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
 vendor/lib64/libconfigdb.so
