@@ -16,13 +16,6 @@ vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 
 # Audio
-etc/settings/mono_qcom_rcv.cnt
-etc/settings/mono_qcom_spk_l.cnt
-etc/settings/stereo_qcom_spk.cnt
-lib64/hw/audio.primary.msm8996.so
-lib64/libtfa9890.so
-lib/hw/audio.primary.msm8996.so
-lib/libtfa9890.so
 vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
 vendor/lib64/libacdbrtac.so
@@ -36,11 +29,9 @@ vendor/lib/libadiertac.so
 vendor/lib/libadm.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudiodevarb.so
-vendor/lib/soundfx/libhwdap.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
-vendor/lib/soundfx/libswdap.so
 
 # Bluetooth
 bin/btnvtool
