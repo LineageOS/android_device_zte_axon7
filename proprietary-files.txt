@@ -280,6 +280,7 @@ bin/gx_fpd
 lib64/hw/fingerprint.goodix.default.so
 lib64/hw/gxfingerprint.default.so
 lib64/libfp_client.so
+lib64/libfpnav.so
 lib64/libfpservice.so
 
 # Fingerprint sensor (Synaptics)
