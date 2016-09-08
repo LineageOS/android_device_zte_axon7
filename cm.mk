@@ -21,3 +21,8 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
 PRODUCT_NAME := cm_ailsa_ii
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME="P996A01" \
+    BUILD_FINGERPRINT="ZTE/P996A01/ailsa_ii:6.0.1/MMB29M/20160805.152414:user/release-keys" \
+    PRIVATE_BUILD_DESC="P996A01-user 6.0.1 MMB29M 20160805.152414 release-keys"

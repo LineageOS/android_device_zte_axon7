@@ -58,7 +58,7 @@ static int read_file2(const char *fname, char *data, int max_size)
     return 1;
 }
 
-void init_alarm_boot_properties()
+static void init_alarm_boot_properties()
 {
     char const *alarm_file = "/proc/sys/kernel/boot_reason";
     char buf[64];
@@ -87,17 +87,7 @@ void init_alarm_boot_properties()
     }
 }
 
-void vendor_load_properties() {
-    char device[PROP_VALUE_MAX];
-    int rc;
-
-    rc = property_get("ro.cm.device", device);
-    if (!rc || strncmp(device, "ailsa_ii", PROP_VALUE_MAX))
-        return;
-
-    /* US */
-    property_set("ro.product.name", "P996A01");
-
+void vendor_load_properties()
+{
     init_alarm_boot_properties();
 }
-
