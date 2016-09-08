@@ -1,7 +1,7 @@
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
-    init.fingerprint.goodix_fp.rc \
-    fingerprintd
+    init.fingerprint.goodix_fp.rc
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.qfp=false
+# Permissions
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml

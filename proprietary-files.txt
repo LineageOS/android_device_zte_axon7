@@ -271,7 +271,6 @@ vendor/lib/libmmcamera_isp_sub_module.so
 # Fingerprint
 bin/alipayServiced
 lib64/lib_alipay_tac_shared.so
-vendor/lib64/hw/fingerprint.msm8996.so
 
 # Fingerprint sensor (Goodix)
 bin/fingerprintd_gx
@@ -282,15 +281,6 @@ lib64/hw/gxfingerprint.default.so
 lib64/libfp_client.so
 lib64/libfpnav.so
 lib64/libfpservice.so
-
-# Fingerprint sensor (Synaptics)
-#bin/fingerprintd
-#bin/synaFpTest
-#bin/vfmService
-#lib64/libsynaFpTestHal.so
-#lib64/libvalAuth.so
-#lib64/libvfmClient.so
-#vendor/lib64/fingerprint.synafp.default.so
 
 # Light sensor
 lib64/hw/lights.msm8996.so
