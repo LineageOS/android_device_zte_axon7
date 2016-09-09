@@ -48,6 +48,7 @@ lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libmm-qcamera.so
 lib/libqomx_core.so
+vendor/lib/libflash_pmic.so
 vendor/lib/libFNVfbEngineHAL.so
 vendor/lib/libImgFvDetect.so
 vendor/lib/libjpegdhw.so
