@@ -19,7 +19,8 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    wifi_symlinks
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wcnss/hostapd.accept:system/etc/hostapd/hostapd.accept \
