@@ -8,6 +8,7 @@ etc/acdbdata/MTP/MTP_Headset_cal.acdb
 etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
 # Audio AKM Firmware
+etc/firmware/ak4961_aram_karaoke_spk.bin
 etc/firmware/ak4961_cram_interview_record.bin
 etc/firmware/ak4961_cram_karaoke_cave.bin
 etc/firmware/ak4961_cram_karaoke_cloister.bin
@@ -16,6 +17,9 @@ etc/firmware/ak4961_cram_karaoke_light.bin
 etc/firmware/ak4961_cram_karaoke_live.bin
 etc/firmware/ak4961_cram_karaoke_middle.bin
 etc/firmware/ak4961_cram_karaoke_room.bin
+etc/firmware/ak4961_cram_karaoke_spk_live.bin
+etc/firmware/ak4961_cram_karaoke_spk_room.bin
+etc/firmware/ak4961_cram_karaoke_spk_theater.bin
 etc/firmware/ak4961_cram_karaoke_theater.bin
 etc/firmware/ak4961_cram_karaoke_valley.bin
 etc/firmware/ak4961_cram_music_speaker.bin
@@ -31,6 +35,7 @@ etc/firmware/ak4961_oram_karaoke_light.bin
 etc/firmware/ak4961_oram_karaoke_middle.bin
 etc/firmware/ak4961_pram_interview_record.bin
 etc/firmware/ak4961_pram_karaoke.bin
+etc/firmware/ak4961_pram_karaoke_spk.bin
 etc/firmware/ak4961_pram_music_speaker.bin
 etc/firmware/ak4961_pram_sound_record.bin
 etc/firmware/ak4961_pram_voice_recognition.bin
@@ -40,7 +45,10 @@ etc/firmware/ak4961_pram_wide.bin
 bin/climax_hostSW
 etc/settings/mono_qcom_rcv.cnt
 etc/settings/mono_qcom_spk_l.cnt
+etc/settings/mono_qcom_spk_r.cnt
 etc/settings/stereo_qcom_spk.cnt
+etc/settings/stereo_qcom_spk_l.cnt
+etc/settings/stereo_qcom_spk_r.cnt
 lib64/libtfa9890.so
 lib/libtfa9890.so
 
@@ -73,6 +81,7 @@ vendor/lib/libmmcamera2_mct.so
 vendor/lib/libmmcamera2_pp_buf_mgr.so
 vendor/lib/libmmcamera2_pproc_modules.so
 vendor/lib/libmmcamera2_q3a_core.so
+vendor/lib/libmmcamera2_q3a_release.so
 vendor/lib/libmmcamera2_sensor_modules.so
 vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
@@ -155,6 +164,7 @@ vendor/lib/libchromatix_s5k2t8_1080p_preview_bu63165.so
 vendor/lib/libchromatix_s5k2t8_1080p_video_bu63165.so
 vendor/lib/libchromatix_s5k2t8_4k_preview_bu63165.so
 vendor/lib/libchromatix_s5k2t8_4k_video_bu63165.so
+vendor/lib/libchromatix_s5k2t8_a3_preview_livephoto.so
 vendor/lib/libchromatix_s5k2t8_a3_preview_panorama.so
 vendor/lib/libchromatix_s5k2t8_a3_preview_sport.so
 vendor/lib/libchromatix_s5k2t8_a3_vga_preview.so
@@ -166,10 +176,12 @@ vendor/lib/libchromatix_s5k2t8_cpp_hfr_300.so
 vendor/lib/libchromatix_s5k2t8_cpp_hfr_60.so
 vendor/lib/libchromatix_s5k2t8_cpp_hfr_90.so
 vendor/lib/libchromatix_s5k2t8_cpp_liveshot.so
+vendor/lib/libchromatix_s5k2t8_cpp_preview_livephoto.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview_panorama.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview_sport.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot_hdr.so
+vendor/lib/libchromatix_s5k2t8_cpp_snapshot_livephoto.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_liveshot.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_preview.so
@@ -199,6 +211,7 @@ vendor/lib/libchromatix_s5k2t8_preview_panorama.so
 vendor/lib/libchromatix_s5k2t8_preview.so
 vendor/lib/libchromatix_s5k2t8_preview_sport.so
 vendor/lib/libchromatix_s5k2t8_snapshot_hdr.so
+vendor/lib/libchromatix_s5k2t8_snapshot_livephoto.so
 vendor/lib/libchromatix_s5k2t8_snapshot.so
 vendor/lib/libchromatix_s5k2t8_vga_preview.so
 vendor/lib/libchromatix_s5k2t8_vga_snapshot.so
@@ -299,7 +312,6 @@ lib/hw/lights.msm8996.so
 vendor/firmware/libpn548ad_fw.so
 
 # Sensors
-etc/sensors/hals.conf
 etc/sensors/sensor_def_qcomdev.conf
 
 # TP firmware

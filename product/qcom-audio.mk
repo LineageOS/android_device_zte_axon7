@@ -4,7 +4,8 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8996 \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing
+    libqcomvoiceprocessing \
+    libvolumelistener
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -24,7 +25,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.deep_buffer.media=true \
     audio.dolby.ds2.enabled=false \
     audio.dolby.ds2.hardbypass=false \
-    audio.ds1.metainfo.key=273 \
     audio_hal.period_size=192 \
     audio.offload.buffer.size.kb=32 \
     audio.offload.gapless.enabled=true \

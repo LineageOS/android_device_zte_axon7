@@ -54,11 +54,6 @@ vendor/lib/libbtnv.so
 bin/cnd
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
-etc/cne/wqeclient/profile1.xml
-etc/cne/wqeclient/profile2.xml
-etc/cne/wqeclient/profile3.xml
-etc/cne/wqeclient/profile4.xml
-etc/cne/wqeclient/profile5.xml
 etc/permissions/cneapiclient.xml
 etc/permissions/com.quicinc.cne.xml
 etc/permissions/ConnectivityExt.xml
@@ -363,6 +358,7 @@ etc/data/qmi_config.xml
 etc/permissions/embms.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
+etc/qcril_db_diff.xml
 etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
 -framework/qcnvitems.jar
@@ -419,15 +415,14 @@ vendor/lib64/libvoice-svc.so
 
 # Sensors
 bin/sensors.qcom
+etc/sensors/hals.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
 # Thermal

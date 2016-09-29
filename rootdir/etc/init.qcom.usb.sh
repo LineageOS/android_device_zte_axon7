@@ -97,6 +97,11 @@ target=`getprop ro.board.platform`
 # Allow USB enumeration with default PID/VID
 #
 baseband=`getprop ro.baseband`
+case "$baseband" in
+    "apq")
+         target="apq"
+   ;;
+esac
 echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
 usb_config=`getprop persist.sys.usb.config`
 debuggable=`getprop ro.debuggable`
@@ -149,6 +154,16 @@ case "$usb_config" in
                 ;;
         esac
 			;;
+esac
+
+#
+# Enable ADB for tradefed
+#
+adbTradefed=`getprop ro.adbtradefed`
+case "adbTradefed" in
+    "1")
+        setprop persist.sys.usb.config diag,adb
+        ;;
 esac
 
 #

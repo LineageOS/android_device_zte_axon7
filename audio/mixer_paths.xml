@@ -232,8 +232,12 @@
 
 <ctl name="SLIM RX1 MUX" value="ZERO" />
     <ctl name="SLIM RX2 MUX" value="ZERO" />
+    <ctl name="SLIM_0_RX Channels" value="One" />
+    <ctl name="SLIM_0_TX Channels" value="One" />
     <ctl name="SB1_CAP Mixer SLIM TX7" value="0" />
     <ctl name="SB1_CAP Mixer SLIM TX8" value="0"/>
+    <ctl name="SB1_CAP Mixer SLIM TX9" value="0" />
+    <ctl name="SB1_CAP Mixer SLIM TX10" value="0" />
     <ctl name="MIC1L Selector" value="Analog" />
     <ctl name="MIC1R Selector" value="Analog" />
     <ctl name="MIC2L Selector" value="Analog" />
@@ -1792,6 +1796,11 @@
         <ctl name="SLIMBUS_DL_HL Switch" value="1" />
     </path>
 
+     <path name="afe-loop-playback headphones-hi-fi">
+        <ctl name="QUAT_MI2S_RX Port Mixer SLIM_0_TX" value="1" />
+        <ctl name="QUAT_MI2S_RX_DL_HL Switch" value="1" />
+    </path>
+
     <!-- These are actual sound device specific mixer settings -->
     <path name="adc1">
         <ctl name="AIF1_CAP Mixer SLIM TX7" value="1"/>
@@ -2234,7 +2243,14 @@
     </path>
 
     <path name="voice-speaker-mic">
-        <path name="speaker-mic" />
+        <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
+        <ctl name="SLIM_0_TX Channels" value="One" />
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="Mic_1L input Selector" value="AIN1" />
+        <ctl name="MIC1L Selector" value="Analog" />
+        <ctl name="SBO1L Source Selector" value="ADC1" />
+        <ctl name="MIC Gain 1L" value="9" />
     </path>
 
     <path name="voice-speaker-for-headphone-mic">	
@@ -3131,6 +3147,23 @@
     </path>
     
      <!-- add for karaoke begin-->
+    <path name="headphone-switch-to-karaoke">
+        <ctl name="DAC1 Source Selector" value="MIXAO" />  
+    </path>
+
+    <path name="headphone-switch-to-karaoke-spk">
+        <ctl name="DAC1 Source Selector" value="MIXAO" />
+        <ctl name="HP Out Volume" value="22" />
+    </path>
+
+    <path name="karaoke-switch-to-headphone">
+        <ctl name="DAC1 Source Selector" value="SBI1" />
+        <ctl name="DAC1 Lch Mixer Lch_Switch" value="1" />
+        <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
+        <ctl name="HP Virt Switch" value="On" />
+        <ctl name="HP Out Volume" value="19" />
+    </path>
+
     <path name="headset-karaoke-heavy-mic">
         <ctl name="CP1 Clock Mode" value="500kHz" />
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
@@ -3170,7 +3203,7 @@
         <ctl name="HP Out Volume" value="19" />
     </path>
 
-    <!-- add for karaoke begin-->
+    <!-- add for karaoke begin -->
     <path name="headset-karaoke-middle-mic">
         <ctl name="CP1 Clock Mode" value="500kHz" />
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
@@ -3210,7 +3243,7 @@
         <ctl name="HP Out Volume" value="19" />
     </path>
 
-    <!-- add for karaoke begin-->
+            <!-- add for karaoke begin-->
     <path name="headset-karaoke-light-mic">
         <ctl name="CP1 Clock Mode" value="500kHz" />
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
@@ -3251,6 +3284,135 @@
     </path>
     
 	
+<path name="headset-karaoke-spk-room-mic">
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="PMMP1 CP1 Switch" value="On" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="Mic_1L input Selector" value="AIN1" />
+        <ctl name="Mic_1R input Selector" value="AIN2" />
+        <ctl name="MIC1L Selector" value="Analog" />
+        <ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="MIC Gain 1L" value="3" />
+        <ctl name="MIC Gain 1R" value="3" />
+        <ctl name="SRCBO Sync Domain" value="dsp16k" />
+        <ctl name="SRCBI Source Selector" value="ADC1" />
+        <ctl name="DSPI1 Source Selector" value="SRCBO" />
+        <ctl name="SRCAO Sync Domain" value="dsp16k" />
+        <ctl name="SRCAI Source Selector" value="SBI1" />
+        <ctl name="DSPI2 Source Selector" value="SRCAO" />
+        <ctl name="DSP Sync Domain" value="dsp16k" />
+        <ctl name="DSP Mode" value="karaoke_spk_room" />
+        <ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
+        <ctl name="DSPO3 Mixer DSPI2_Switch" value="1" />
+        <ctl name="DSPO3 Mixer DSPI1_Switch" value="1" />
+        <ctl name="SRCCO Sync Domain" value="slimbus" />
+        <ctl name="SRCCI Source Selector" value="DSPO1" />
+        <ctl name="SBO1L Source Selector" value="SRCCO" />
+        <ctl name="SBO1R Source Selector" value="SRCCO" />                 
+        <ctl name="SRCDO Sync Domain" value="slimbus" />
+        <ctl name="SRCDI Source Selector" value="DSPO3" />
+        <ctl name="MIXAI1 Source Selector" value="SBI1" />
+        <ctl name="MIXAI2 Source Selector" value="SRCDO" />
+        <ctl name="MIXERA Input1 Gain" value="0" />
+        <ctl name="MIXERA Input2 Gain" value="0" />
+        <ctl name="MIXAO Virt Switch" value="On" />
+        <ctl name="DAC1 Source Selector" value="MIXAO" />
+        <ctl name="DAC1 Lch Mixer Lch_Switch" value="1" />
+        <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
+        <ctl name="HP Virt Switch" value="On" />
+        <ctl name="HP Out Volume" value="22" />
+    </path>
+
+    <path name="headset-karaoke-spk-live-mic">
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="PMMP1 CP1 Switch" value="On" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="Mic_1L input Selector" value="AIN1" />
+        <ctl name="Mic_1R input Selector" value="AIN2" />
+        <ctl name="MIC1L Selector" value="Analog" />
+        <ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="MIC Gain 1L" value="3" />
+        <ctl name="MIC Gain 1R" value="3" />
+        <ctl name="SRCBO Sync Domain" value="dsp16k" />
+        <ctl name="SRCBI Source Selector" value="ADC1" />
+        <ctl name="DSPI1 Source Selector" value="SRCBO" />
+        <ctl name="SRCAO Sync Domain" value="dsp16k" />
+        <ctl name="SRCAI Source Selector" value="SBI1" />
+        <ctl name="DSPI2 Source Selector" value="SRCAO" />
+        <ctl name="DSP Sync Domain" value="dsp16k" />
+        <ctl name="DSP Mode" value="karaoke_spk_live" />
+        <ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
+        <ctl name="DSPO3 Mixer DSPI2_Switch" value="1" />
+        <ctl name="DSPO3 Mixer DSPI1_Switch" value="1" />
+        <ctl name="SRCCO Sync Domain" value="slimbus" />
+        <ctl name="SRCCI Source Selector" value="DSPO1" />
+        <ctl name="SBO1L Source Selector" value="SRCCO" />
+        <ctl name="SBO1R Source Selector" value="SRCCO" />                 
+        <ctl name="SRCDO Sync Domain" value="slimbus" />
+        <ctl name="SRCDI Source Selector" value="DSPO3" />
+        <ctl name="MIXAI1 Source Selector" value="SBI1" />
+        <ctl name="MIXAI2 Source Selector" value="SRCDO" />
+        <ctl name="MIXERA Input1 Gain" value="0" />
+        <ctl name="MIXERA Input2 Gain" value="0" />
+        <ctl name="MIXAO Virt Switch" value="On" />
+        <ctl name="DAC1 Source Selector" value="MIXAO" />
+        <ctl name="DAC1 Lch Mixer Lch_Switch" value="1" />
+        <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
+        <ctl name="HP Virt Switch" value="On" />
+        <ctl name="HP Out Volume" value="22" />
+    </path>
+
+    <path name="headset-karaoke-spk-theater-mic">
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="PMMP1 CP1 Switch" value="On" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="Mic_1L input Selector" value="AIN1" />
+        <ctl name="Mic_1R input Selector" value="AIN2" />
+        <ctl name="MIC1L Selector" value="Analog" />
+        <ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="MIC Gain 1L" value="3" />
+        <ctl name="MIC Gain 1R" value="3" />
+        <ctl name="SRCBO Sync Domain" value="dsp16k" />
+        <ctl name="SRCBI Source Selector" value="ADC1" />
+        <ctl name="DSPI1 Source Selector" value="SRCBO" />
+        <ctl name="SRCAO Sync Domain" value="dsp16k" />
+        <ctl name="SRCAI Source Selector" value="SBI1" />
+        <ctl name="DSPI2 Source Selector" value="SRCAO" />
+        <ctl name="DSP Sync Domain" value="dsp16k" />
+        <ctl name="DSP Mode" value="karaoke_spk_theater" />
+        <ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
+        <ctl name="DSPO3 Mixer DSPI2_Switch" value="1" />
+        <ctl name="DSPO3 Mixer DSPI1_Switch" value="1" />
+        <ctl name="SRCCO Sync Domain" value="slimbus" />
+        <ctl name="SRCCI Source Selector" value="DSPO1" />
+        <ctl name="SBO1L Source Selector" value="SRCCO" />
+        <ctl name="SBO1R Source Selector" value="SRCCO" />                 
+        <ctl name="SRCDO Sync Domain" value="slimbus" />
+        <ctl name="SRCDI Source Selector" value="DSPO3" />
+        <ctl name="MIXAI1 Source Selector" value="SBI1" />
+        <ctl name="MIXAI2 Source Selector" value="SRCDO" />
+        <ctl name="MIXERA Input1 Gain" value="0" />
+        <ctl name="MIXERA Input2 Gain" value="0" />
+        <ctl name="MIXAO Virt Switch" value="On" />
+        <ctl name="DAC1 Source Selector" value="MIXAO" />
+        <ctl name="DAC1 Lch Mixer Lch_Switch" value="1" />
+        <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
+        <ctl name="HP Virt Switch" value="On" />
+        <ctl name="HP Out Volume" value="22" />
+    </path>
+
 
 <!-- Added for ADSP testfwk -->
     <path name="ADSP testfwk">
