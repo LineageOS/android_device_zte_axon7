@@ -36,6 +36,14 @@ etc/firmware/ak4961_pram_sound_record.bin
 etc/firmware/ak4961_pram_voice_recognition.bin
 etc/firmware/ak4961_pram_wide.bin
 
+# Audio NXP
+bin/climax_hostSW
+etc/settings/mono_qcom_rcv.cnt
+etc/settings/mono_qcom_spk_l.cnt
+etc/settings/stereo_qcom_spk.cnt
+lib64/libtfa9890.so
+lib/libtfa9890.so
+
 # Camera
 bin/mm-qcamera-daemon
 etc/camera/msm8996_camera.xml
