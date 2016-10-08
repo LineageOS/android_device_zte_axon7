@@ -49,8 +49,8 @@ etc/settings/mono_qcom_spk_r.cnt
 etc/settings/stereo_qcom_spk.cnt
 etc/settings/stereo_qcom_spk_l.cnt
 etc/settings/stereo_qcom_spk_r.cnt
-lib64/libtfa9890.so
-lib/libtfa9890.so
+-lib64/libtfa9890.so
+-lib/libtfa9890.so
 
 # Camera
 bin/mm-qcamera-daemon

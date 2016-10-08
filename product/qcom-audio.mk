@@ -1,5 +1,6 @@
 # Audio
 PRODUCT_PACKAGES += \
+    audio_amplifier.msm8996 \
     audiod \
     audio.primary.msm8996 \
     libqcompostprocbundle \
