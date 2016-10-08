@@ -309,7 +309,7 @@ lib64/hw/lights.msm8996.so
 lib/hw/lights.msm8996.so
 
 # NFC firmware
-vendor/firmware/libpn548ad_fw.so
+vendor/firmware/libpn548ad_fw.so|29dd20f4b13c68d5b0b7ae2cea9990fe3efa50f1
 
 # Sensors
 etc/sensors/sensor_def_qcomdev.conf
