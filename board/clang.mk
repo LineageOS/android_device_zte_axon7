@@ -1,2 +1,2 @@
 # Clang
-USE_CLANG_PLATFORM_BUILD := true
+USE_CLANG_PLATFORM_BUILD := false
