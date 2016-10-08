@@ -126,9 +126,9 @@ bin/loc_launcher
 bin/lowi-server
 bin/xtwifi-client
 bin/xtwifi-inet-agent
-etc/permissions/com.qti.location.sdk.xml
-etc/permissions/com.qualcomm.location.xml
-framework/com.qti.location.sdk.jar
+#etc/permissions/com.qti.location.sdk.xml
+#etc/permissions/com.qualcomm.location.xml
+#framework/com.qti.location.sdk.jar
 lib/hw/gps.default.so
 lib64/hw/gps.default.so
 lib64/libloc_api_v02.so
@@ -139,8 +139,8 @@ lib64/libloc_eng.so
 lib/libloc_eng.so
 lib64/libgps.utils.so
 lib/libgps.utils.so
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
--priv-app/xtra_t_app/xtra_t_app.apk
+#-priv-app/com.qualcomm.location/com.qualcomm.location.apk
+#-priv-app/xtra_t_app/xtra_t_app.apk
 vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
 vendor/lib/libalarmservice_jni.so
