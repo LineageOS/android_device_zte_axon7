@@ -287,7 +287,7 @@ bin/alipayServiced
 lib64/lib_alipay_tac_shared.so
 
 # Fingerprint sensor (Goodix)
-bin/fingerprintd_gx|57ffd47a2d58dacf76515bc1bf1e60cfea3e6dd1
+bin/fingerprintd_gx|adb50c9cb808a2c48c828067cf9cd02e7b807244
 bin/goodixFpTest
 bin/gx_fpd|b9ec1abb8332976b996987c0ee523a8613edad1a
 lib64/hw/fingerprint.goodix.default.so
