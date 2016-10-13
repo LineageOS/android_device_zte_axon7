@@ -296,9 +296,10 @@ on boot
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
 
-    # Wake gesture
+    # Wake gesture and KeyDisabler
     chown system system /proc/touchscreen/wake_gesture
     chmod 0644 /proc/touchscreen/wake_gesture
+    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input2/0dbutton
 
     # NDT weight port
     chown system system /dev/ndt_i2c_node
