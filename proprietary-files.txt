@@ -41,8 +41,8 @@ bin/climax_hostSW
 etc/settings/mono_qcom_rcv.cnt|54521027fadb2c746e9c044539b77e178860009b
 etc/settings/mono_qcom_spk_l.cnt|9c60d7f8c51d243605bbe5118d43d26a2d6a802e
 etc/settings/stereo_qcom_spk.cnt|2a57360ed499dc25653c52c307e7e8cd29d10f60
--lib64/libtfa9890.so|99831091958ddab9b40f1601c015987aef8f98c6
--lib/libtfa9890.so|b0d01103abf6c87788f2660f416e9019eb4da276
+lib64/libtfa9890.so|99831091958ddab9b40f1601c015987aef8f98c6
+lib/libtfa9890.so|b0d01103abf6c87788f2660f416e9019eb4da276
 
 # Camera
 bin/mm-qcamera-daemon
