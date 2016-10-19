@@ -5,7 +5,8 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libvolumelistener
+    libvolumelistener \
+    libshim_audio
 
 # Audio configuration
 PRODUCT_COPY_FILES += \

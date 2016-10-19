@@ -44,6 +44,8 @@ on init
     symlink /sdcard /storage/sdcard0
 
 on fs
+    export LD_SHIM_LIBS /system/lib/hw/audio.primary.msm8996.so|libshim_audio.so
+
     wait /dev/block/bootdevice
     mount_all fstab.qcom
 
