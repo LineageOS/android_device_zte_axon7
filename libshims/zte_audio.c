@@ -22,3 +22,7 @@ int dolby_status() {
 int UseAkmSpeaker() {
     return 0;
 }
+
+int AllowUseHiFiSession() {
+    return 0;
+}
