@@ -1,5 +1,6 @@
 # Camera
 PRODUCT_PACKAGES += \
+    libshim_camera \
     Snap
 
 # Permissions
