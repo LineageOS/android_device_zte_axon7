@@ -1,11 +1,11 @@
 # Audio ACDB
-etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
-etc/acdbdata/MTP/MTP_General_cal.acdb
-etc/acdbdata/MTP/MTP_Global_cal.acdb
-etc/acdbdata/MTP/MTP_Handset_cal.acdb
-etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
-etc/acdbdata/MTP/MTP_Headset_cal.acdb
-etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb|f15b8230a54f584b4271be7ce3140658be468dc7
+etc/acdbdata/MTP/MTP_General_cal.acdb|c73d647b93a01ce6a5ed0247374074281b24119b
+etc/acdbdata/MTP/MTP_Global_cal.acdb|9330659b8dae5c6ab2b411db90ec725a4f74713c
+etc/acdbdata/MTP/MTP_Handset_cal.acdb|8bfa81bc1ff1d12a89aa20a9f153be3ae5d1a26e
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb|d3b424b45a98880e5643caf79b11b46d8cd00188
+etc/acdbdata/MTP/MTP_Headset_cal.acdb|fd2289a93f036c1b0d6eeb96819fc8cbb5064851
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb|8ac96cc07e5803dc365eb3d956b7e2c4fe5f9928
 
 # Audio AKM Firmware
 etc/firmware/ak4961_aram_karaoke_spk.bin
@@ -49,14 +49,8 @@ etc/settings/mono_qcom_spk_r.cnt
 etc/settings/stereo_qcom_spk.cnt
 etc/settings/stereo_qcom_spk_l.cnt
 etc/settings/stereo_qcom_spk_r.cnt
-lib64/hw/audio.primary.msm8996.so
 lib64/libtfa9890.so
-lib64/libtinyalsa.so
-lib64/libtinycompress.so
-lib/hw/audio.primary.msm8996.so
 lib/libtfa9890.so
-lib/libtinyalsa.so
-lib/libtinycompress.so
 
 # Camera
 bin/mm-qcamera-daemon
