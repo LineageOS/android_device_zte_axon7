@@ -29,7 +29,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
      persist.radio.flexmap_type=disabled \
      persist.radio.hw_mbn_update=1 \
      persist.radio.jbims=1 \
-     persist.radio.long_iin_mbn=1 \
      persist.radio.mt_sms_ack=20 \
      persist.radio.multisim.config=dsds \
      persist.radio.rat_on=combine \
