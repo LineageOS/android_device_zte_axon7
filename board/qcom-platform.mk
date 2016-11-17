@@ -28,3 +28,4 @@ BOARD_USES_QC_TIME_SERVICES := true
 TARGET_POWERHAL_VARIANT := qcom
 TARGET_RIL_VARIANT := caf
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchscreen/wake_gesture"
+TARGET_USE_SDCLANG := true
