@@ -416,10 +416,16 @@ vendor/lib64/libvoice-svc.so
 # Sensors
 bin/sensors.qcom
 etc/sensors/hals.conf
-vendor/lib64/hw/activity_recognition.msm8996.so
-vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor1.so
+vendor/lib64/hw/activity_recognition.msm8996.so|eb375e7de23ca8d367660f6f2f0efc5d2d63ef9c
+vendor/lib64/libsensor1.so|9c4d90c91c8aa092d8de438da50db108b6471453
+vendor/lib64/libsensor_reg.so|37e02c53dc7fa44304b100189303bf26385e5964
+vendor/lib64/libsensor_user_cal.so|b7e096eb635efbfe49af5a80a4548c0af50c8c53
 vendor/lib64/sensors.ssc.so|c59bd5075a77a331353471f2f51e9bbf5dcb45c4
+vendor/lib/hw/activity_recognition.msm8996.so|eb89f70e7286bc6bedc8fc926eb07e816e3c80b8
+vendor/lib/libsensor1.so|f649e9a8f096b22d97e41a230cc8150924c8b9c7
+vendor/lib/libsensor_reg.so|8790cb818d1c5849ff609ef3bf6c0591cf16be2c
+vendor/lib/libsensor_user_cal.so|df76d71a539cdb2cad0034e52aadc283bd58a199
+vendor/lib/sensors.ssc.so|c59bd5075a77a331353471f2f51e9bbf5dcb45c4
 
 # Thermal
 etc/thermal-engine.conf
