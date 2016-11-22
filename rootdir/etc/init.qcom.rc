@@ -498,9 +498,10 @@ on property:ro.data.large_tcp_window_size=true
 service ril-daemon2 /system/bin/rild -c 2
     class main
     socket rild2 stream 660 root radio
+    socket sap_uim_socket2 stream 660 bluetooth bluetooth
     socket rild-debug2 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log
+    group radio cache inet misc audio log readproc wakelock qcom_diag
 
 service charger /charger
     class charger
