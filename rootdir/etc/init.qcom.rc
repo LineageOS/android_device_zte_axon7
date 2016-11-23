@@ -699,8 +699,11 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
 on charger
     setprop persist.sys.usb.config charging
 
-# on property:vold.decrypt=trigger_restart_min_framework
-#    start time_daemon
+on property:vold.decrypt=trigger_restart_min_framework
+    start time_daemon
+
+on property:vold.decrypt=trigger_restart_framework
+    restart time_daemon
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
