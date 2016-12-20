@@ -42,6 +42,9 @@
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
 
+#permissions for pta
+/dev/pta                  0660   system     system
+
 /dev/smdcntl0             0640   radio      radio
 /dev/smdcntl8             0640   radio      radio
 /dev/mhi_pipe_14          0640   radio      radio
