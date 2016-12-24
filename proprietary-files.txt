@@ -292,11 +292,11 @@ vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
 
 # Fingerprint
-bin/alipayServiced
+#bin/alipayServiced
 lib64/lib_alipay_tac_shared.so
 
 # Fingerprint sensor (Goodix)
-bin/fingerprintd_gx|adb50c9cb808a2c48c828067cf9cd02e7b807244
+bin/fingerprintd|adb50c9cb808a2c48c828067cf9cd02e7b807244
 bin/goodixFpTest
 bin/gx_fpd|b9ec1abb8332976b996987c0ee523a8613edad1a
 lib64/hw/fingerprint.goodix.default.so

@@ -1,0 +1,65 @@
+type gx_fpd, domain;
+type gx_fpd_exec, exec_type, file_type;
+typeattribute gx_fpd mlstrustedsubject;
+
+# gx_fpd
+init_daemon_domain(gx_fpd)
+binder_use(gx_fpd)
+binder_call(gx_fpd, binderservicedomain)
+#binder_call(gx_fpd, appdomain)
+binder_service(gx_fpd)
+
+# callback to fingerprintd with binder
+binder_call(gx_fpd, fingerprintd);
+allow gx_fpd fingerprintd_service:service_manager find;
+
+# add self
+allow gx_fpd gx_fpd_service:service_manager { add find };
+allow gx_fpd self:process execmem;
+allow gx_fpd self:capability { dac_override dac_read_search };
+#allow gx_fpd kernel:system module_request;
+
+# allow TEE
+allow gx_fpd tee_device:chr_file rw_file_perms;
+
+# allow gx_fpd_device
+allow gx_fpd gx_fpd_device:file { create_file_perms };
+allow gx_fpd gx_fpd_device:chr_file { rw_file_perms setattr };
+allow gx_fpd gx_fpd_device:chr_file { getattr open read ioctl lock append write };
+
+# allow HAL module to read dir contents
+allow gx_fpd fingerprintd_data_file:file { create_file_perms };
+
+# allow HAL module to read/write/unlink contents of this dir
+allow gx_fpd fingerprintd_data_file:dir rw_dir_perms;
+
+# allow gx_fpd_lib_file
+allow gx_fpd gx_fpd_lib_file:file { create_file_perms getattr read execute execmod };
+allow gx_fpd gx_fpd_lib_file:chr_file { rw_file_perms setattr };
+allow gx_fpd gx_fpd_lib_file:dir ra_dir_perms;
+
+# allow gx_fp_lib_file
+allow gx_fpd gx_fp_lib_file:file { create_file_perms getattr read execute execmod };
+allow gx_fpd gx_fp_lib_file:chr_file { rw_file_perms setattr };
+
+# allow system_file
+allow gx_fpd system_file:file rx_file_perms;
+
+# Need to add auth tokens to KeyStore
+use_keystore(gx_fpd)
+allow gx_fpd keystore:keystore_key { add_auth };
+
+# For permissions checking
+binder_call(gx_fpd, system_server);
+allow gx_fpd permission_service:service_manager find;
+
+# allow SD-Card
+#allow gx_fpd fuse:dir create_dir_perms;
+#allow gx_fpd fuse:file create_file_perms;
+#r_dir_file(gx_fpd, sdcard_type)
+#allow gx_fpd sdcard_type:file write;
+#allow gx_fpd app_data_file:dir search;
+#allow gx_fpd app_data_file:file rw_file_perms;
+
+# R dir perms for firmware dir
+r_dir_file(gx_fpd, firmware_file)

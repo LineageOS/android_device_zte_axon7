@@ -27,7 +27,6 @@
 
 import init.qcom.power.rc
 import init.qcom.usb.rc
-import init.fingerprint.goodix_fp.rc
 
 on early-init
     mkdir /firmware 0771 system system
@@ -258,6 +257,8 @@ on boot
 
     mkdir /persist/drm 0770 system system
 
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
@@ -288,7 +289,7 @@ on boot
 
     # NFC
     chmod 0660 /dev/pn548
-    chown nfc system /dev/pn548
+    chown nfc nfc /dev/pn548
 
     # Secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
@@ -297,8 +298,8 @@ on boot
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
 
     # Wake gesture and KeyDisabler
-    chown system system /proc/touchscreen/wake_gesture
-    chmod 0644 /proc/touchscreen/wake_gesture
+    chown system radio /proc/touchscreen/wake_gesture
+    chmod 0660 /proc/touchscreen/wake_gesture
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input2/0dbutton
 
     # NDT weight port
@@ -776,3 +777,19 @@ service hvdcp_opti /system/bin/hvdcp_opti
     class main
     user root
     group root
+
+service gx_fpd /system/bin/gx_fpd
+    class late_start
+    user root
+    group system
+    onrestart restart fingerprintd
+
+#fingerprintd
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    onrestart restart gx_fpd
+
+#service alipayServiced /system/bin/alipayServiced
+#   class late_start
+#   user system

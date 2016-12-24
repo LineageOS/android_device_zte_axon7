@@ -1,0 +1,7 @@
+binder_call(fingerprintd, gx_fpd);
+allow fingerprintd gx_fpd_service:service_manager find;
+allow fingerprintd gx_fpd_lib_file:file r_file_perms;
+allow fingerprintd gx_fpd_lib_file:file { getattr read execute execmod };
+allow fingerprintd gx_fpd_lib_file:chr_file { r_file_perms setattr };
+allow fingerprintd gx_fp_lib_file:file rx_file_perms;
+allow fingerprintd gx_fp_lib_file:chr_file { r_file_perms setattr };

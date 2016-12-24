@@ -1,0 +1,5 @@
+# Touchscreen
+type proc_touchscreen, fs_type;
+
+# Goodix fingerprint
+type gx_fpd_lib_file, file_type, data_file_type;
