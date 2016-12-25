@@ -1,7 +1,18 @@
 binder_call(fingerprintd, gx_fpd);
 allow fingerprintd gx_fpd_service:service_manager find;
-allow fingerprintd gx_fpd_lib_file:file r_file_perms;
-allow fingerprintd gx_fpd_lib_file:file { getattr read execute execmod };
-allow fingerprintd gx_fpd_lib_file:chr_file { r_file_perms setattr };
-allow fingerprintd gx_fp_lib_file:file rx_file_perms;
-allow fingerprintd gx_fp_lib_file:chr_file { r_file_perms setattr };
+
+# allow TEE
+allow fingerprintd tee_device:chr_file rw_file_perms;
+
+# allow log
+allow fingerprintd log_device:dir search;
+allow fingerprintd log_device:chr_file rw_file_perms;
+
+# allow qseecom to system data
+allow fingerprintd system_data_file:dir { write remove_name add_name };
+
+# allow writing fp_msg_type
+allow fingerprintd sysfs:file write;
+
+# R dir perms for firmware dir
+r_dir_file(fingerprintd, firmware_file)

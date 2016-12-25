@@ -4,3 +4,6 @@
 # Goodix fingerprint
 /dev/goodix_fp*                             u:object_r:gx_fpd_device:s0
 /system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
+
+# Goodix Fingerprint data
+/data/system/fingerprint(/.*)?              u:object_r:gx_fpd_data_file:s0
