@@ -1,2 +1,4 @@
-allow tee gx_fpd_data_file:dir rw_dir_perms;
-allow tee gx_fpd_data_file:file { create_file_perms };
+allow tee system_data_dir: create;
+allow tee system_data_file:file create_file_perms;
+allow tee gx_fpd_data_file:dir create_dir_perms;
+allow tee gx_fpd_data_file:file create_file_perms;

@@ -13,10 +13,10 @@ allow gx_fpd gx_fpd_service:service_manager { add find };
 allow gx_fpd self:capability { dac_override dac_read_search };
 
 # allow HAL module to read dir contents
-allow gx_fpd fingerprintd_data_file:file { create_file_perms };
+allow gx_fpd gx_fpd_data_file:file { create_file_perms };
 
 # allow HAL module to read/write/unlink contents of this dir
-allow gx_fpd fingerprintd_data_file:dir rw_dir_perms;
+allow gx_fpd gx_fpd_data_file:dir rw_dir_perms;
 
 # Need to add auth tokens to KeyStore
 use_keystore(gx_fpd)
