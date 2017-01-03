@@ -45,31 +45,53 @@ typedef struct tfa9890_device {
 
 static tfa9890_device_t *tfa9890_dev = NULL;
 
-static int is_spkr_needed(uint32_t snd_device) {
-    int spkr_needed = 0;
+enum {
+    NO_SPEAKER = 0,
+    MONO_RIGHT,
+    MONO_LEFT,
+    STEREO_SPEAKER
+};
 
+static int is_spkr_needed(uint32_t snd_device) {
     switch (snd_device) {
         case SND_DEVICE_OUT_SPEAKER:
         case SND_DEVICE_OUT_VOICE_SPEAKER:
-            spkr_needed = 1;
-            break;
+            return STEREO_SPEAKER;
+        case SND_DEVICE_OUT_HANDSET:
+        case SND_DEVICE_OUT_VOICE_HANDSET:
+            return MONO_RIGHT;
+        default:
+            return NO_SPEAKER;
     }
-
-    return spkr_needed;
 }
 
 static int amp_enable_output_devices(hw_device_t *device, uint32_t devices, bool enable) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
 
-    if (is_spkr_needed(devices)) {
-        if (enable) {
-            tfa9890->speaker_needed(1, 1);
-            tfa9890->speaker_on();
-            } else {
-               tfa9890->speaker_needed(0, 0);
-               tfa9890->speaker_off();
-            }
+    if (enable) {
+        switch (is_spkr_needed(devices)) {
+            case STEREO_SPEAKER:
+                tfa9890->speaker_needed(1, 1);
+                tfa9890->speaker_on();
+                break;
+            case MONO_RIGHT:
+                tfa9890->speaker_needed(0, 1);
+                tfa9890->speaker_on();
+                break;
+            case MONO_LEFT:
+                tfa9890->speaker_needed(1, 0);
+                tfa9890->speaker_on();
+                break;
+            case NO_SPEAKER:
+                tfa9890->speaker_needed(0, 0);
+                tfa9890->speaker_off();
+                break;
+        }
+    } else {
+        tfa9890->speaker_needed(0, 0);
+        tfa9890->speaker_off() ;
     }
+
     return 0;
 }
 
