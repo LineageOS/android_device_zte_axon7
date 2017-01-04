@@ -56,6 +56,7 @@ static int is_spkr_needed(uint32_t snd_device) {
     switch (snd_device) {
         case SND_DEVICE_OUT_SPEAKER:
         case SND_DEVICE_OUT_VOICE_SPEAKER:
+            return STEREO_SPEAKER;
         case SND_DEVICE_OUT_HANDSET:
         case SND_DEVICE_OUT_VOICE_HANDSET:
             return MONO_RIGHT;
