@@ -1,4 +1,5 @@
 # Copyright (C) 2016 The CyanogenMod Project
+            (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +15,7 @@
 
 $(call inherit-product, device/zte/axon7/full_axon7.mk)
 
-# Inherit some common CM stuff.
+# Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 PRODUCT_NAME := cm_axon7

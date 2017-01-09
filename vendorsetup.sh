@@ -1,2 +1,0 @@
-add_lunch_combo cm_axon7-eng
-add_lunch_combo cm_axon7-userdebug
