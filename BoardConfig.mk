@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/zte/ailsa_ii
+LOCAL_PATH := device/zte/axon7
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 
-include device/zte/ailsa_ii/board/*.mk
+include device/zte/axon7/board/*.mk
 
 # inherit from the proprietary version
--include vendor/zte/ailsa_ii/BoardConfigVendor.mk
+-include vendor/zte/axon7/BoardConfigVendor.mk

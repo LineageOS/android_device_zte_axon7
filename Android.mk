@@ -15,7 +15,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),ailsa_ii)
+ifeq ($(TARGET_DEVICE),axon7)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
@@ -60,6 +60,6 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 
 #ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
 
-include device/zte/ailsa_ii/tftp.mk
+include device/zte/axon7/tftp.mk
 
 endif
