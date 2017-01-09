@@ -4,6 +4,10 @@
     "target_path": "device/qcom/common"
   },
   {
+    "repository": "android_kernel_zte_msm8996",
+    "target_path": "kernel/zte/msm8996"
+  },
+  {
     "repository": "android_packages_resources_devicesettings",
     "target_path": "packages/resources/devicesettings"
   },
