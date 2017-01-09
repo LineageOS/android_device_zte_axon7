@@ -1,4 +1,4 @@
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_ailsa_ii \
+    librecovery_updater_axon7 \
     init.recovery.qcom.rc

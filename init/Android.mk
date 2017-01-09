@@ -19,7 +19,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_C_INCLUDES := system/core/init
-LOCAL_SRC_FILES := init_ailsa_ii.cpp
-LOCAL_MODULE := libinit_ailsa_ii
+LOCAL_SRC_FILES := init_axon7.cpp
+LOCAL_MODULE := libinit_axon7
 
 include $(BUILD_STATIC_LIBRARY)

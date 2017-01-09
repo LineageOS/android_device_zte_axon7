@@ -189,6 +189,6 @@ Value * VerifyTrustZoneFn(const char *name, State *state, int argc, Expr *argv[]
     return StringValue(strdup(ret ? "1" : "0"));
 }
 
-void Register_librecovery_updater_ailsa_ii() {
-    RegisterFunction("ailsa_ii.verify_trustzone", VerifyTrustZoneFn);
+void Register_librecovery_updater_axon7() {
+    RegisterFunction("axon7.verify_trustzone", VerifyTrustZoneFn);
 }

@@ -19,8 +19,8 @@ ENABLE_CPUSETS := true
 TARGET_USES_64_BIT_BINDER := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := libinit_ailsa_ii
-TARGET_RECOVERY_DEVICE_MODULES := libinit_ailsa_ii
+TARGET_INIT_VENDOR_LIB := libinit_axon7
+TARGET_RECOVERY_DEVICE_MODULES := libinit_axon7
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true

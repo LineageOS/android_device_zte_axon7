@@ -19,7 +19,7 @@
 set -e
 
 # Required!
-DEVICE=ailsa_ii
+DEVICE=axon7
 VENDOR=zte
 
 INITIAL_COPYRIGHT_YEAR=2016

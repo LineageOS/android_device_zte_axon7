@@ -1,7 +1,7 @@
 # Assertions
-TARGET_BOARD_INFO_FILE ?= device/zte/ailsa_ii/board-info.txt
+TARGET_BOARD_INFO_FILE ?= device/zte/axon7/board-info.txt
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/zte/ailsa_ii/rootdir/etc/fstab.qcom
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_ailsa_ii
-TARGET_RELEASETOOLS_EXTENSIONS := device/zte/ailsa_ii
+TARGET_RECOVERY_FSTAB := device/zte/axon7/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_axon7
+TARGET_RELEASETOOLS_EXTENSIONS := device/zte/axon7
