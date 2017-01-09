@@ -1,2 +1,2 @@
-add_lunch_combo cm_ailsa_ii-eng
-add_lunch_combo cm_ailsa_ii-userdebug
+add_lunch_combo cm_axon7-eng
+add_lunch_combo cm_axon7-userdebug

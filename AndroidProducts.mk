@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_ailsa_ii.mk
+    $(LOCAL_DIR)/full_axon7.mk

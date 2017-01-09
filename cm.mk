@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/zte/ailsa_ii/full_ailsa_ii.mk)
+$(call inherit-product, device/zte/axon7/full_axon7.mk)
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_ailsa_ii
+PRODUCT_NAME := cm_axon7
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME="P996A01" \
