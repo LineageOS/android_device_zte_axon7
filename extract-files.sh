@@ -17,7 +17,7 @@
 
 set -e
 
-DEVICE=ailsa_ii
+DEVICE=axon7
 VENDOR=zte
 
 # Load extractutils and do some sanity checks
