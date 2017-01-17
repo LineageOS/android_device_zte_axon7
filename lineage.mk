@@ -1,4 +1,5 @@
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2016, The CyanogenMod Project
+#           (C) 2017, The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +15,10 @@
 
 $(call inherit-product, device/zte/ailsa_ii/full_ailsa_ii.mk)
 
-# Inherit some common CM stuff.
+# Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_ailsa_ii
+PRODUCT_NAME := lineage_ailsa_ii
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME="P996A01" \
