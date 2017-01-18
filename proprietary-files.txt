@@ -1,11 +1,11 @@
 # Audio ACDB
-etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb|f15b8230a54f584b4271be7ce3140658be468dc7
-etc/acdbdata/MTP/MTP_General_cal.acdb|c73d647b93a01ce6a5ed0247374074281b24119b
-etc/acdbdata/MTP/MTP_Global_cal.acdb|9330659b8dae5c6ab2b411db90ec725a4f74713c
-etc/acdbdata/MTP/MTP_Handset_cal.acdb|8bfa81bc1ff1d12a89aa20a9f153be3ae5d1a26e
-etc/acdbdata/MTP/MTP_Hdmi_cal.acdb|d3b424b45a98880e5643caf79b11b46d8cd00188
-etc/acdbdata/MTP/MTP_Headset_cal.acdb|fd2289a93f036c1b0d6eeb96819fc8cbb5064851
-etc/acdbdata/MTP/MTP_Speaker_cal.acdb|8ac96cc07e5803dc365eb3d956b7e2c4fe5f9928
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP/MTP_General_cal.acdb
+etc/acdbdata/MTP/MTP_Global_cal.acdb
+etc/acdbdata/MTP/MTP_Handset_cal.acdb
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP/MTP_Headset_cal.acdb
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
 # Audio AKM Firmware
 etc/firmware/ak4961_aram_karaoke_spk.bin
@@ -42,7 +42,6 @@ etc/firmware/ak4961_pram_voice_recognition.bin
 etc/firmware/ak4961_pram_wide.bin
 
 # Audio NXP
-bin/climax_hostSW
 etc/settings/mono_qcom_rcv.cnt
 etc/settings/mono_qcom_spk_l.cnt
 etc/settings/mono_qcom_spk_r.cnt
@@ -54,17 +53,14 @@ etc/settings/stereo_qcom_spk_r.cnt
 
 # Camera
 bin/mm-qcamera-daemon
-etc/camera/msm8996_camera.xml
-etc/camera/ov8856_chromatix.xml
-etc/camera/P996A01_camera.xml
-etc/camera/s5k2t8_chromatix.xml
-#etc/camera/t4k35_chromatix.xml
+etc/camera/camera_config.xml
 lib/hw/camera.msm8996.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libmm-qcamera.so
-lib/libqomx_core.so
 lib/libmorpho_refocus.so
+lib/libqomx_core.so
+vendor/lib/libchromaflash.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libFNVfbEngineHAL.so
 vendor/lib/libImgFvDetect.so
@@ -78,6 +74,7 @@ vendor/lib/libmmcamera2_iface_modules.so
 vendor/lib/libmmcamera2_imglib_modules.so
 vendor/lib/libmmcamera2_isp_modules.so
 vendor/lib/libmmcamera2_is.so
+vendor/lib/libmmcamera2_mct_shimlayer.so
 vendor/lib/libmmcamera2_mct.so
 vendor/lib/libmmcamera2_pp_buf_mgr.so
 vendor/lib/libmmcamera2_pproc_modules.so
@@ -86,16 +83,16 @@ vendor/lib/libmmcamera2_q3a_release.so
 vendor/lib/libmmcamera2_sensor_modules.so
 vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
-vendor/lib/libmmcamera2_vpe_module.so
-vendor/lib/libmmcamera2_wnr_module.so
+vendor/lib/libmmcamera_chromaflash_lib.so
 vendor/lib/libmmcamera_common_ov8856_eeprom.so
 vendor/lib/libmmcamera_common_s5k2t8_eeprom.so
-#vendor/lib/libmmcamera_common_t4k35_eeprom.so
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_dummyalgo.so
 vendor/lib/libmmcamera_eebinparse.so
 vendor/lib/libmmcamera_eeprom_util.so
 vendor/lib/libmmcamera_eztune_module.so
+vendor/lib/libmmcamera_facedetection_lib.so
+vendor/lib/libmmcamera_faceproc2.so
 vendor/lib/libmmcamera_faceproc.so
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hvx_add_constant.so
@@ -103,35 +100,39 @@ vendor/lib/libmmcamera_hvx_grid_sum.so
 vendor/lib/libmmcamera_hvx_zzHDR.so
 vendor/lib/libmmcamera_imglib_faceproc_adspstub.so
 vendor/lib/libmmcamera_imglib.so
+vendor/lib/libmmcamera_optizoom_lib.so
 vendor/lib/libmmcamera_ov8856.so
+vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_ppbase_module.so
+vendor/lib/libmmcamera_ppeiscore.so
+vendor/lib/libmmcamera_quadracfa.so
 vendor/lib/libmmcamera_s5k2t8.so
-#vendor/lib/libmmcamera_t4k35.so
+vendor/lib/libmmcamera_stillmore_lib.so
+vendor/lib/libmmcamera_sw2d_lib.so
 vendor/lib/libmmcamera_thread_services.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
+vendor/lib/libmmcamera_trueportrait_lib.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libmmcamera_tuning.so
-vendor/lib/libmmcamera_vpu_module.so
+vendor/lib/libmmcamera_ubifocus_lib.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
-vendor/lib/libois_bu63165_bin1_mem5.so
-vendor/lib/libois_bu63165_bin4_mem11.so
-vendor/lib/libois_bu63165_bin4_mem12.so
-vendor/lib/libois_bu63165_bin6_mem17.so
-vendor/lib/libois_bu63165_bin6_mem19.so
-vendor/lib/libois_bu63165_bin7_mem24.so
-vendor/lib/libois_bu63165.so
+vendor/lib/liboptizoom.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libremosaic_daemon.so
+vendor/lib/libseemore.so
+vendor/lib/libtrueportrait.so
 vendor/lib/libtsvideoprocess.so
+vendor/lib/libubifocus.so
 vendor/lib/libZEffectLib.so
 
-# Camera actuators
+# Camera actuator
 vendor/lib/libactuator_ak7371.so
 
 # Camera chromatix
@@ -141,10 +142,12 @@ vendor/lib/libchromatix_ov8856_a3_skyeye_preview.so
 vendor/lib/libchromatix_ov8856_a3_vga_preview.so
 vendor/lib/libchromatix_ov8856_a3_vga_video.so
 vendor/lib/libchromatix_ov8856_common.so
+vendor/lib/libchromatix_ov8856_cpp_ds_chromatix.so
 vendor/lib/libchromatix_ov8856_cpp_liveshot.so
 vendor/lib/libchromatix_ov8856_cpp_preview.so
 vendor/lib/libchromatix_ov8856_cpp_skyeye_preview.so
 vendor/lib/libchromatix_ov8856_cpp_snapshot.so
+vendor/lib/libchromatix_ov8856_cpp_us_chromatix.so
 vendor/lib/libchromatix_ov8856_cpp_vga_liveshot.so
 vendor/lib/libchromatix_ov8856_cpp_vga_preview.so
 vendor/lib/libchromatix_ov8856_cpp_vga_snapshot.so
@@ -161,10 +164,6 @@ vendor/lib/libchromatix_ov8856_vga_snapshot.so
 vendor/lib/libchromatix_ov8856_vga_video.so
 vendor/lib/libchromatix_ov8856_zsl_preview.so
 vendor/lib/libchromatix_ov8856_zsl_video.so
-vendor/lib/libchromatix_s5k2t8_1080p_preview_bu63165.so
-vendor/lib/libchromatix_s5k2t8_1080p_video_bu63165.so
-vendor/lib/libchromatix_s5k2t8_4k_preview_bu63165.so
-vendor/lib/libchromatix_s5k2t8_4k_video_bu63165.so
 vendor/lib/libchromatix_s5k2t8_a3_preview_livephoto.so
 vendor/lib/libchromatix_s5k2t8_a3_preview_panorama.so
 vendor/lib/libchromatix_s5k2t8_a3_preview_sport.so
@@ -175,27 +174,23 @@ vendor/lib/libchromatix_s5k2t8_cpp_hfr_120.so
 vendor/lib/libchromatix_s5k2t8_cpp_hfr_240.so
 vendor/lib/libchromatix_s5k2t8_cpp_hfr_300.so
 vendor/lib/libchromatix_s5k2t8_cpp_hfr_60.so
-vendor/lib/libchromatix_s5k2t8_cpp_hfr_90.so
 vendor/lib/libchromatix_s5k2t8_cpp_liveshot.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview_livephoto.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview_panorama.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview_sport.so
-vendor/lib/libchromatix_s5k2t8_cpp_snapshot_hdr.so
+vendor/lib/libchromatix_s5k2t8_cpp_snapshot_downscale.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot_livephoto.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot.so
+vendor/lib/libchromatix_s5k2t8_cpp_snapshot_upscale.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_liveshot.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_preview.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_snapshot.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_video.so
-vendor/lib/libchromatix_s5k2t8_cpp_video_4k.so
-vendor/lib/libchromatix_s5k2t8_cpp_video_hdr.so
 vendor/lib/libchromatix_s5k2t8_cpp_video.so
 vendor/lib/libchromatix_s5k2t8_default_preview_bu63165.so
 vendor/lib/libchromatix_s5k2t8_default_video_bu63165.so
 vendor/lib/libchromatix_s5k2t8_default_video.so
-vendor/lib/libchromatix_s5k2t8_hdr_snapshot_bu63165.so
-vendor/lib/libchromatix_s5k2t8_hdr_video_bu63165.so
 vendor/lib/libchromatix_s5k2t8_hfr_120_bu63165.so
 vendor/lib/libchromatix_s5k2t8_hfr_120.so
 vendor/lib/libchromatix_s5k2t8_hfr_240_bu63165.so
@@ -204,49 +199,40 @@ vendor/lib/libchromatix_s5k2t8_hfr_300_bu63165.so
 vendor/lib/libchromatix_s5k2t8_hfr_300.so
 vendor/lib/libchromatix_s5k2t8_hfr_60_bu63165.so
 vendor/lib/libchromatix_s5k2t8_hfr_60.so
-vendor/lib/libchromatix_s5k2t8_hfr_90_bu63165.so
-vendor/lib/libchromatix_s5k2t8_hfr_90.so
 vendor/lib/libchromatix_s5k2t8_liveshot.so
 vendor/lib/libchromatix_s5k2t8_postproc.so
 vendor/lib/libchromatix_s5k2t8_preview_panorama.so
 vendor/lib/libchromatix_s5k2t8_preview.so
 vendor/lib/libchromatix_s5k2t8_preview_sport.so
-vendor/lib/libchromatix_s5k2t8_snapshot_hdr.so
 vendor/lib/libchromatix_s5k2t8_snapshot_livephoto.so
 vendor/lib/libchromatix_s5k2t8_snapshot.so
 vendor/lib/libchromatix_s5k2t8_vga_preview.so
 vendor/lib/libchromatix_s5k2t8_vga_snapshot.so
 vendor/lib/libchromatix_s5k2t8_vga_video.so
-vendor/lib/libchromatix_s5k2t8_video_16M_bu63165.so
 vendor/lib/libchromatix_s5k2t8_video_4k.so
-vendor/lib/libchromatix_s5k2t8_video_hdr.so
 vendor/lib/libchromatix_s5k2t8_zsl_preview_bu63165.so
 vendor/lib/libchromatix_s5k2t8_zsl_video_bu63165.so
-#vendor/lib/libchromatix_t4k35_a3_default_preview.so
-#vendor/lib/libchromatix_t4k35_a3_default_video.so
-#vendor/lib/libchromatix_t4k35_common.so
-#vendor/lib/libchromatix_t4k35_cpp_liveshot.so
-#vendor/lib/libchromatix_t4k35_cpp_preview.so
-#vendor/lib/libchromatix_t4k35_cpp_snapshot.so
-#vendor/lib/libchromatix_t4k35_cpp_video.so
-#vendor/lib/libchromatix_t4k35_default_video.so
-#vendor/lib/libchromatix_t4k35_liveshot.so
-#vendor/lib/libchromatix_t4k35_postproc.so
-#vendor/lib/libchromatix_t4k35_preview.so
-#vendor/lib/libchromatix_t4k35_snapshot.so
-#vendor/lib/libchromatix_t4k35_zsl_preview.so
-#vendor/lib/libchromatix_t4k35_zsl_video.so
 
 # Camera firmware
-etc/firmware/cpp_firmware_v1_10_0.fw
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
+etc/firmware/cpp_firmware_v1_10_0.fw
+etc/firmware/cpp_firmware_v1_12_0.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_5_0.fw
 etc/firmware/cpp_firmware_v1_5_2.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
+
+# Camera OIS
+vendor/lib/libois_bu63165_bin1_mem5.so
+vendor/lib/libois_bu63165_bin4_mem11.so
+vendor/lib/libois_bu63165_bin4_mem12.so
+vendor/lib/libois_bu63165_bin6_mem17.so
+vendor/lib/libois_bu63165_bin6_mem19.so
+vendor/lib/libois_bu63165_bin7_mem24.so
+vendor/lib/libois_bu63165.so
 
 # Camera sensors
 vendor/lib/libmmcamera_isp_abf47.so
@@ -291,29 +277,38 @@ vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
 
-# Fingerprint
-bin/alipayServiced
-lib64/lib_alipay_tac_shared.so
+# Graphics firmware
+etc/firmware/a530_gpmu.fw2
+etc/firmware/a530_pfp.fw
+etc/firmware/a530_pm4.fw
+etc/firmware/a530v1_pfp.fw
+etc/firmware/a530v1_pm4.fw
+etc/firmware/a530v2_seq.fw2
+etc/firmware/a530v3_gpmu.fw2
+etc/firmware/a530v3_seq.fw2
+etc/firmware/a530_zap.b00
+etc/firmware/a530_zap.b01
+etc/firmware/a530_zap.b02
+etc/firmware/a530_zap.elf
+etc/firmware/a530_zap.mdt
 
 # Fingerprint sensor (Goodix)
-bin/fingerprintd_gx|adb50c9cb808a2c48c828067cf9cd02e7b807244
-bin/goodixFpTest
-bin/gx_fpd|b9ec1abb8332976b996987c0ee523a8613edad1a
+bin/fingerprintd_gx
+bin/gx_fpd
 lib64/hw/fingerprint.goodix.default.so
 lib64/hw/gxfingerprint.default.so
 lib64/libfp_client.so
 lib64/libfpnav.so
 lib64/libfpservice.so
 
-# Light sensor
-lib64/hw/lights.msm8996.so
-lib/hw/lights.msm8996.so
-
 # NFC firmware
-vendor/firmware/libpn548ad_fw.so|281ec4160e056ede4cc17873277a419bf2e9ab13
+vendor/firmware/libpn548ad_fw.so
 
 # Sensors
 etc/sensors/sensor_def_qcomdev.conf
+lib64/hw/lights.msm8996.so
+lib/hw/lights.msm8996.so
 
-# TP firmware
-etc/firmware/ZTE_NDT_0X19_20160401.nfw
+# VR
+lib64/hw/vr.default.so
+lib/hw/vr.default.so

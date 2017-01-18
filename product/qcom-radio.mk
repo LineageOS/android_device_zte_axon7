@@ -10,6 +10,7 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full \
     librmnetctl \
     libxml2
 
@@ -19,16 +20,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
      persist.data.iwlan.enable=true \
      persist.data.qmi.adb_logmask=0 \
      persist.dpm.feature=0 \
-     persist.net.doxlat=true \
+     persist.net.doxlat=false \
      persist.radio.add_power_save=1 \
      persist.radio.apm_sim_not_pwdn=1 \
      persist.radio.calls.on.ims=true \
      persist.radio.csvt.enabled=false \
      persist.radio.custom_ecc=1 \
-     persist.radio.domain.ps=false \
      persist.radio.flexmap_type=disabled \
      persist.radio.hw_mbn_update=1 \
-     persist.radio.jbims=1 \
      persist.radio.mt_sms_ack=20 \
      persist.radio.multisim.config=dsds \
      persist.radio.rat_on=combine \

@@ -130,6 +130,8 @@
     <ctl name="SLIMBUS_4_RX Audio Mixer MultiMedia2" value="0" />
     <ctl name="MultiMedia5 Mixer SLIM_0_TX" value="0" />
     <ctl name="MultiMedia5 Mixer AFE_PCM_TX" value="0" />
+    <ctl name="MultiMedia8 Mixer SLIM_0_TX" value="0" />
+    <ctl name="MultiMedia8 Mixer AFE_PCM_TX" value="0" />
     <ctl name="MultiMedia4 Mixer MI2S_TX" value="0" />
     <ctl name="MultiMedia1 Mixer MI2S_TX" value="0" />
     <ctl name="MultiMedia7 Mixer MI2S_TX" value="0" />
@@ -162,6 +164,7 @@
     <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia4" value="0" />
     <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia5" value="0" />
     <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia7" value="0" />
+    <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia8" value="0" />
     <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia10" value="0" />
     <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia11" value="0" />
     <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia12" value="0" />
@@ -1882,7 +1885,7 @@
         <ctl name="IIR1 INP1 MUX" value="DEC6" />
     </path>
 
-<path name="codec-mclk">
+    <path name="codec-mclk">
               <ctl name="Codec MCLK Switch" value="On" />
 	</path>
 
@@ -1906,8 +1909,8 @@
 		<ctl name="PORT2 Sync Domain" value="slimbus" />
         <ctl name="SDTO2 Source Selector" value="SBI1" />
         </path>
-		
-<path name="speaker-akm">
+
+    <path name="speaker-akm">
         <ctl name="SLIM RX1 MUX" value="SB1_PB" />
         <ctl name="SLIM RX2 MUX" value="SB1_PB" />
         <ctl name="SLIM_0_RX Channels" value="Two" />
@@ -1938,21 +1941,21 @@
 
     <path name="speaker-ext-1-liquid">
         <path name="speaker" />
-</path>
+    </path>
 
     <path name="speaker-ext-1-db">
         <path name="speaker" />
-</path>
+    </path>
 
-<path name="speaker-ext-2-db">
+    <path name="speaker-ext-2-db">
         <path name="speaker" />
     </path>
 
-<path name="voice-speaker-pv">
+    <path name="voice-speaker-pv">
         <path name="speaker" />
     </path>
 
-<path name="sidetone-iir">
+    <path name="sidetone-iir">
         <ctl name="IIR1 Enable Band1" value="1" />
         <ctl name="IIR1 Enable Band2" value="1" />
         <ctl name="IIR1 Enable Band3" value="1" />
@@ -2024,12 +2027,12 @@
         <ctl name="SLIM0_RX_VI_FB_LCH_MUX"  value="SLIM4_TX" />
     </path>
 
-<path name="handset-hac">
+    <path name="handset-hac">
         <ctl name="Receiver Switch" value="On" />
         <path name="speaker" />
     </path>
 
-<path name="handset">
+    <path name="handset">
         <ctl name="Receiver Switch" value="On" />
         <path name="speaker" />
     </path>
@@ -2046,80 +2049,80 @@
         <ctl name="MIC Gain 1L" value="9" />
     </path> -->
 
-<!-- ADD DSP 
+<!-- ADD DSP
     <path name="handset-mic">
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
-	<ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="Two" />
-		<ctl name="AIN1 PMMP Selector" value="MPWR1A" />
-	<ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
         <ctl name="Mic_1L input Selector" value="AIN1" />
-	<ctl name="Mic_1R input Selector" value="AIN2" />
+        <ctl name="Mic_1R input Selector" value="AIN2" />
         <ctl name="MIC1L Selector" value="Analog" />
-	<ctl name="MIC1R Selector" value="Analog" />
-	<ctl name="CP1 Clock Mode" value="500kHz" />
-	<ctl name="DSPI1 Source Selector" value="ADC1" />
-	<ctl name="DSP Sync Domain" value="slimbus" />
-	<ctl name="DSP Uplink Status" value="on" />
-	<ctl name="DSP Mode" value="sound_record" />
-	<ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
+        <ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="DSPI1 Source Selector" value="ADC1" />
+        <ctl name="DSP Sync Domain" value="slimbus" />
+        <ctl name="DSP Uplink Status" value="on" />
+        <ctl name="DSP Mode" value="sound_record" />
+        <ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
         <ctl name="SBO1L Source Selector" value="DSPO1" />
         <ctl name="MIC Gain 1L" value="2" />
-	<ctl name="MIC Gain 1R" value="2" />
+        <ctl name="MIC Gain 1R" value="2" />
     </path>  -->
 
 <!-- ADD DSP wchat_record specially for WeChat -->
     <path name="handset-mic">
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
-	<ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="Two" />
-		<ctl name="AIN1 PMMP Selector" value="MPWR1A" />
-	<ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
         <ctl name="Mic_1L input Selector" value="AIN1" />
-	<ctl name="Mic_1R input Selector" value="AIN2" />
+        <ctl name="Mic_1R input Selector" value="AIN2" />
         <ctl name="MIC1L Selector" value="Analog" />
-	<ctl name="MIC1R Selector" value="Analog" />
-	<ctl name="DSP Mode" value="wchat_record" />
-	<ctl name="CP1 Clock Mode" value="500kHz" />
-	<ctl name="DSPI1 Source Selector" value="ADC1" />
-	<ctl name="DSP Sync Domain" value="slimbus" />
-	<ctl name="DSP Uplink Status" value="on" />
-	<ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
-	<ctl name="MIXAI1 Source Selector" value="DSPO1" />
-	<ctl name="MIXERA Input1 SWAP" value="through" />
-	<ctl name="MIXAO Virt Switch" value="On" />
+        <ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="DSP Mode" value="wchat_record" />
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="DSPI1 Source Selector" value="ADC1" />
+        <ctl name="DSP Sync Domain" value="slimbus" />
+        <ctl name="DSP Uplink Status" value="on" />
+        <ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
+        <ctl name="MIXAI1 Source Selector" value="DSPO1" />
+        <ctl name="MIXERA Input1 SWAP" value="through" />
+        <ctl name="MIXAO Virt Switch" value="On" />
         <ctl name="SBO1L Source Selector" value="MIXAO" />
-        <ctl name="MIC Gain 1L" value="7" /> 
+        <ctl name="MIC Gain 1L" value="7" />
         <ctl name="MIC Gain 1R" value="7" />
     </path>
 
     <path name="handset-mic-rotation">
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
-	<ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="Two" />
-	<ctl name="AIN1 PMMP Selector" value="MPWR1A" />
-	<ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
         <ctl name="Mic_1L input Selector" value="AIN2" />
-	<ctl name="Mic_1R input Selector" value="AIN1" />
+        <ctl name="Mic_1R input Selector" value="AIN1" />
         <ctl name="MIC1L Selector" value="Analog" />
-	<ctl name="MIC1R Selector" value="Analog" />
-	<ctl name="DSP Mode" value="sound_record" />
-	<ctl name="CP1 Clock Mode" value="500kHz" />
-	<ctl name="DSPI1 Source Selector" value="ADC1" />
-	<ctl name="DSP Sync Domain" value="slimbus" />
-	<ctl name="DSP Uplink Status" value="on" />
-	<ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
+        <ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="DSP Mode" value="sound_record" />
+        <ctl name="CP1 Clock Mode" value="500kHz" />
+        <ctl name="DSPI1 Source Selector" value="ADC1" />
+        <ctl name="DSP Sync Domain" value="slimbus" />
+        <ctl name="DSP Uplink Status" value="on" />
+        <ctl name="DSPO1 Mixer DSPI1_Switch" value="1" />
         <ctl name="SBO1L Source Selector" value="DSPO1" />
         <ctl name="MIC Gain 1L" value="2" />
-	<ctl name="MIC Gain 1R" value="2" />
+        <ctl name="MIC Gain 1R" value="2" />
     </path>
 
-<path name="speaker-mic">
+    <path name="speaker-mic">
         <path name="handset-mic" />
     </path>
 
 
-<path name="handset-mic-db">
+    <path name="handset-mic-db">
                 <path name="handset-mic" />
     </path>
 
@@ -2165,8 +2168,8 @@
         <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
         <ctl name="HP Virt Switch" value="On" />
         <ctl name="HP Out Volume" value="19" />
-        </path>
-		
+    </path>
+
     <path name="headphones-off-dolby">
         <ctl name="SLIM RX1 MUX" value="SB1_PB" />
         <ctl name="SLIM RX2 MUX" value="SB1_PB" />
@@ -2176,13 +2179,13 @@
         <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
         <ctl name="HP Virt Switch" value="On" />
         <ctl name="HP Out Volume" value="19" />
-        </path>
-		
+    </path>
+
     <path name="line">
         <path name="headphones" />
     </path>
 
-<path name="headphones-dolby">
+    <path name="headphones-dolby">
         <ctl name="SLIM RX1 MUX" value="SB1_PB" />
         <ctl name="SLIM RX2 MUX" value="SB1_PB" />
         <ctl name="SLIM_0_RX Channels" value="Two" />
@@ -2191,10 +2194,10 @@
         <ctl name="DAC1 Rch Mixer Rch_Switch" value="1" />
         <ctl name="HP Virt Switch" value="On" />
         <ctl name="HP Out Volume" value="19" />
-        </path>	
+    </path>
 
-<path name="headset-mic">
-	    <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
+    <path name="headset-mic">
+        <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="One" />
         <ctl name="AIN4 PMMP Selector" value="MPWR2" />
         <ctl name="Mic_1L input Selector" value="AIN4" />
@@ -2239,7 +2242,7 @@
     </path>
 
     <path name="voice-speaker-db">
-<path name="speaker" />
+        <path name="speaker" />
     </path>
 
     <path name="voice-speaker-mic">
@@ -2306,22 +2309,22 @@
 
     <path name="speaker-and-headphones-fluid">
         <path name="speaker-and-headphones" />
-</path>
+    </path>
 
    <path name="speaker-and-line-fluid">
         <path name="speaker-and-headphones-fluid" />
     </path>
 
     <path name="speaker-and-headphones-liquid">
-<path name="speaker-and-headphones" />
-</path>
+        <path name="speaker-and-headphones" />
+    </path>
 
    <path name="speaker-and-line-liquid">
         <path name="speaker-and-headphones-liquid" />
     </path>
 
     <path name="speaker-and-headphones-ext-1-liquid">
-<path name="speaker-and-headphones" />
+        <path name="speaker-and-headphones" />
     </path>
 
     <path name="speaker-and-headphones-ext-1-db">
@@ -2330,8 +2333,8 @@
 </path>
 
     <path name="speaker-and-headphones-ext-2-db">
-<path name="speaker-and-headphones" />
-</path>
+        <path name="speaker-and-headphones" />
+    </path>
 
     <path name="usb-headphones">
     </path>
@@ -2345,7 +2348,7 @@
         <ctl name="ANC1 FB MUX" value="EAR_HPH_L" />
         <ctl name="ANC1 MUX" value="ADC3" />
         <ctl name="ANC2 MUX" value="ADC4" />
-	<ctl name="ADC3 Volume" value="8" />
+        <ctl name="ADC3 Volume" value="8" />
         <ctl name="ADC4 Volume" value="8" />
         <ctl name="HPHL Volume" value="20" />
         <ctl name="HPHR Volume" value="20" />
@@ -2441,16 +2444,17 @@
         <ctl name="SBO1L Source Selector" value="DSPO1" />
         <ctl name="MIC Gain 1L" value="4" />
 	</path>
-    <path name="camcorder-mic">
+
+<path name="camcorder-mic">
         <ctl name="SB1_CAP Mixer SLIM TX7" value="1"/>
-	<ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
+        <ctl name="SB1_CAP Mixer SLIM TX8" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="Two" />
-		<ctl name="AIN1 PMMP Selector" value="MPWR1A" />
-	<ctl name="AIN2 PMMP Selector" value="MPWR1B" />
+        <ctl name="AIN1 PMMP Selector" value="MPWR1A" />
+        <ctl name="AIN2 PMMP Selector" value="MPWR1B" />
         <ctl name="Mic_1L input Selector" value="AIN1" />
-	<ctl name="Mic_1R input Selector" value="AIN2" />
+        <ctl name="Mic_1R input Selector" value="AIN2" />
         <ctl name="MIC1L Selector" value="Analog" />
-	<ctl name="MIC1R Selector" value="Analog" />
+        <ctl name="MIC1R Selector" value="Analog" />
 	<ctl name="DSP Mode" value="voice_record" />
 	<ctl name="CP1 Clock Mode" value="500kHz" />
 	<ctl name="DSPI1 Source Selector" value="ADC1" />
@@ -3413,6 +3417,13 @@
         <ctl name="HP Out Volume" value="22" />
     </path>
 
+    <path name="unprocessed-handset-mic">
+        <path name="voice-rec-mic" />
+    </path>
+
+    <path name="unprocessed-mic">
+        <path name="unprocessed-handset-mic" />
+    </path>
 
 <!-- Added for ADSP testfwk -->
     <path name="ADSP testfwk">
