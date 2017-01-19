@@ -367,7 +367,7 @@ service perfd /system/vendor/bin/perfd
    group root readproc
    disabled
    socket perfd seqpacket 0666 root system
-#   writepid /dev/cpuset/system-background/tasks
+   writepid /dev/cpuset/system-background/tasks
 
 service iop /system/bin/iop
     class main
@@ -375,7 +375,7 @@ service iop /system/bin/iop
     group root
     disabled
     socket iop seqpacket 0666 root system
-#    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/system-background/tasks
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
@@ -404,11 +404,13 @@ on property:persist.env.fastdorm.enabled=true
 service cnd /system/bin/cnd
     class main
     socket cnd stream 660 root inet
+    writepid /dev/cpuset/system-background/tasks
 
 service dpmd /system/bin/dpmd
     class late_start
     socket dpmd stream 660 root system
     group system readproc
+    writepid /dev/cpuset/system-background/tasks
 
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class core
@@ -418,10 +420,12 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
+    writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /system/bin/tftp_server
    class core
    user root
+   writepid /dev/cpuset/system-background/tasks
 
 on property:wc_transport.start_hci=true
     start start_hci_filter
@@ -480,6 +484,7 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
+    writepid /dev/cpuset/system-background/tasks
 
 service ipacm-diag /system/bin/ipacm-diag
     class main
@@ -491,16 +496,19 @@ service ipacm /system/bin/ipacm
     class main
     user net_admin
     group net_admin inet
+    writepid /dev/cpuset/system-background/tasks
 
 service qti /system/vendor/bin/qti
     class main
     user radio
     group radio net_raw qcom_diag usb net_admin
+    writepid /dev/cpuset/system-background/tasks
 
 service sensors /system/bin/sensors.qcom
     class core
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -562,6 +570,7 @@ service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet qcom_diag wifi
+    writepid /dev/cpuset/system-background/tasks
 
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
@@ -590,6 +599,7 @@ service charger /charger
     class charger
     group system graphics
     seclabel u:r:healthd:s0
+    writepid /dev/cpuset/system-background/tasks
 
 service qbcharger /charger -m 1
     disabled
@@ -606,7 +616,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     user root
     group root
     disabled
-#    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/system-background/tasks
 
 #add by zte_pm for hotplug begin
 service hotplug /system/bin/hotplug_cpu
@@ -622,6 +632,7 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start
     user system
     group system
+    writepid /dev/cpuset/system-background/tasks
 
 on charger
     setprop persist.sys.usb.config charging
@@ -637,7 +648,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-#    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/system-background/tasks
 
 #Start up peripheral manager
 service per_mgr system/bin/pm-service
@@ -645,12 +656,14 @@ service per_mgr system/bin/pm-service
     user system
     group system net_raw
     ioprio rt 4
+    writepid /dev/cpuset/system-background/tasks
 
 service per_proxy /system/bin/pm-proxy
     class core
     user system
     group system
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 on property:init.svc.per_mgr=running
     start per_proxy
@@ -662,6 +675,7 @@ service qseecomd /system/bin/qseecomd
    class core
    user root
    group root
+   writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-normal.conf
    class main
@@ -673,6 +687,7 @@ service thermal-engine /system/vendor/bin/thermal-engine -c /system/etc/thermal-
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
+   writepid /dev/cpuset/system-background/tasks
 
 service thermal-perf /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-perf.conf
    class main
@@ -685,6 +700,7 @@ service thermal-perf /system/vendor/bin/thermal-engine -c /system/etc/thermal-en
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    disabled
+   writepid /dev/cpuset/system-background/tasks
 
 #smart cpu enable
 on property:debug.zte.vr_mode=1
@@ -704,6 +720,7 @@ service time_daemon /system/bin/time_daemon
    class late_start
    user root
    group root
+   writepid /dev/cpuset/system-background/tasks
 
 service adsprpcd /system/bin/adsprpcd
    class main
@@ -720,6 +737,7 @@ service imsqmidaemon /system/bin/imsqmidaemon
     user system
     socket ims_qmid stream 0660 system radio
     group radio log diag
+    writepid /dev/cpuset/system-background/tasks
 
 service imsdatadaemon /system/bin/imsdatadaemon
     class main
@@ -727,6 +745,7 @@ service imsdatadaemon /system/bin/imsdatadaemon
     socket ims_datad stream 0660 system radio
     group system wifi radio inet log diag
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service pd_mapper /system/vendor/bin/pd-mapper
      class core
@@ -754,6 +773,7 @@ service imscmservice /system/bin/imscmservice
    user system
    group radio diag inet log
    disabled
+   writepid /dev/cpuset/system-background/tasks
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
@@ -794,15 +814,19 @@ service hvdcp_opti /system/bin/hvdcp_opti
     class main
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
+
 
 service gx_fpd /system/bin/gx_fpd
     class late_start
     user root
     group system
     onrestart restart fingerprintd_gx
+    writepid /dev/cpuset/system-background/tasks
 
 #fingerprintd
 service fingerprintd_gx /system/bin/fingerprintd_gx
     class late_start
     user system
     onrestart restart gx_fpd
+    writepid /dev/cpuset/system-background/tasks
