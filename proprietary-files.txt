@@ -54,6 +54,8 @@ etc/settings/stereo_qcom_spk_r.cnt
 # Camera
 bin/mm-qcamera-daemon
 etc/camera/camera_config.xml
+etc/camera/ov8856_chromatix.xml
+etc/camera/s5k2t8_chromatix.xml
 lib/hw/camera.msm8996.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
