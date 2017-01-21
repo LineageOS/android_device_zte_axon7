@@ -295,9 +295,8 @@ etc/firmware/a530_zap.elf
 etc/firmware/a530_zap.mdt
 
 # Fingerprint sensor (Goodix)
-bin/fingerprintd_gx
 bin/gx_fpd
-lib64/hw/fingerprint.goodix.default.so
+lib64/hw/fingerprint.msm8996.so
 lib64/hw/gxfingerprint.default.so
 lib64/libfp_client.so
 lib64/libfpnav.so
