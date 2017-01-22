@@ -298,7 +298,7 @@ etc/permissions/telephonyservice.xml
 etc/qcril_db_diff.xml
 framework/embmslibrary.jar
 -framework/qcrilhook.jar
-framework/qti-telephony-common.jar
+framework/qti-telephony-common.jar|02fbc79f309af1c9ccfb1401cbd898138faf0848
 framework/QtiTelephonyServicelibrary.jar
 lib64/libmodemapi.so
 lib64/libztecfg.so
