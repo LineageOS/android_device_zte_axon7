@@ -220,6 +220,7 @@ vendor/lib64/libcsm_data.so
 vendor/lib64/libQtiTether.so
 vendor/lib/libconnctrl.so
 vendor/lib/libcsm_data.so
+vendor/lib/libQtiTether.so
 
 # Perf
 bin/energy-awareness
