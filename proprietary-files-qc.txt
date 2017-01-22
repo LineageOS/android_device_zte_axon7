@@ -216,8 +216,10 @@ vendor/lib/libvqzip.so
 # Network
 -priv-app/QtiTetherService/QtiTetherService.apk
 vendor/lib64/libconnctrl.so
+vendor/lib64/libcsm_data.so
 vendor/lib64/libQtiTether.so
 vendor/lib/libconnctrl.so
+vendor/lib/libcsm_data.so
 
 # Perf
 bin/energy-awareness
