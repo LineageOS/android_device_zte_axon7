@@ -21,6 +21,6 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 PRODUCT_NAME := lineage_ailsa_ii
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME="P996A01" \
-    BUILD_FINGERPRINT="ZTE/P996A01_N/ailsa_ii:7.0/NRD90M/20170114.044044:user/release-keys" \
-    PRIVATE_BUILD_DESC="P996A01_N-user 7.0 NRD90M 20170114.044044 release-keys"
+    PRODUCT_NAME="P996A01_N" \
+    BUILD_FINGERPRINT="ZTE/P996A01_N/ailsa_ii:7.0/NRD90M/20170120.053039:user/release-keys" \
+    PRIVATE_BUILD_DESC="P996A01_N-user 7.0 NRD90M 20170120.053039 release-keys"
