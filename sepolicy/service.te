@@ -1,0 +1,1 @@
+type gx_fpd_service, app_api_service, system_server_service, service_manager_type;

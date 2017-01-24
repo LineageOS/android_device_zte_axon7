@@ -1,0 +1,7 @@
+allow system_server persist_file:dir { read write };
+allow system_server proc_touchscreen:dir search;
+allow system_server proc_touchscreen:file rw_file_perms;
+
+# Allow system server access to gx_fpd daemon
+binder_call(system_server, gx_fpd);
+allow system_server gx_fpd_service:service_manager find;

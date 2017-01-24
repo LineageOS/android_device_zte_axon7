@@ -90,7 +90,7 @@
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/p2p0/queues/rx-* rps_cpus 0660 system system
 
 #nfc permissions
-/dev/nq-nci               0660    nfc         nfc
+/dev/pn548                0660   nfc        nfc
 
 # UIO devices
 /dev/uio0                 0660   system     system

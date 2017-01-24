@@ -1,0 +1,2 @@
+allow thermal-engine sysfs_batteryinfo:file r_file_perms;
+allow thermal-engine sysfs_kgsl:file r_file_perms;

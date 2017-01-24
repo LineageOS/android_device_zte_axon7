@@ -239,17 +239,13 @@ on boot
     # Set the default message loglevel to KERN_INFO
     write /proc/sys/kernel/printk "6 6 1 7"
 
-    # NFC
-    chmod 0660 /dev/pn548
-    chown nfc system /dev/pn548
-
     # Allow access to dload sysfs node
     chown root system /sys/kernel/dload/emmc_dload
     chmod 0660 /sys/kernel/dload/emmc_dload
 
     # Wake gesture and KeyDisabler
-    chown system system /proc/touchscreen/wake_gesture
-    chmod 0644 /proc/touchscreen/wake_gesture
+    chown system radio /proc/touchscreen/wake_gesture
+    chmod 0660 /proc/touchscreen/wake_gesture
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input2/0dbutton
 
     # NDT weight port
@@ -360,11 +356,13 @@ service config_bt_addr /system/bin/bt_mac_writer -O
     class core
     user bluetooth
     group bluetooth radio
+    seclabel u:r:btnvtool_exec:s0
     oneshot
 
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
     user root
+    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
@@ -372,6 +370,7 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
     group bluetooth net_bt_admin
     disabled
+    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 on property:bluetooth.hciattach=true
@@ -703,7 +702,6 @@ service hvdcp_opti /system/bin/hvdcp_opti
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
-
 
 service gx_fpd /system/bin/gx_fpd
     class late_start
