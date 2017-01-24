@@ -76,6 +76,9 @@ on post-fs-data
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
 
+    #Create directories for Fingerprint
+    mkdir /data/system/fingerprint 0700 system system
+
     #Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
 
