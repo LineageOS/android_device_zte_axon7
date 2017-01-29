@@ -267,6 +267,14 @@ on boot
     chmod 0660 /sys/module/zte_misc/parameters/fp_msg_type
     chown system system /sys/module/zte_misc/parameters/fp_msg_type
 
+    # add for HALL interface permissions
+    chmod 0660 /sys/module/zte_hall/parameters/factory_mode
+    chmod 0660 /sys/module/zte_hall/parameters/hall_timer_debug
+    chmod 0660 /sys/module/zte_hall/parameters/hall_interrupt_count
+    chown root system /sys/module/zte_hall/parameters/factory_mode
+    chown root system /sys/module/zte_hall/parameters/hall_timer_debug
+    chown root system /sys/module/zte_hall/parameters/hall_interrupt_count
+
     # Create SWAP related dirs
     mkdir /data/system/swap 0770 root system
     chmod 2770 /data/system/swap
