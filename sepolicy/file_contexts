@@ -1,6 +1,12 @@
 # NFC
 /dev/pn548                                  u:object_r:nfc_device:s0
 
+# Cryptkey
+/dev/block/bootdevice/by-name/cryptkey      u:object_r:cryptkey_device:s0
+
+# DSP
+/dev/block/bootdevice/by-name/dsp           u:object_r:dsp_block_device:s0
+
 # Goodix fingerprint
 /dev/goodix_fp*                             u:object_r:gx_fpd_device:s0
 /system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
