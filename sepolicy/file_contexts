@@ -2,7 +2,7 @@
 /dev/pn548                                  u:object_r:nfc_device:s0
 
 # Cryptkey
-/dev/block/bootdevice/by-name/cryptkey      u:object_r:cryptkey_device:s0
+/dev/block/bootdevice/by-name/cryptkey      u:object_r:metadata_block_device:s0
 
 # DSP
 /dev/block/bootdevice/by-name/dsp           u:object_r:dsp_block_device:s0

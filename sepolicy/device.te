@@ -1,8 +1,5 @@
 # Goodix fingerprint
 type gx_fpd_device, dev_type;
 
-# Cryptkey
-type cryptkey_device, dev_type;
-
 # DSP
 type dsp_block_device, dev_type;
