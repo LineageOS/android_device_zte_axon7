@@ -7,6 +7,9 @@
 # DSP
 /dev/block/bootdevice/by-name/dsp           u:object_r:dsp_block_device:s0
 
+# Btnvtool
+/system/bin/bt_mac_writer                   u:object_r:btnvtool_exec:s0
+
 # Goodix fingerprint
 /dev/goodix_fp*                             u:object_r:gx_fpd_device:s0
 /system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0

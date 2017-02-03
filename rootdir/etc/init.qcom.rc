@@ -359,7 +359,6 @@ service config_bt_addr /system/bin/bt_mac_writer -O
     class core
     user bluetooth
     group bluetooth radio
-    seclabel u:r:btnvtool_exec:s0
     oneshot
 
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
