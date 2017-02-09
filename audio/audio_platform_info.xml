@@ -28,12 +28,22 @@
     <acdb_ids>
         <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="207"/>
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124"/>
+        <device name="SND_DEVICE_OUT_HEADPHONES" acdb_id="207"/>
     </acdb_ids>
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
     </bit_width_configs>
+
+    <device_names>
+         <device name="SND_DEVICE_OUT_HEADPHONES" alias="headphones-hi-fi"/>
+    </device_names>
+
+    <backend_names>
+        <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones-hi-fi"/>
+    </backend_names>
+
     <config_params>
-                <!-- In the below value string, first parameter indicates size -->
+        <!-- In the below value string, first parameter indicates size -->
         <!-- followed by perf lock options                             -->
         <param key="perf_lock_opts" value="2, 0x101, 0x20F"/>
         </config_params>
