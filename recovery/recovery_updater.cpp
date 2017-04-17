@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 
 #include "edify/expr.h"
@@ -37,6 +38,10 @@
 #define TZ_VER_STR "QC_IMAGE_VERSION_STRING="
 #define TZ_VER_STR_LEN 24
 #define TZ_VER_BUF_LEN 255
+#define MODEM_PART_PATH "/dev/block/bootdevice/by-name/modem"
+#define MODEM_VER_STR "Time_Stamp\": \""
+#define MODEM_VER_STR_LEN 14
+#define MODEM_VER_BUF_LEN 20
 
 /* Boyer-Moore string search implementation from Wikipedia */
 
@@ -189,6 +194,88 @@ Value * VerifyTrustZoneFn(const char *name, State *state, int argc, Expr *argv[]
     return StringValue(strdup(ret ? "1" : "0"));
 }
 
+static int get_modem_version(char *ver_str, size_t len) {
+    int ret = 0;
+    int fd;
+    int modem_size;
+    char *modem_data = NULL;
+    char *offset = NULL;
+
+    fd = open(MODEM_PART_PATH, O_RDONLY);
+    if (fd < 0) {
+        ret = errno;
+        goto err_ret;
+    }
+
+    modem_size = lseek64(fd, 0, SEEK_END);
+    if (modem_size == -1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    modem_data = (char *) mmap(NULL, modem_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (modem_data == (char *)-1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    /* Do Boyer-Moore search across MODEM data */
+    offset = bm_search(modem_data, modem_size, MODEM_VER_STR, MODEM_VER_STR_LEN);
+    if (offset != NULL) {
+        snprintf(ver_str, len, "%s", offset + MODEM_VER_STR_LEN);
+    } else {
+        ret = -ENOENT;
+    }
+
+    munmap(modem_data, modem_size);
+err_fd_close:
+    close(fd);
+err_ret:
+    return ret;
+}
+
+/* verify_modem("MODEM_VERSION", "MODEM_VERSION", ...) */
+Value * VerifyModemFn(const char *name, State *state, int argc, Expr *argv[]) {
+    char current_modem_version[MODEM_VER_BUF_LEN];
+    int i, ret;
+    struct tm tm1, tm2;
+
+    ret = get_modem_version(current_modem_version, MODEM_VER_BUF_LEN);
+    if (ret) {
+        return ErrorAbort(state, "%s() failed to read current MODEM build time-stamp: %d",
+                name, ret);
+    }
+
+    char** modem_version = ReadVarArgs(state, argc, argv);
+    if (modem_version == NULL) {
+        return ErrorAbort(state, "%s() error parsing arguments", name);
+    }
+
+    memset(&tm1, 0, sizeof(tm));
+    strptime(current_modem_version, "%Y-%m-%d %H:%M:%S", &tm1);
+
+    ret = 0;
+    for (i = 0; i < argc; i++) {
+        uiPrintf(state, "Checking for MODEM build time-stamp %s\n", modem_version[i]);
+
+        memset(&tm2, 0, sizeof(tm));
+        strptime(modem_version[i], "%Y-%m-%d %H:%M:%S", &tm2);
+
+        if (mktime(&tm1) >= mktime(&tm2)) {
+            ret = 1;
+            break;
+        }
+    }
+
+    for (i = 0; i < argc; i++) {
+        free(modem_version[i]);
+    }
+    free(modem_version);
+
+    return StringValue(strdup(ret ? "1" : "0"));
+}
+
 void Register_librecovery_updater_axon7() {
     RegisterFunction("axon7.verify_trustzone", VerifyTrustZoneFn);
+    RegisterFunction("axon7.verify_modem", VerifyModemFn);
 }
