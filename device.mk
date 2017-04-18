@@ -20,4 +20,5 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # Include package config fragments
 include $(LOCAL_PATH)/product/*.mk
 
-$(call inherit-product-if-exists, vendor/zte/axon7/axon7-vendor.mk)
+# Call the proprietary setup
+$(call inherit-product, vendor/zte/axon7/axon7-vendor.mk)

@@ -20,5 +20,5 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 include device/zte/axon7/board/*.mk
 
-# inherit from the proprietary version
--include vendor/zte/axon7/BoardConfigVendor.mk
+# Inherit from proprietary files
+include vendor/zte/axon7/BoardConfigVendor.mk
