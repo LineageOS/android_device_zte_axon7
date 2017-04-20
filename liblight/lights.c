@@ -47,14 +47,8 @@ char const*const RED_LED_FILE
 char const*const GREEN_LED_FILE
         = "/sys/class/leds/green/brightness";
 
-char const*const BLUE_LED_FILE
-        = "/sys/class/leds/blue/brightness";
-
 char const*const LCD_FILE
         = "/sys/class/leds/lcd-backlight/brightness";
-
-const char*const BUTTONS_FILE
-        = "/sys/class/leds/button-backlight/brightness";
 
 char const*const RED_DUTY_PCTS_FILE
         = "/sys/class/leds/red/duty_pcts";
@@ -62,17 +56,11 @@ char const*const RED_DUTY_PCTS_FILE
 char const*const GREEN_DUTY_PCTS_FILE
         = "/sys/class/leds/green/duty_pcts";
 
-char const*const BLUE_DUTY_PCTS_FILE
-        = "/sys/class/leds/blue/duty_pcts";
-
 char const*const RED_START_IDX_FILE
         = "/sys/class/leds/red/start_idx";
 
 char const*const GREEN_START_IDX_FILE
         = "/sys/class/leds/green/start_idx";
-
-char const*const BLUE_START_IDX_FILE
-        = "/sys/class/leds/blue/start_idx";
 
 char const*const RED_PAUSE_LO_FILE
         = "/sys/class/leds/red/pause_lo";
@@ -80,17 +68,11 @@ char const*const RED_PAUSE_LO_FILE
 char const*const GREEN_PAUSE_LO_FILE
         = "/sys/class/leds/green/pause_lo";
 
-char const*const BLUE_PAUSE_LO_FILE
-        = "/sys/class/leds/blue/pause_lo";
-
 char const*const RED_PAUSE_HI_FILE
         = "/sys/class/leds/red/pause_hi";
 
 char const*const GREEN_PAUSE_HI_FILE
         = "/sys/class/leds/green/pause_hi";
-
-char const*const BLUE_PAUSE_HI_FILE
-        = "/sys/class/leds/blue/pause_hi";
 
 char const*const RED_RAMP_STEP_MS_FILE
         = "/sys/class/leds/red/ramp_step_ms";
@@ -98,17 +80,11 @@ char const*const RED_RAMP_STEP_MS_FILE
 char const*const GREEN_RAMP_STEP_MS_FILE
         = "/sys/class/leds/green/ramp_step_ms";
 
-char const*const BLUE_RAMP_STEP_MS_FILE
-        = "/sys/class/leds/blue/ramp_step_ms";
-
 char const*const RED_BLINK_FILE
         = "/sys/class/leds/red/blink";
 
 char const*const GREEN_BLINK_FILE
         = "/sys/class/leds/green/blink";
-
-char const*const BLUE_BLINK_FILE
-        = "/sys/class/leds/blue/blink";
 
 #define RAMP_SIZE 8
 static int BRIGHTNESS_RAMP[RAMP_SIZE]
@@ -118,12 +94,6 @@ static int BRIGHTNESS_RAMP[RAMP_SIZE]
 /**
  * device methods
  */
-
-void init_globals(void)
-{
-    // init the mutex
-    pthread_mutex_init(&g_lock, NULL);
-}
 
 static int
 write_int(char const* path, int value)
@@ -169,6 +139,13 @@ write_str(char const* path, char* value)
     }
 }
 
+
+void init_globals(void)
+{
+    // init the mutex
+    pthread_mutex_init(&g_lock, NULL);
+}
+
 static int
 is_lit(struct light_state_t const* state)
 {
@@ -198,21 +175,6 @@ set_light_backlight(struct light_device_t* dev,
     return err;
 }
 
-static int
-set_light_buttons(struct light_device_t *dev,
-        const struct light_state_t *state)
-{
-    int err = 0;
-    int brightness = rgb_to_brightness(state);
-    if(!dev) {
-        return -1;
-    }
-    pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTONS_FILE, brightness);
-    pthread_mutex_unlock(&g_lock);
-    return err;
-}
-
 static char*
 get_scaled_duty_pcts(int brightness)
 {
@@ -236,7 +198,7 @@ static int
 set_speaker_light_locked(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    int red, green, blue, blink;
+    int red, green, blink;
     int onMS, offMS, stepDuration, pauseHi;
     unsigned int colorRGB;
     char *duty;
@@ -264,17 +226,12 @@ set_speaker_light_locked(struct light_device_t* dev,
 
     red = (colorRGB >> 16) & 0xFF;
     green = (colorRGB >> 8) & 0xFF;
-    blue = colorRGB & 0xFF;
-    // bias for true white
-    if (colorRGB != 0 && red == green && green == blue) {
-        blue = (blue * 171) / 256;
-    }
+
     blink = onMS > 0 && offMS > 0;
 
     // disable all blinking to start
     write_int(RED_BLINK_FILE, 0);
     write_int(GREEN_BLINK_FILE, 0);
-    write_int(BLUE_BLINK_FILE, 0);
 
     if (blink) {
         stepDuration = RAMP_STEP_DURATION;
@@ -306,28 +263,14 @@ set_speaker_light_locked(struct light_device_t* dev,
         write_int(GREEN_RAMP_STEP_MS_FILE, stepDuration);
         free(duty);
 
-        // blue
-        write_int(BLUE_START_IDX_FILE, RAMP_SIZE * 2);
-        duty = get_scaled_duty_pcts(blue);
-        write_str(BLUE_DUTY_PCTS_FILE, duty);
-        write_int(BLUE_PAUSE_LO_FILE, offMS);
-        // The led driver is configured to ramp up then ramp
-        // down the lut. This effectively doubles the ramp duration.
-        write_int(BLUE_PAUSE_HI_FILE, pauseHi);
-        write_int(BLUE_RAMP_STEP_MS_FILE, stepDuration);
-        free(duty);
-
         // start the party
         write_int(RED_BLINK_FILE, red);
         write_int(GREEN_BLINK_FILE, green);
-        write_int(BLUE_BLINK_FILE, blue);
 
     } else {
         write_int(RED_LED_FILE, red);
         write_int(GREEN_LED_FILE, green);
-        write_int(BLUE_LED_FILE, blue);
     }
-
 
     return 0;
 }
@@ -431,8 +374,6 @@ static int open_lights(const struct hw_module_t* module, char const* name,
 
     if (0 == strcmp(LIGHT_ID_BACKLIGHT, name))
         set_light = set_light_backlight;
-    else if (0 == strcmp(LIGHT_ID_BUTTONS, name))
-        set_light = set_light_buttons;
     else if (0 == strcmp(LIGHT_ID_BATTERY, name))
         set_light = set_light_battery;
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
