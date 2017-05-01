@@ -1,0 +1,3 @@
+#============= hal_wifi_default ==============
+allow hal_wifi_default persist_file:dir search;
+allow hal_wifi_default radio_data_file:file rw_file_perms;
