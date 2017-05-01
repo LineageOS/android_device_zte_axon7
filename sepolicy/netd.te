@@ -1,0 +1,2 @@
+allow netd persist_file:dir search;
+allow netd persist_file:file { open read write };
