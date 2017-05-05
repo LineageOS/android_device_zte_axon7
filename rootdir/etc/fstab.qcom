@@ -19,7 +19,7 @@
 /dev/block/bootdevice/by-name/misc                           /misc             emmc    defaults                                                                                                        defaults
 /dev/block/bootdevice/by-name/frp                            /frp              emmc    defaults                                                                                                        defaults
 
-/dev/block/zram0                                             none              swap    defaults                                                                                                        zramsize=1073741824
+/dev/block/zram0                                             none              swap    defaults                                                                                                        zramsize=536870912,zramstreams=4
 
 /devices/soc/74a4900.sdhci/mmc_host*                         auto              auto    defaults                                                                                                        voldmanaged=sdcard1:auto,encryptable=footer
                                 
