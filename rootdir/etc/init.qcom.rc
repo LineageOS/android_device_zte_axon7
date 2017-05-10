@@ -70,6 +70,9 @@ on fs
     restorecon_recursive /persist
 
 on post-fs
+    # Create directory used by display clients
+    mkdir /data/vendor/display 0770 system graphics
+
     chmod 0755 /sys/kernel/debug/tracing
 
 # msm specific files that need to be created on /data
@@ -122,9 +125,6 @@ on post-fs-data
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
-
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -232,6 +232,7 @@ on boot
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
     mkdir /persist/time 0770 system system
+    mkdir /persist/display 0770 system graphics
 
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
