@@ -73,6 +73,9 @@ on post-fs
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
+    # Create directory used by media clients
+    mkdir /data/vendor/media 0770 mediacodec media
+
     chmod 0755 /sys/kernel/debug/tracing
 
 # msm specific files that need to be created on /data
