@@ -179,6 +179,11 @@ on post-fs-data
     chown radio radio /data/misc/radio/copy_complete
     chmod 0660 /data/misc/radio/copy_complete
 
+    # copy prebuilt qcril.db files always
+    copy /system/vendor/qcril.db /data/misc/radio/qcril_prebuilt.db
+    chown radio radio /data/misc/radio/qcril_prebuilt.db
+    chmod 0660 /data/misc/radio/qcril_prebuilt.db
+
     # File flags for prebuilt ril db file
     write /data/misc/radio/prebuilt_db_support 1
     chown radio radio /data/misc/radio/prebuilt_db_support
@@ -532,12 +537,6 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
 on charger
     setprop persist.sys.usb.config charging
 
-#on property:vold.decrypt=trigger_restart_min_framework
-#    start time_daemon
-
-#on property:vold.decrypt=trigger_restart_framework
-#    restart time_daemon
-
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -549,7 +548,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service per_mgr system/bin/pm-service
     class core
     user system
-    group system net_raw
+    group system
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
@@ -610,12 +609,6 @@ on property:debug.zte.vr_mode=0
     write /d/spmi/spmi-0/data  0x80
     stop thermal-perf
     start thermal-engine
-
-service time_daemon /system/bin/time_daemon
-    class late_start
-    user root
-    group root
-    writepid /dev/cpuset/system-background/tasks
 
 service adsprpcd /system/bin/adsprpcd
     class main
@@ -723,4 +716,10 @@ service fingerprintd /system/bin/fingerprintd
     class late_start
     user system
     onrestart restart gx_fpd
+    writepid /dev/cpuset/system-background/tasks
+
+service time_daemon /system/bin/time_daemon
+    class main
+    user root
+    group root
     writepid /dev/cpuset/system-background/tasks
