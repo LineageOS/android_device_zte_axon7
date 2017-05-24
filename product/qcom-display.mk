@@ -27,6 +27,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qcom.ad=1 \
     ro.qcom.ad.calib.data=/system/etc/calib.cfg \
     ro.qcom.ad.sensortype=2 \
+    ro.qualcomm.cabl=0 \
     ro.qualcomm.display.paneltype=1 \
     sdm.debug.disable_rotator_split=1 \
     sdm.perf_hint_window=50
