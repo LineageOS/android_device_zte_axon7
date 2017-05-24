@@ -360,7 +360,7 @@ etc/permissions/telephonyservice.xml
 etc/qcril_db_diff.xml
 framework/embmslibrary.jar
 -framework/qcrilhook.jar
-framework/qti-telephony-common.jar|02fbc79f309af1c9ccfb1401cbd898138faf0848
+framework/qti-telephony-common.jar
 framework/QtiTelephonyServicelibrary.jar
 lib64/libmodemapi.so
 lib64/libztecfg.so
@@ -425,11 +425,11 @@ etc/sensors/hals.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/sensors.ssc.so|28fc2e656a43ccadc78b592abc2e212a72724148
+vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/sensors.ssc.so|36c370fa6b99fd5a1ecaec79e4b13cc4919ac56c
+vendor/lib/sensors.ssc.so
 
 # Thermal
 etc/thermal-engine-8996-normal.conf
