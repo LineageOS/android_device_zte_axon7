@@ -9,8 +9,10 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
+    camera.disable_zsl_mode=1 \
+    persist.camera.global.debug=0 \
     persist.camera.gyro.disable=0 \
     persist.camera.preview.ubwc=0 \
-    persist.camera.video.ubwc=0 \
+    persist.camera.set.afd=5 \
     persist.camera.stats.test=5 \
-    camera.disable_zsl_mode=1
+    persist.camera.video.ubwc=0
