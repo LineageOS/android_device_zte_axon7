@@ -1,11 +1,11 @@
 # Audio ACDB
-etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
-etc/acdbdata/MTP/MTP_General_cal.acdb
-etc/acdbdata/MTP/MTP_Global_cal.acdb
-etc/acdbdata/MTP/MTP_Handset_cal.acdb
-etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
-etc/acdbdata/MTP/MTP_Headset_cal.acdb
-etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb|d7b5c10c5238a09dad3ebca23b45f71696ef6575
+etc/acdbdata/MTP/MTP_General_cal.acdb|6850ce32c72f7d56a90ae535ed8b2bc6679a0a06
+etc/acdbdata/MTP/MTP_Global_cal.acdb|26d330ffdc2cd06f96cb774e2bbcffd40062fa12
+etc/acdbdata/MTP/MTP_Handset_cal.acdb|3307a7a48cc560bb5545a0b8511510912ff8d660
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb|caeed9a0d222ebc59c9e6f5def2eae9a1ef920a3
+etc/acdbdata/MTP/MTP_Headset_cal.acdb|6953aba39728ea31054d08a8861467354acd69a9
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb|1320e1ff15b094915da8410f36e56de6d1734aa1
 
 # Audio AKM Firmware
 etc/firmware/ak4961_aram_karaoke_spk.bin
@@ -296,11 +296,11 @@ etc/firmware/a530_zap.mdt
 
 # Fingerprint sensor (Goodix)
 bin/gx_fpd
-lib64/hw/fingerprint.msm8996.so|8de37b6d1cac307c1b918d7a907cc91b5ede50d6
+lib64/hw/fingerprint.msm8996.so
 lib64/hw/gxfingerprint.default.so
 lib64/libfp_client.so
 lib64/libfpnav.so
-lib64/libfpservice.so|04de5592d4cebfc48ddfbd3bd00b00a95fde3708
+lib64/libfpservice.so
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
