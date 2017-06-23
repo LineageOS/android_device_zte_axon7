@@ -21,6 +21,7 @@ persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=false
 persist.vendor.bt.enable.splita2dp=false
+ro.config.media_vol_steps=25
 vendor.audio.hw.aac.encoder=true
 ro.vendor.audio.sdk.ssr=false
 vendor.audio.tunnel.encode=false
