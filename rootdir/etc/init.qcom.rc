@@ -80,7 +80,7 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    mkdir /data/vendor/misc 0770 system system
+    mkdir /data/vendor/misc 01771 system system
 
     # Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
