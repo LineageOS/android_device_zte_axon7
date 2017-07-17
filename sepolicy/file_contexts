@@ -19,3 +19,6 @@
 
 # Goodix Fingerprint data
 /data/system/fingerprint(/.*)?              u:object_r:gx_fpd_data_file:s0
+
+# Sensors
+/persist/factoryinfo/accel_cal_data         u:object_r:sensors_persist_file:s0
