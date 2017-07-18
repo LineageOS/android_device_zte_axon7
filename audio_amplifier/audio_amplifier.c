@@ -64,6 +64,18 @@ typedef struct tfa9890_device {
     tfa9890_state_t state;
 } tfa9890_device_t;
 
+static void tfa9890_dump_state(tfa9890_device_t *t, char *label) {
+    ALOGD("tfa9890[%s]:\n\t"
+                "in_stream: %d\n\t"
+                "in_call: %d\n\t"
+                "amp_device: %d\n\t"
+                "amp_mode: %d\n\t"
+                "calibration_done: %d\n\t",
+                label, t->state.in_stream, t->state.in_call, t->state.amp_device,
+                t->state.amp_mode, t->state.calibration_done
+    );
+}
+
 static void tfa9890_update_amp(tfa9890_device_t *tfa9890, int in_stream, int in_call,
                                int amp_device, int amp_mode) {
     bool reinitialize = false;
@@ -128,6 +140,7 @@ static int amp_dev_close(hw_device_t *device) {
 static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t devices) {
     ALOGD("%s: %u\n", __func__, devices);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
+    tfa9890_dump_state(tfa9890, "before");
     switch (devices) {
         case SND_DEVICE_OUT_SPEAKER:
         case SND_DEVICE_OUT_SPEAKER_REVERSE:
@@ -152,13 +165,14 @@ static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t 
             pthread_mutex_unlock(&tfa9890->amp_update);
             break;
     }
+    tfa9890_dump_state(tfa9890, "after");
     return 0;
 }
 
 static int amp_enable_output_devices(struct amplifier_device *device, uint32_t devices, bool enable) {
     ALOGD("%s: %u %d\n", __func__, devices, enable);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
-
+    tfa9890_dump_state(tfa9890, "before");
     switch (devices) {
         case SND_DEVICE_OUT_SPEAKER:
         case SND_DEVICE_OUT_SPEAKER_REVERSE:
@@ -183,13 +197,14 @@ static int amp_enable_output_devices(struct amplifier_device *device, uint32_t d
             pthread_mutex_unlock(&tfa9890->amp_update);
             break;
     }
-
+    tfa9890_dump_state(tfa9890, "after");
     return 0;
 }
 
 static int tfa9890_set_mode(struct amplifier_device *device, audio_mode_t mode) {
     ALOGD("%s: %u\n", __func__, mode);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
+    tfa9890_dump_state(tfa9890, "before");
     // Stock used 2 and 1 and 0, and all 3 seem to be the same... no clue.  Draken's log showed 2 for music
     switch (mode) {
         case AUDIO_MODE_NORMAL:
@@ -214,26 +229,31 @@ static int tfa9890_set_mode(struct amplifier_device *device, audio_mode_t mode) 
             pthread_mutex_unlock(&tfa9890->amp_update);
             break;
     }
+    tfa9890_dump_state(tfa9890, "after");
     return 0;
 }
 
 static int tfa9890_output_stream_start(struct amplifier_device *device, struct audio_stream_out *stream, bool offload) {
     ALOGD("%s: %p %d\n", __func__, stream, offload);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
+    tfa9890_dump_state(tfa9890, "before");
     pthread_mutex_lock(&tfa9890->amp_update);
     tfa9890_update_amp(tfa9890, tfa9890->state.in_stream + 1, tfa9890->state.in_call,
                        tfa9890->state.amp_device, tfa9890->state.amp_mode);
     pthread_mutex_unlock(&tfa9890->amp_update);
+    tfa9890_dump_state(tfa9890, "after");
     return 0;
 }
 
 static int tfa9890_output_stream_standby(struct amplifier_device *device, struct audio_stream_out *stream) {
     ALOGD("%s: %p\n", __func__, stream);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
+    tfa9890_dump_state(tfa9890, "before");
     pthread_mutex_lock(&tfa9890->amp_update);
     tfa9890_update_amp(tfa9890, tfa9890->state.in_stream - 1, tfa9890->state.in_call,
                        tfa9890->state.amp_device, tfa9890->state.amp_mode);
     pthread_mutex_unlock(&tfa9890->amp_update);
+    tfa9890_dump_state(tfa9890, "after");
     return 0;
 }
 
