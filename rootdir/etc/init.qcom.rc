@@ -80,11 +80,8 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    mkdir /data/tombstones 0771 system system
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
+    # Create directory for tftp
+    mkdir /data/vendor/tombstones 0771 system system
 
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
