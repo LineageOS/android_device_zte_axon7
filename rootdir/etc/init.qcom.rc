@@ -36,6 +36,8 @@ on early-init
     mkdir /dsp 0771 media media
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+    chown root system /dev/kmsg
+    chmod 0620 /dev/kmsg
 
 on init
     export LD_SHIM_LIBS /system/vendor/lib64/libril-qc-qmi-1.so|libshims_rild_socket.so:/system/vendor/lib64/liblowi_wifihal_nl.so|libshims_is_wifi_driver_loaded.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/vendor/lib/hw/camera.msm8996.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libFNVfbEngineHAL.so|/system/vendor/lib/libshim_camera.so
