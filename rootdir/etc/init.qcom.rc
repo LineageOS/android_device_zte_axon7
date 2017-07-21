@@ -172,11 +172,10 @@ on post-fs-data
     chmod 0644 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
 
-    #Create PERFD deamon related dirs
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-    rm /data/system/perfd/default_values
-    start perfd
+    # Create PERFD deamon related dirs
+    mkdir /data/vendor/perfd 0770 root system
+    chmod 2770 /data/vendor/perfd
+    rm /data/vendor/perfd/default_values
 
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
@@ -312,14 +311,6 @@ on boot
 
     #WAPI
     mkdir /data/misc/wapi_certificate 0770 system wifi
-
-service perfd /system/vendor/bin/perfd
-    class main
-    user root
-    group root readproc
-    disabled
-    socket perfd seqpacket 0666 root system
-    writepid /dev/cpuset/system-background/tasks
 
 on property:sys.boot_completed=1
     # end boot time fs tune
