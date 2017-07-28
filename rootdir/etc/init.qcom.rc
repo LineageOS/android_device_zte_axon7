@@ -359,14 +359,6 @@ service cnd /system/vendor/bin/cnd
     socket cnd stream 660 root inet
     writepid /dev/cpuset/system-background/tasks
 
-service dpmd /system/vendor/bin/dpmd
-    class late_start
-    socket dpmd stream 660 root system
-    socket tcm stream 660 root inet
-    socket dpmwrapper stream 660 root inet
-    group system readproc inet
-    writepid /dev/cpuset/system-background/tasks
-
 service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class core
     user root
