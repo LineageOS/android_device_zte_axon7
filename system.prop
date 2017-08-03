@@ -20,6 +20,7 @@ ro.vendor.audio.sdk.fluencetype=fluence
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=false
+persist.vendor.bt.enable.splita2dp=false
 vendor.audio.hw.aac.encoder=true
 ro.vendor.audio.sdk.ssr=false
 vendor.audio.tunnel.encode=false
