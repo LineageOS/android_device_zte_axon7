@@ -64,7 +64,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
      persist.data.df.iwlan_mux=9 \
      persist.data.df.mux_count=8 \
      persist.data.df.ul_mode=5 \
-     persist.data.iwlan.enable=true \
-     persist.data.qmi.adb_logmask=0 \
      persist.data.wda.enable=true \
      persist.rmnet.data.enable=true
