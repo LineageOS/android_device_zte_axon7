@@ -16,7 +16,18 @@
  * limitations under the License.
  */
 -->
-
 <resources>
     <bool name="def_bluetooth_on">false</bool>
+
+    <!-- Set the automatic brightness mode on by default -->
+    <bool name="def_screen_brightness_automatic_mode">true</bool>
+
+    <!-- Default screen brightness, from 0 to 255. 82 is 32%. -->
+    <integer name="def_screen_brightness">82</integer>
+
+    <!-- 30 seconds for default screen timeout -->
+    <integer name="def_screen_off_timeout">30000</integer>
+
+    <!-- Set the notificaiton pulse to be off by default. -->
+    <bool name="def_notification_pulse">false</bool>
 </resources>
