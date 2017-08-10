@@ -49,7 +49,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
      rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
      ril.subscription.types=NV,RUIM \
      ro.telephony.call_ring.multiple=false \
-     ro.telephony.default_network=10,10
+     ro.telephony.default_network=9,9
 
 PRODUCT_PROPERTY_OVERRIDES += \
      persist.data.mode=concurrent \
