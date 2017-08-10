@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c85c418c_a74b57b8",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 15450
+      },
+      "writtenOn": "2017-08-10T10:39:44Z",
+      "side": 1,
+      "message": "No need to change this. Just the changes on the device.mk",
+      "revId": "8ee10edf045c37088035eaab2d8b7e7f02feb760",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
