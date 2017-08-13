@@ -16,6 +16,23 @@
       "revId": "16e7678abdeec32dc3302b5971e8b52c1b402d14",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd979ffa_2fac44a2",
+        "filename": "overlay/frameworks/base/core/res/res/xml/power_profile.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2017-08-13T05:15:01Z",
+      "side": 1,
+      "message": "The battery capacity here is only for visual purposes. The real battery capacity is defined in the dts. The value here doesn\u0027t define when the phone shuts down. That\u0027s defined in the dts, the phone shuts down when the kernel fuel gauge driver sends the \"no battery left\" signal.",
+      "revId": "16e7678abdeec32dc3302b5971e8b52c1b402d14",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
