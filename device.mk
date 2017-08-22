@@ -171,10 +171,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ZteDoze
 
-# Fingerprintd
-PRODUCT_PACKAGES += \
-    fingerprintd
-
 # Flip Cover App
 PRODUCT_PACKAGES += \
     FlipFlap
