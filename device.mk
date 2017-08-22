@@ -290,9 +290,7 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     ipacm \
     ipacm-diag \
-    IPACM_cfg.xml \
-    libqsap_sdk \
-    libQWiFiSoftApCfg
+    IPACM_cfg.xml
 
 PRODUCT_PACKAGES += \
     wificond \
