@@ -722,14 +722,6 @@ service gx_fpd /system/bin/gx_fpd
     class late_start
     user root
     group system
-    onrestart restart fingerprintd
-    writepid /dev/cpuset/system-background/tasks
-
-#fingerprintd
-service fingerprintd /system/bin/fingerprintd
-    class late_start
-    user system
-    onrestart restart gx_fpd
     writepid /dev/cpuset/system-background/tasks
 
 service time_daemon /system/bin/time_daemon
