@@ -310,7 +310,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librmnetctl \
-    libxml2
+    libxml2 \
+    libshims_rild_socket
 
 # Sensors
 PRODUCT_PACKAGES += \
