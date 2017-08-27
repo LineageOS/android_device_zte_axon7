@@ -24,7 +24,8 @@ LOCAL_SRC_FILES += \
     LocTimer.cpp \
     LocThread.cpp \
     MsgTask.cpp \
-    loc_misc_utils.cpp
+    loc_misc_utils.cpp \
+    process_name.c
 
 # Flag -std=c++11 is not accepted by compiler when LOCAL_CLANG is set to true
 LOCAL_CFLAGS += \
