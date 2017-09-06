@@ -136,6 +136,8 @@ vendor/lib/libZEffectLib.so
 
 # Camera actuator
 vendor/lib/libactuator_ak7371.so
+vendor/lib/libactuator_interface.so
+vendor/lib/libactuator_update_interface.so
 
 # Camera chromatix
 vendor/lib/libchromatix_ov8856_a3_default_preview.so
