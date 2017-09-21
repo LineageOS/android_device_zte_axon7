@@ -714,7 +714,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
 service hvdcp_opti /system/vendor/bin/hvdcp_opti
     class main
     user root
-    group root
+    group system wakelock
     writepid /dev/cpuset/system-background/tasks
 
 service gx_fpd /system/vendor/bin/gx_fpd
