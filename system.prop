@@ -79,6 +79,7 @@ ro.opengles.version=196610
 ro.qualcomm.display.paneltype=1
 ro.sf.lcd_density=640
 sdm.debug.disable_rotator_split=1
+sdm.debug.disable_skip_validate=1
 sdm.perf_hint_window=50
 
 # GPS
