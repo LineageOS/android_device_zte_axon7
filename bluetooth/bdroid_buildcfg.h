@@ -16,6 +16,9 @@
 
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
+
+#define BLUETOOTH_QTI_SW TRUE
+
 #define BTM_DEF_LOCAL_NAME   "Axon 7"
 // Disables read remote device feature
 #define MAX_ACL_CONNECTIONS   16
