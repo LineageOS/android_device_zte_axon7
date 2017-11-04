@@ -345,7 +345,6 @@ vendor/lib/libvqzip.so
 -app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
-bin/ipacm-diag
 bin/netmgrd
 bin/radish
 bin/rmt_storage
