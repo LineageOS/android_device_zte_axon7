@@ -510,10 +510,8 @@ vendor/lib64/libthermalioctl.so
 # Time services
 -app/TimeService/TimeService.apk
 vendor/bin/time_daemon
--vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
--vendor/lib/libtime_genoff.so
-vendor/lib/libTimeService.so
+vendor/lib64/libtime_genoff.so
 
 # Voice print - from op3 - OPR6.170623.013
 vendor/lib64/hw/sound_trigger.primary.msm8996.so|d81639f09364ff39a1132f7ee8497a13aa1bd988
