@@ -424,7 +424,7 @@ vendor/lib64/libvoice-svc.so
 
 # Sensors
 bin/sensors.qcom
-etc/sensors/hals.conf
+vendor/etc/sensors/hals.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
