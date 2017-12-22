@@ -66,7 +66,7 @@ vidc.enc.disable.pq=true
 vidc.enc.dcvs.extra-buff-count=2
 
 # FRP
-ro.frp.pst=/dev/block/bootdevice/by-name/frp
+ro.frp.pst=/dev/block/platform/soc/624000.ufshc/by-name/frp
 
 # Graphics
 debug.egl.hw=1
