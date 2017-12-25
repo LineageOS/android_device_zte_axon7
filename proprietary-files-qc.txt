@@ -64,7 +64,7 @@ vendor/lib64/libbtnv.so
 vendor/lib/libbtnv.so
 
 # CNE
-bin/cnd
+bin/cnd|ffa92e9fa3bc5ce2a5aa9b73ce24f2a0cf438f77
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
 etc/cne/wqeclient/ATT/ATT_profile1.xml
@@ -89,9 +89,10 @@ framework/cneapiclient.jar
 framework/com.quicinc.cne.jar
 framework/ConnectivityExt.jar
 -priv-app/CNEService/CNEService.apk
-vendor/lib64/libcneapiclient.so
+vendor/lib64/libcneapiclient.so|a02563240d43b2d886387b96f4535fe627f9cab0
 vendor/lib64/libcneqmiutils.so
-vendor/lib64/libcne.so
+vendor/lib64/libcne.so|4f7cc39d30162fc36995b2fe6b6a4cc52ec29634
+vendor/lib64/libprotobuf-cpp-lpro.so|c3a9d890c52f98595904e24dd17e6c2c7818513f
 vendor/lib64/libvendorconn.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
