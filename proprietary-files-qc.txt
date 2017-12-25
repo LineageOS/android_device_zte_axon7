@@ -343,6 +343,7 @@ vendor/lib/libsmemlog.so
 vendor/lib/libvqzip.so
 
 # Radio
+# libsettings.so|OnePlus3Oxygen_16_OTA_036_all_1710262329_97651662219b4e6b
 -app/datastatusnotification/datastatusnotification.apk
 -app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
@@ -380,7 +381,7 @@ vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
 vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/librilqmiservices.so
-vendor/lib64/libsettings.so
+vendor/lib64/libsettings.so|4609cacca0a56dae2596687c8f5f2f9423d4d0d9
 vendor/lib64/libsystem_health_mon.so
 vendor/lib/libmdmdetect.so
 vendor/qcril.db
