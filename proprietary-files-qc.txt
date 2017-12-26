@@ -1,5 +1,5 @@
 # ADSP
-bin/adsprpcd
+vendor/bin/adsprpcd
 vendor/lib64/libadsp_default_listener.so
 vendor/lib64/libadsprpc.so
 vendor/lib/libadsprpc.so
@@ -47,9 +47,9 @@ vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 
 # Bluetooth
-bin/bt_mac_writer
-bin/hci_qcomm_init
-bin/wcnss_filter
+vendor/bin/bt_mac_writer
+vendor/bin/hci_qcomm_init
+vendor/bin/wcnss_filter
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
@@ -68,7 +68,7 @@ vendor/lib64/libbtnv.so
 vendor/lib/libbtnv.so
 
 # CNE
-bin/cnd|ffa92e9fa3bc5ce2a5aa9b73ce24f2a0cf438f77
+vendor/bin/cnd|ffa92e9fa3bc5ce2a5aa9b73ce24f2a0cf438f77
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
 etc/cne/wqeclient/ATT/ATT_profile1.xml
@@ -108,7 +108,7 @@ vendor/lib/libwqe.so
 vendor/lib/libxml.so
 
 # DPM
-bin/dpmd
+vendor/bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
 etc/permissions/com.qti.dpmframework.xml
@@ -129,7 +129,7 @@ vendor/lib/libdpmnsrm.so
 vendor/lib/libdpmtcm.so
 
 # DRM
-bin/qseecomd
+vendor/bin/qseecomd
 vendor/bin/qseeproxydaemon
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
@@ -151,11 +151,11 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS
-bin/garden_app
-bin/loc_launcher
-bin/lowi-server
-bin/xtwifi-client
-bin/xtwifi-inet-agent
+vendor/bin/garden_app
+vendor/bin/loc_launcher
+vendor/bin/lowi-server
+vendor/bin/xtwifi-client
+vendor/bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml|2bebdd2bf3f4aa7e84beb24c973759a17a5f1e82
@@ -250,7 +250,7 @@ vendor/lib/libsd_sdk_display.so|1e3d287f5c7908ac1a1b75caad7194c2a91fa751
 -vendor/lib/libsdm-disp-apis.so|9490e80798f4c6f3bad87ed1f5112c26afacca69
 
 # HVDCP
-bin/hvdcp_opti
+vendor/bin/hvdcp_opti
 
 # Keystore
 vendor/lib64/hw/keystore.msm8996.so
@@ -283,12 +283,12 @@ vendor/lib/libcsm_data.so
 vendor/lib/libQtiTether.so
 
 # Perf
-bin/energy-awareness
-bin/msm_irqbalance
+vendor/bin/energy-awareness
+vendor/bin/msm_irqbalance
 
 # Peripheral manager
-bin/pm-proxy
-bin/pm-service
+vendor/bin/pm-proxy
+vendor/bin/pm-service
 vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
@@ -300,7 +300,7 @@ vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
 
 # QMI
-bin/irsc_util
+vendor/bin/irsc_util
 etc/permissions/qti_permissions.xml|30f240377e8af499bd0f9496eb98455bacf064d1
 vendor/bin/pd-mapper
 vendor/lib64/libdiag.so
@@ -349,10 +349,10 @@ vendor/lib/libvqzip.so
 -app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
-bin/netmgrd
-bin/radish
-bin/rmt_storage
-bin/tftp_server
+vendor/bin/netmgrd
+vendor/bin/radish
+vendor/bin/rmt_storage
+vendor/bin/tftp_server
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/permissions/embms.xml
@@ -387,10 +387,10 @@ vendor/lib/libmdmdetect.so
 vendor/qcril.db
 
 # Radio - IMS
-bin/imscmservice
-bin/imsdatadaemon
-bin/imsqmidaemon
-bin/ims_rtp_daemon
+vendor/bin/imscmservice
+vendor/bin/imsdatadaemon
+vendor/bin/imsqmidaemon
+vendor/bin/ims_rtp_daemon
 etc/permissions/imscm.xml
 etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar
@@ -423,7 +423,7 @@ vendor/lib64/lib-rtpsl.so
 vendor/lib64/libvoice-svc.so
 
 # Sensors
-bin/sensors.qcom
+vendor/bin/sensors.qcom
 vendor/etc/sensors/hals.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
@@ -445,7 +445,7 @@ vendor/lib64/libthermalioctl.so
 
 # Time services
 -app/TimeService/TimeService.apk
-bin/time_daemon
+vendor/bin/time_daemon
 -vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
 -vendor/lib/libtime_genoff.so
@@ -457,5 +457,5 @@ vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc|51a3168a0dbc064d78e
 vendor/lib/libwvhidl.so|f7288f7a7ed6765bd1d80d639a0aeb0c31eda795
 
 # Wifi
-bin/cnss-daemon
-bin/cnss_diag
+vendor/bin/cnss-daemon
+vendor/bin/cnss_diag
