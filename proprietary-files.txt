@@ -52,7 +52,7 @@ lib64/libtfa9890.so
 lib/libtfa9890.so
 
 # Camera
-bin/mm-qcamera-daemon
+vendor/bin/mm-qcamera-daemon
 etc/camera/camera_config.xml
 etc/camera/ov8856_chromatix.xml
 etc/camera/s5k2t8_chromatix.xml
@@ -295,7 +295,7 @@ etc/firmware/a530_zap.elf
 etc/firmware/a530_zap.mdt
 
 # Fingerprint sensor (Goodix)
-bin/gx_fpd
+vendor/bin/gx_fpd
 lib64/hw/fingerprint.msm8996.so
 lib64/hw/gxfingerprint.default.so
 lib64/libfp_client.so
