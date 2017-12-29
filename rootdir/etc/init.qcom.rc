@@ -368,7 +368,7 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950
+    group bluetooth oem_2950 wakelock
     disabled
 
 on property:wc_transport.start_root=true
@@ -380,7 +380,7 @@ on property:wc_transport.start_root=false
 service hci_filter_root /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950 system
+    group bluetooth oem_2950 system wakelock
     disabled
 
 service config_bt_addr /system/vendor/bin/bt_mac_writer -O
