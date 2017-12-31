@@ -1,3 +1,6 @@
+on early-init
+    setprop sys.io.scheduler noop
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
@@ -6,7 +9,7 @@ on boot
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/top-app/cpus 0-3
 
-    # add a cpuset for the camera daemon
+    # Add a cpuset for the camera daemon
     # we want all cores for camera
     mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus 0-3
@@ -22,9 +25,8 @@ on enable-low-power
     # Disable thermal hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
 
-    # Enable Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 81250
+    # Set sync wakee policy tunable
+    write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
 
     # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
@@ -38,45 +40,44 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads 80
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 19000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 79000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 307200
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 1
 
-    # Online CPU2
+    # Bring CPU2 online
     write /sys/devices/system/cpu/cpu2/online 1
 
     # Configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "39000 1400000:39000 1700000:100000 2100000:79000"
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "19000 1400000:39000 1700000:19000 2100000:79000"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 940000
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1248000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "85 1500000:90 1800000:70 2100000:95"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 19000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 79000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 307200
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 0
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction 1
 
     # Re-enable thermal hotplug
     write /sys/module/msm_thermal/core_control/enabled 1
 
     # Input boost configuration
-    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1036800 1:0 2:1036800 3:0"
-    write /sys/module/cpu_boost/parameters/input_boost_ms 0
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 2:1324800"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
-    # Setting b.L scheduler parameters
+    # Set big.LITTLE scheduler parameters
     write /proc/sys/kernel/sched_boost 0
-    write /proc/sys/kernel/sched_downmigrate 65
-    write /proc/sys/kernel/sched_upmigrate 75
+    write /proc/sys/kernel/sched_upmigrate 95
+    write /proc/sys/kernel/sched_downmigrate 90
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
     write /proc/sys/kernel/sched_init_task_load 100
-    write /proc/sys/kernel/sched_upmigrate_min_nice 9
 
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
@@ -100,10 +101,16 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 10
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
+    # Enable all LPMs by default
+    # This will enable C4, D4, D3, E4 and M3 LPMs
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
-    # Set idle GPU to 133 Mhz
+    # Set idle GPU to 133 MHz
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
+
+    # Enable Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 81250
 
     # Set perfd properties
     setprop sys.post_boot.parsed 1
@@ -128,8 +135,8 @@ on charger
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     start hvdcp_opti
 
-on property:sys.boot_completed=1
+on property:init.svc.recovery=running
     trigger enable-low-power
 
-on property:init.svc.recovery=running
+on property:sys.boot_completed=1
     trigger enable-low-power
