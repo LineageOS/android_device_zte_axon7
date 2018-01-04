@@ -181,6 +181,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8996 \
     libtinyxml \
     memtrack.msm8996 \
+    libdisplayconfig \
     qdcm_calib_data_zteSAM_S6E3HA3_SAM_25601440_5P5Inch.xml
 
 # Doze mode
