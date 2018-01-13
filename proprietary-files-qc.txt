@@ -314,7 +314,6 @@ vendor/lib64/libvpphvx.so|1a83a5b32b4f65725a0d4485b402356dfbcd859c
 vendor/lib64/libvpplibrary.so|733e8aa44490239a8b038eaa862cd4f1bdbe259e
 
 # Perf
-vendor/bin/energy-awareness
 vendor/bin/msm_irqbalance
 
 # Peripheral manager
