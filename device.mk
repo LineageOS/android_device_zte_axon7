@@ -277,8 +277,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    lights.msm8996
+    android.hardware.light@2.0-service.zte_8996
 
 # LiveDisplay native
 PRODUCT_PACKAGES += \
