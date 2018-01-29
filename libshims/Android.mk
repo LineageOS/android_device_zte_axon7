@@ -16,15 +16,6 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := rild_socket.c
-
-LOCAL_MODULE := libshims_rild_socket
-LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
 LOCAL_SRC_FILES := is_wifi_driver_loaded.cpp
 
 LOCAL_MODULE := libshims_is_wifi_driver_loaded
