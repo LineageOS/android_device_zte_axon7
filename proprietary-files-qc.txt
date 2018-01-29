@@ -92,7 +92,6 @@ etc/permissions/ConnectivityExt.xml
 framework/cneapiclient.jar
 framework/com.quicinc.cne.jar
 framework/ConnectivityExt.jar
--priv-app/CNEService/CNEService.apk
 vendor/lib64/libcneapiclient.so|a02563240d43b2d886387b96f4535fe627f9cab0
 vendor/lib64/libcneqmiutils.so
 vendor/lib64/libcne.so|4f7cc39d30162fc36995b2fe6b6a4cc52ec29634
@@ -116,7 +115,6 @@ etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
--priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib64/libdpmctmgr.so
 vendor/lib64/libdpmfdmgr.so
 vendor/lib64/libdpmframework.so
