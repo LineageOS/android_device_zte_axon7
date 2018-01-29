@@ -40,7 +40,7 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
-    export LD_SHIM_LIBS /system/vendor/lib64/libril-qc-qmi-1.so|libshims_rild_socket.so:/system/vendor/lib64/liblowi_wifihal_nl.so|libshims_is_wifi_driver_loaded.so:/system/vendor/lib/hw/camera.msm8996.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libFNVfbEngineHAL.so|/system/vendor/lib/libshim_camera.so
+    export LD_SHIM_LIBS /system/vendor/lib64/liblowi_wifihal_nl.so|libshims_is_wifi_driver_loaded.so:/system/vendor/lib/hw/camera.msm8996.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libFNVfbEngineHAL.so|/system/vendor/lib/libshim_camera.so
 
     # Set permissions for persist partition
     mkdir /persist 0771 root system
