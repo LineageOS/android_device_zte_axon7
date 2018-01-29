@@ -327,8 +327,7 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librmnetctl \
     libxml2 \
-    libshims_rild_socket \
-    libshims_ims
+    libshims_rild_socket
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
