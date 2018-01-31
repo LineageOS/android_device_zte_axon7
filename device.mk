@@ -209,8 +209,7 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     gps.msm8996 \
     libcurl \
-    libgnsspps \
-    libshims_is_wifi_driver_loaded
+    libgnsspps
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \

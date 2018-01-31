@@ -16,16 +16,6 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := is_wifi_driver_loaded.cpp
-
-LOCAL_MODULE := libshims_is_wifi_driver_loaded
-LOCAL_MODULE_TAGS := optional
-LOCAL_SHARED_LIBRARIES := libwifi-hal
-
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
 LOCAL_SRC_FILES := \
     camera_shim.cpp
 
