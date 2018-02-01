@@ -341,8 +341,8 @@ vendor/lib/vendor.display.postproc@1.0_vendor.so|a710a9d7f93892961ff71420fe222ad
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|04bf21220673630ebaa4c8e7a84adbcdcf08f0dc
 
 # QMI
-etc/permissions/qti_libpermissions.xml|ef3c88495f2f61a2d16e1445113a9d80f8db0e0a
-etc/permissions/qti_permissions.xml
+etc/permissions/qti_libpermissions.xml:vendor/etc/permissions/qti_libpermissions.xml|ef3c88495f2f61a2d16e1445113a9d80f8db0e0a
+etc/permissions/qti_permissions.xml:vendor/etc/permissions/qti_permissions.xml
 lib/libqmi_cci_system.so:vendor/lib/libqmi_cci_system.so
 lib64/libqmi_cci_system.so:vendor/lib64/libqmi_cci_system.so
 vendor/bin/irsc_util
