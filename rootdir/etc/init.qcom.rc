@@ -40,8 +40,6 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
-    export LD_SHIM_LIBS /system/vendor/lib/hw/camera.msm8996.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_camera.so:/system/vendor/lib/libFNVfbEngineHAL.so|/system/vendor/lib/libshim_camera.so
-
     # Set permissions for persist partition
     mkdir /persist 0771 root system
 
