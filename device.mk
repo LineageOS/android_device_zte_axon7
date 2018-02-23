@@ -416,7 +416,6 @@ PRODUCT_PACKAGES += \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
-    wificond \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf \
