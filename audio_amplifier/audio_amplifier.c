@@ -80,15 +80,16 @@ static void tfa9890_update_amp(tfa9890_device_t *tfa9890, int in_stream, int in_
                                int amp_device, int amp_mode) {
     bool reinitialize = false;
 
-    if (!!in_stream != !!tfa9890->state.in_stream) {
-        reinitialize = true;
-    }
-    tfa9890->state.in_stream = in_stream;
-
     if (in_call != tfa9890->state.in_call) {
         tfa9890->state.in_call = in_call;
         reinitialize = true;
     }
+
+    // Only re-initialize when we're not in a call and the stream state changes
+    if (!in_call && (!!in_stream != !!tfa9890->state.in_stream)) {
+        reinitialize = true;
+    }
+    tfa9890->state.in_stream = in_stream;
 
     if (amp_device != tfa9890->state.amp_device) {
         // We can't change devices on the fly
