@@ -52,20 +52,23 @@ lib64/libtfa9890.so
 lib/libtfa9890.so
 
 # Camera
+lib/libtrueportrait.so
 vendor/bin/mm-qcamera-daemon
-etc/camera/camera_config.xml
-etc/camera/ov8856_chromatix.xml
-etc/camera/s5k2t8_chromatix.xml
+vendor/etc/camera/beautiful_fn/fn_default.xml
+vendor/etc/camera/beautiful_fn/fn_ov8856.xml
+vendor/etc/camera/camera_config.xml
+vendor/etc/camera/ov8856_chromatix.xml
+vendor/etc/camera/s5k2t8_chromatix.xml
 vendor/lib/hw/camera.msm8996.so
-vendor/lib/libmmcamera_interface.so
-vendor/lib/libmmjpeg_interface.so
-vendor/lib/libmm-qcamera.so
-vendor/lib/libmorpho_refocus.so
-vendor/lib/libqomx_core.so
+vendor/lib/libautohdr_check.so
 vendor/lib/libchromaflash.so
 vendor/lib/libflash_pmic.so
+vendor/lib/libfn_facebeauty_v1.so
+vendor/lib/libfn_facebeauty_v2.so
 vendor/lib/libFNVfbEngineHAL.so
+vendor/lib/libfnxml.so
 vendor/lib/libImgFvDetect.so
+vendor/lib/libImgmovie_solid.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
@@ -102,14 +105,17 @@ vendor/lib/libmmcamera_hvx_grid_sum.so
 vendor/lib/libmmcamera_hvx_zzHDR.so
 vendor/lib/libmmcamera_imglib_faceproc_adspstub.so
 vendor/lib/libmmcamera_imglib.so
+vendor/lib/libmmcamera_interface.so
+vendor/lib/libmmcamera_llvd.so
 vendor/lib/libmmcamera_optizoom_lib.so
+vendor/lib/libmmcamera_ov8856_dual.so
 vendor/lib/libmmcamera_ov8856.so
 vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_ppbase_module.so
-vendor/lib/libmmcamera_ppeiscore.so
 vendor/lib/libmmcamera_quadracfa.so
+vendor/lib/libmmcamera_s5k2t8_ext.so
 vendor/lib/libmmcamera_s5k2t8.so
 vendor/lib/libmmcamera_stillmore_lib.so
 vendor/lib/libmmcamera_sw2d_lib.so
@@ -120,16 +126,18 @@ vendor/lib/libmmcamera_trueportrait_lib.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_ubifocus_lib.so
+vendor/lib/libmmjpeg_interface.so
 vendor/lib/libmmjpeg.so
+vendor/lib/libmm-qcamera.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
 vendor/lib/liboptizoom.so
+vendor/lib/libqomx_core.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libremosaic_daemon.so
 vendor/lib/libseemore.so
-vendor/lib/libtrueportrait.so
 vendor/lib/libtsvideoprocess.so
 vendor/lib/libubifocus.so
 vendor/lib/libZEffectLib.so
@@ -142,14 +150,19 @@ vendor/lib/libactuator_update_interface.so
 # Camera chromatix
 vendor/lib/libchromatix_ov8856_a3_default_preview.so
 vendor/lib/libchromatix_ov8856_a3_default_video.so
+vendor/lib/libchromatix_ov8856_a3_preview_full_livephoto.so
+vendor/lib/libchromatix_ov8856_a3_preview_panorama.so
 vendor/lib/libchromatix_ov8856_a3_skyeye_preview.so
 vendor/lib/libchromatix_ov8856_a3_vga_preview.so
 vendor/lib/libchromatix_ov8856_a3_vga_video.so
 vendor/lib/libchromatix_ov8856_common.so
 vendor/lib/libchromatix_ov8856_cpp_ds_chromatix.so
 vendor/lib/libchromatix_ov8856_cpp_liveshot.so
+vendor/lib/libchromatix_ov8856_cpp_preview_livephoto.so
+vendor/lib/libchromatix_ov8856_cpp_preview_panorama.so
 vendor/lib/libchromatix_ov8856_cpp_preview.so
 vendor/lib/libchromatix_ov8856_cpp_skyeye_preview.so
+vendor/lib/libchromatix_ov8856_cpp_snapshot_livephoto.so
 vendor/lib/libchromatix_ov8856_cpp_snapshot.so
 vendor/lib/libchromatix_ov8856_cpp_us_chromatix.so
 vendor/lib/libchromatix_ov8856_cpp_vga_liveshot.so
@@ -160,8 +173,10 @@ vendor/lib/libchromatix_ov8856_cpp_video.so
 vendor/lib/libchromatix_ov8856_default_video.so
 vendor/lib/libchromatix_ov8856_liveshot.so
 vendor/lib/libchromatix_ov8856_postproc.so
+vendor/lib/libchromatix_ov8856_preview_panorama.so
 vendor/lib/libchromatix_ov8856_preview.so
 vendor/lib/libchromatix_ov8856_skyeye_preview.so
+vendor/lib/libchromatix_ov8856_snapshot_livephoto.so
 vendor/lib/libchromatix_ov8856_snapshot.so
 vendor/lib/libchromatix_ov8856_vga_preview.so
 vendor/lib/libchromatix_ov8856_vga_snapshot.so
@@ -185,6 +200,7 @@ vendor/lib/libchromatix_s5k2t8_cpp_preview.so
 vendor/lib/libchromatix_s5k2t8_cpp_preview_sport.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot_downscale.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot_livephoto.so
+vendor/lib/libchromatix_s5k2t8_cpp_snapshot_night.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot.so
 vendor/lib/libchromatix_s5k2t8_cpp_snapshot_upscale.so
 vendor/lib/libchromatix_s5k2t8_cpp_vga_liveshot.so
@@ -218,16 +234,17 @@ vendor/lib/libchromatix_s5k2t8_zsl_preview_bu63165.so
 vendor/lib/libchromatix_s5k2t8_zsl_video_bu63165.so
 
 # Camera firmware
-etc/firmware/cpp_firmware_v1_1_1.fw
-etc/firmware/cpp_firmware_v1_1_6.fw
-etc/firmware/cpp_firmware_v1_10_0.fw
-etc/firmware/cpp_firmware_v1_12_0.fw
-etc/firmware/cpp_firmware_v1_2_0.fw
-etc/firmware/cpp_firmware_v1_4_0.fw
-etc/firmware/cpp_firmware_v1_5_0.fw
-etc/firmware/cpp_firmware_v1_5_2.fw
-etc/firmware/cpp_firmware_v1_6_0.fw
-etc/firmware/cpp_firmware_v1_8_0.fw
+vendor/firmware/cpp_firmware_v1_1_1.fw
+vendor/firmware/cpp_firmware_v1_1_6.fw
+vendor/firmware/cpp_firmware_v1_10_0.fw
+vendor/firmware/cpp_firmware_v1_12_0.fw
+vendor/firmware/cpp_firmware_v1_2_0.fw
+vendor/firmware/cpp_firmware_v1_4_0.fw
+vendor/firmware/cpp_firmware_v1_5_0.fw
+vendor/firmware/cpp_firmware_v1_5_1.fw
+vendor/firmware/cpp_firmware_v1_5_2.fw
+vendor/firmware/cpp_firmware_v1_6_0.fw
+vendor/firmware/cpp_firmware_v1_8_0.fw
 
 # Camera OIS
 vendor/lib/libois_bu63165_bin1_mem5.so
@@ -236,6 +253,7 @@ vendor/lib/libois_bu63165_bin4_mem12.so
 vendor/lib/libois_bu63165_bin6_mem17.so
 vendor/lib/libois_bu63165_bin6_mem19.so
 vendor/lib/libois_bu63165_bin7_mem24.so
+vendor/lib/libois_bu63165_bin7_mem27.so
 vendor/lib/libois_bu63165.so
 
 # Camera sensors
