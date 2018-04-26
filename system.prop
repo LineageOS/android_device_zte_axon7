@@ -39,13 +39,14 @@ ro.bluetooth.wipower=true
 
 # Camera
 camera.disable_zsl_mode=1
-persist.camera.HAL3.enabled=1
 persist.camera.gyro.disable=0
-persist.camera.preview.ubwc=0
-persist.camera.stats.test=5
-persist.camera.video.ubwc=0
 persist.ts.postmakeup=false
 persist.ts.rtmakeup=false
+persist.vendor.camera.HAL3.system.enabled=1
+persist.vendor.camera.HAL3.zte.enabled=1
+persist.vendor.camera.preview.ubwc=0
+persist.vendor.camera.stats.test=5
+persist.vendor.camera.video.ubwc=0
 
 # CNE
 persist.cne.feature=1
