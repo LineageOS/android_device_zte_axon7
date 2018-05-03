@@ -54,14 +54,11 @@ typedef struct tfa9890_state {
 typedef struct tfa9890_device {
     amplifier_device_t amp_dev;
     void *lib_ptr;
-    int (*speaker_needed)(int);
     void (*set_mode)(int);
-    void (*speaker_on)(void);
+    int (*speaker_on)(int mode);
     void (*speaker_off)(void);
     void (*set_device)(int);
     int (*calibration)(int);
-    int (*speaker_on_call)(int mode);
-    void (*speaker_off_call)(void);
     void (*reverse)(int);
     // Hold for all the things
     pthread_mutex_t amp_update;
@@ -93,11 +90,14 @@ typedef struct tfa9890_device {
 
 void *tfa9890_update_amp(void *device) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
-    tfa9890_state_t rstate = {0};
+    tfa9890_state_t rstate = {0,0,0,0,0,0,0,0};
     do {
         bool reinitialize = false;
         sem_wait(&tfa9890->trigger_update);
         pthread_mutex_lock(&tfa9890->amp_update);
+
+        // Drain any other pending updates
+        while(sem_trywait(&tfa9890->trigger_update) != -1);
 
         tfa9890_dump_state(tfa9890->state, rstate, "new(current)");
 
@@ -139,39 +139,24 @@ void *tfa9890_update_amp(void *device) {
 
         if(rstate.enabled && (rstate.streams || rstate.in_call)) {
             if (reinitialize) {
-                tfa9890->speaker_needed(0);
                 tfa9890->speaker_off();
                 tfa9890->set_device(rstate.device);
                 tfa9890->set_mode(rstate.amp_mode);
-                //tfa9890->reverse(rstate.reversed);
+                tfa9890->reverse(rstate.reversed);
             }
-            if (rstate.in_call) {
+            int again = 1;
+            while (again && tfa9890->speaker_on(rstate.mode)){
                 pthread_mutex_unlock(&tfa9890->amp_update);
-                // Bump this number if call audio ever fails.
-                usleep(40*1000);
+                usleep(5*1000);
+                ALOGD("%s: Failed turning amp on %d times", __func__, again);
+                again = (sem_trywait(&tfa9890->trigger_update) == -1) ? again + 1 : 0;
                 pthread_mutex_lock(&tfa9890->amp_update);
             }
-            tfa9890->speaker_needed(1);
-// Revisit this uglyness when stereo audio is sorted out.  It works better for in-call
-// audio, but my sound is currently bunk.
-//            if (rstate.in_call) {
-//                bool again = true;
-//                while (tfa9890->speaker_on_call(rstate.mode) && again){
-//                    pthread_mutex_unlock(&tfa9890->amp_update);
-//
-//                    again = (sem_trywait(&tfa9890->trigger_update) == -1);
-//                    pthread_mutex_lock(&tfa9890->amp_update);
-//                }
-//                if (!again) {
-//                    sem_post(&tfa9890->trigger_update);
-//                } else {
-//                    tfa9890->reverse(1);
-//                }
-//            } else {
-                tfa9890->speaker_on();
-//            }
+            if (!again) {
+                ALOGD("%s: Amp state was changed, triggering refresh", __func__);
+                sem_post(&tfa9890->trigger_update);
+            }
         } else {
-            tfa9890->speaker_needed(0);
             tfa9890->speaker_off();
         }
         pthread_mutex_unlock(&tfa9890->amp_update);
@@ -197,9 +182,9 @@ static int tfa9890_dev_close(hw_device_t *device) {
 }
 
 static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t devices) {
-    ALOGD("%s: %u\n", __func__, devices);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
     pthread_mutex_lock(&tfa9890->amp_update);
+    ALOGD("%s: %u\n", __func__, devices);
     switch (devices) {
         default:
             ALOGE("%s: Unhandled output device: %d\n", __func__, devices);
@@ -220,24 +205,25 @@ static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t 
 }
 
 static int tfa9890_enable_output_devices(struct amplifier_device *device, uint32_t devices, bool enable) {
-    ALOGD("%s: %u %d\n", __func__, devices, enable);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
     pthread_mutex_lock(&tfa9890->amp_update);
+    ALOGD("%s: %u %d\n", __func__, devices, enable);
     switch (devices) {
         default:
             ALOGE("%s: Unhandled audio device: %d\n", __func__, devices);
         case SND_DEVICE_OUT_SPEAKER:
         case SND_DEVICE_OUT_SPEAKER_REVERSE:
-        case SND_DEVICE_OUT_VOICE_SPEAKER:
             tfa9890->state.in_call = 0;
-            tfa9890->state.mode = 0;
-            tfa9890->state.amp_mode = AUDIO_MUSIC;
+            tfa9890->state.mode = 2;
+            break;
+        case SND_DEVICE_OUT_VOICE_SPEAKER:
+            tfa9890->state.in_call = enable;
+            tfa9890->state.mode = 2;
             break;
         case SND_DEVICE_OUT_HANDSET:
         case SND_DEVICE_OUT_VOICE_HANDSET:
             tfa9890->state.in_call = enable;
             tfa9890->state.mode = 1;
-            tfa9890->state.amp_mode = AUDIO_VOICE;
             break;
     }
     // 'enabled' should probably be tracked based on devices
@@ -248,9 +234,9 @@ static int tfa9890_enable_output_devices(struct amplifier_device *device, uint32
 }
 
 static int tfa9890_set_mode(struct amplifier_device *device, audio_mode_t mode) {
-    ALOGD("%s: %u\n", __func__, mode);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
     pthread_mutex_lock(&tfa9890->amp_update);
+    ALOGD("%s: %u\n", __func__, mode);
     // Stock used 2 and 1 and 0, and all 3 seem to be the same... no clue.  Draken's log showed 2 for music
     switch (mode) {
         default:
@@ -270,9 +256,9 @@ static int tfa9890_set_mode(struct amplifier_device *device, audio_mode_t mode) 
 }
 
 static int tfa9890_output_stream_start(struct amplifier_device *device, struct audio_stream_out *stream, bool offload) {
-    ALOGD("%s: %p %d\n", __func__, stream, offload);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
     pthread_mutex_lock(&tfa9890->amp_update);
+    ALOGD("%s: %p %d\n", __func__, stream, offload);
     tfa9890->state.streams++;
     sem_post(&tfa9890->trigger_update);
     pthread_mutex_unlock(&tfa9890->amp_update);
@@ -280,9 +266,9 @@ static int tfa9890_output_stream_start(struct amplifier_device *device, struct a
 }
 
 static int tfa9890_output_stream_standby(struct amplifier_device *device, struct audio_stream_out *stream) {
-    ALOGD("%s: %p\n", __func__, stream);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
     pthread_mutex_lock(&tfa9890->amp_update);
+    ALOGD("%s: %p\n", __func__, stream);
     tfa9890->state.streams--;
     sem_post(&tfa9890->trigger_update);
     pthread_mutex_unlock(&tfa9890->amp_update);
@@ -290,9 +276,11 @@ static int tfa9890_output_stream_standby(struct amplifier_device *device, struct
 }
 
 int tfa9890_set_parameters(struct amplifier_device *device, struct str_parms *parms) {
-    ALOGD("%s: %p\n", __func__, parms);
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
     // todo, dump parms.  Might be more stuff we need to do here
+    pthread_mutex_lock(&tfa9890->amp_update);
+    ALOGD("%s: %p\n", __func__, parms);
+    pthread_mutex_unlock(&tfa9890->amp_update);
     return 0;
 }
 
@@ -333,11 +321,11 @@ static int tfa9890_module_open(const hw_module_t *module,
     }
 
     // Functions normally exported, or at least I can find reference to outside our hal.
-    *(void **)&tfa9890_dev->speaker_on_call = dlsym(tfa9890_dev->lib_ptr, "exTfa98xx_speakeron");
-    *(void **)&tfa9890_dev->speaker_off_call = dlsym(tfa9890_dev->lib_ptr, "exTfa98xx_speakeroff");
+    *(void **)&tfa9890_dev->speaker_on = dlsym(tfa9890_dev->lib_ptr, "exTfa98xx_speakeron");
+    *(void **)&tfa9890_dev->speaker_off = dlsym(tfa9890_dev->lib_ptr, "exTfa98xx_speakeroff");
     *(void **)&tfa9890_dev->reverse = dlsym(tfa9890_dev->lib_ptr, "exTfa98xx_LR_Switch");
     *(void **)&tfa9890_dev->calibration = dlsym(tfa9890_dev->lib_ptr, "exTfa98xx_calibration");
-    if (!tfa9890_dev->speaker_on_call || !tfa9890_dev->speaker_off_call ||
+    if (!tfa9890_dev->speaker_on || !tfa9890_dev->speaker_off ||
         !tfa9890_dev->reverse || !tfa9890_dev->calibration) {
         ALOGE("%s:%d: Unable to find required symbols", __func__, __LINE__);
         dlclose(tfa9890_dev->lib_ptr);
@@ -345,18 +333,6 @@ static int tfa9890_module_open(const hw_module_t *module,
         return -ENODEV;
     }
 
-
-    // Uncertain if we're supposed to need to use these.  ZTE Made them?
-    *(void **)&tfa9890_dev->speaker_on = dlsym(tfa9890_dev->lib_ptr, "tfa9890_Stereo_SpeakerOn");
-    *(void **)&tfa9890_dev->speaker_off = dlsym(tfa9890_dev->lib_ptr, "tfa9890_Stereo_SpeakerOff");
-    *(void **)&tfa9890_dev->speaker_needed = dlsym(tfa9890_dev->lib_ptr, "tfa9890_Set_SpeakerNeeded");
-    if (!tfa9890_dev->speaker_on || !tfa9890_dev->speaker_off ||
-        !tfa9890_dev->speaker_needed) {
-        ALOGE("%s:%d: Unable to find required symbols", __func__, __LINE__);
-        dlclose(tfa9890_dev->lib_ptr);
-        free(tfa9890_dev);
-        return -ENODEV;
-    }
 
     // Internal functions we aren't supposed to need to use directly
     *(void **)&tfa9890_dev->set_mode = dlsym(tfa9890_dev->lib_ptr, "tfa9890_set_mode");
