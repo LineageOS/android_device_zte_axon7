@@ -316,11 +316,11 @@ etc/firmware/a530_zap.mdt
 
 # Fingerprint sensor (Goodix)
 vendor/bin/gx_fpd
-lib64/hw/fingerprint.msm8996.so
-lib64/hw/gxfingerprint.default.so
-lib64/libfp_client.so
-lib64/libfpnav.so
-lib64/libfpservice.so
+vendor/lib64/hw/fingerprint.msm8996.so
+vendor/lib64/hw/gxfingerprint.default.so
+vendor/lib64/libfp_client.so
+vendor/lib64/libfpnav.so
+vendor/lib64/libfpservice.so
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
