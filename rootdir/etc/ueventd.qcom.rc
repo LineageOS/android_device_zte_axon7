@@ -94,6 +94,7 @@
 
 #nfc permissions
 /dev/pn548                0660   nfc        nfc
+/dev/pn5xx                0660   nfc        nfc
 
 # UIO devices
 /dev/uio0                 0660   system     system
