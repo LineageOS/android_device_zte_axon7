@@ -1,6 +1,3 @@
-on early-init
-    setprop sys.io.scheduler noop
-
 on init
     # Disable UFS powersaving
     write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 0
@@ -15,7 +12,7 @@ on boot
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/top-app/cpus 0-3
 
-    # Add a cpuset for the camera daemon
+    # add a cpuset for the camera daemon
     # we want all cores for camera
     mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus 0-3
@@ -50,7 +47,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 0
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/enable_prediction 1
 
-    # Bring CPU2 online
+    # Online CPU2
     write /sys/devices/system/cpu/cpu2/online 1
 
     # Configure governor settings for big cluster
@@ -76,7 +73,7 @@ on enable-low-power
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 2:1324800"
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
-    # Set big.LITTLE scheduler parameters
+    # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_upmigrate 95
     write /proc/sys/kernel/sched_downmigrate 90
@@ -116,7 +113,7 @@ on enable-low-power
     # This will enable C4, D4, D3, E4 and M3 LPMs
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
-    # Set idle GPU to 133 MHz
+    # Set idle GPU to 133 Mhz
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
 
     # Enable Adaptive LMK
@@ -129,7 +126,7 @@ on enable-low-power
     # Starting io prefetcher service
     start iop
 
-    setprop sys.io.scheduler "cfq"
+    setprop sys.io.scheduler "bfq"
     # update cpusets now that boot is complete and we want better load balancing
     write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/foreground/boost/cpus 0-2
