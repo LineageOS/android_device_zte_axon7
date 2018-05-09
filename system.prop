@@ -4,6 +4,7 @@ ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 # Audio
 af.fast_track_multiplier=1
 audio.deep_buffer.media=true
+audio.offload.disable=1
 audio.offload.video=true
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.voicecall=true
@@ -16,6 +17,7 @@ ro.vendor.audio.sdk.ssr=false
 vendor.audio.dolby.ds2.enabled=false
 vendor.audio.dolby.ds2.hardbypass=false
 vendor.audio.flac.sw.decoder.24bit=true
+vendor.audio_hal.period_size=192
 vendor.audio.hw.aac.encoder=true
 vendor.audio.offload.buffer.size.kb=64
 vendor.audio.offload.gapless.enabled=true
@@ -28,7 +30,6 @@ vendor.audio.safx.pbe.enabled=true
 vendor.audio.tunnel.encode=false
 vendor.audio.use.sw.alac.decoder=true
 vendor.audio.use.sw.ape.decoder=true
-vendor.audio_hal.period_size=192
 vendor.voice.path.for.pcm.voip=true
 
 # Bluetooth
@@ -57,10 +58,7 @@ persist.data.mode=concurrent
 persist.data.netmgrd.qos.enable=true
 ro.use_data_netmgrd=true
 
-# Display (Qualcomm AD)
-ro.qcom.ad.calib.data=/system/etc/calib.cfg
-ro.qcom.ad.sensortype=2
-ro.qcom.ad=1
+# Display
 ro.qualcomm.cabl=0
 vendor.display.enable_default_color_mode=1
 
@@ -138,10 +136,11 @@ persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 
 # Sensors
-ro.qti.sensors.dev_ori=false
-ro.qti.sensors.mot_detect=false
-ro.qti.sensors.pmd=false
-ro.qti.sensors.sta_detect=false
+ro.vendor.sensors.dev_ori=true
+ro.vendor.sensors.dpc=true
 
 # TimeService
 persist.timed.enable=true
+
+# Voice assistant
+ro.opa.eligible_device=true
