@@ -492,11 +492,11 @@ vendor/etc/sensors/hals.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/sensors.ssc.so|f19c628efb93d24a3866b0f914363639722951b5
+vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/sensors.ssc.so|78bfb42be8b2e6df7475bb955bcbe49d2a51e151
+vendor/lib/sensors.ssc.so
 
 # Thermal
 etc/thermal-engine-8996-normal.conf

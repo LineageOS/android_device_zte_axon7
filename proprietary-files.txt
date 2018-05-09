@@ -326,7 +326,7 @@ vendor/lib64/libfpservice.so
 vendor/firmware/libpn548ad_fw.so
 
 # Sensors
-etc/sensors/sensor_def_qcomdev.conf
+vendor/etc/sensors/sensor_def_qcomdev.conf
 
 # VR
 lib64/hw/vr.default.so
