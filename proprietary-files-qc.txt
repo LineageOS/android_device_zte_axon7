@@ -266,12 +266,6 @@ vendor/bin/hvdcp_opti
 vendor/lib64/hw/keystore.msm8996.so|ade812bb2991c103f6af397e9662460ed0e48d5f
 vendor/lib/hw/keystore.msm8996.so|bd92d1ccbc294e6bcb0fdb4018749646d1ba0193
 
-# Listen - from op3 - OPR6.170623.013
-vendor/lib64/hw/sound_trigger.primary.msm8996.so|d81639f09364ff39a1132f7ee8497a13aa1bd988
-vendor/lib/hw/sound_trigger.primary.msm8996.so|82906637605944c0dea3de007bd3ad063b610cd0
-vendor/lib/libadpcmdec.so|cce776b6e1edac56705b155444c3f28362055442
-vendor/lib/libsmwrapper.so|cd54c73eaafbe3fe9eacafc845a04d25e44fe553
-
 # Media - from op3 - OPR6.170623.013
 -vendor/lib/libgpustats.so|176395bf6055b3475080d9bae65684820bafab49
 vendor/lib/libI420colorconvert.so|38212d068cd62a91a7cf88337a9655c0fd2c46ca
