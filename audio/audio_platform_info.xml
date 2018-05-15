@@ -168,6 +168,7 @@
 
     <backend_names>
         <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones-hi-fi"/>
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="voice-speaker"/>
     </backend_names>
 
     <config_params>
