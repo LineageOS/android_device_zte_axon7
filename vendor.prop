@@ -138,6 +138,9 @@ persist.data.df.ul_mode=5
 persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 
+# Security patch level
+ro.vendor.build.security_patch=2018-04-05
+
 # Sensors
 ro.vendor.sensors.dev_ori=false
 ro.vendor.sensors.dpc=false
