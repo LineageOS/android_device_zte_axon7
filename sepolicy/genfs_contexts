@@ -1,2 +1,0 @@
-genfscon proc /gloved_finger_switch    u:object_r:proc_touchscreen:s0
-genfscon proc /touchscreen             u:object_r:proc_touchscreen:s0

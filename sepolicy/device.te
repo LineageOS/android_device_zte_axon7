@@ -1,5 +1,0 @@
-# Goodix fingerprint
-type gx_fpd_device, dev_type;
-
-# DSP
-type dsp_block_device, dev_type;

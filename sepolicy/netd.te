@@ -1,1 +1,0 @@
-allow netd persist_file:dir search;
