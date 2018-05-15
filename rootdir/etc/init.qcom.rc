@@ -554,44 +554,18 @@ service qseecomd /system/vendor/bin/qseecomd
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service thermal-engine /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-normal.conf
+service thermal-engine /system/vendor/bin/thermal-engine
    class main
    user root
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
+   socket thermal-send-rule stream 0660 system system
    group root
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    writepid /dev/cpuset/system-background/tasks
-
-service thermal-perf /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-perf.conf
-   class main
-   user root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   disabled
-   writepid /dev/cpuset/system-background/tasks
-
-#smart cpu enable
-on property:debug.zte.vr_mode=1
-    write /d/spmi/spmi-0/address 0x00000843
-    write /d/spmi/spmi-0/data  0x0
-    stop thermal-engine
-    start thermal-perf
-
-#smart cpu disable
-on property:debug.zte.vr_mode=0
-    write /d/spmi/spmi-0/address 0x00000843
-    write /d/spmi/spmi-0/data  0x80
-    stop thermal-perf
-    start thermal-engine
 
 service adsprpcd /system/vendor/bin/adsprpcd
     class main
