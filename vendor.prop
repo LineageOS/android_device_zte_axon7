@@ -145,6 +145,9 @@ ro.vendor.sensors.mot_detect=false
 ro.vendor.sensors.pmd=false
 ro.vendor.sensors.sta_detect=false
 
+# Security patch level
+ro.vendor.build.security_patch=2018-04-05
+
 # TimeService
 persist.timed.enable=true
 
