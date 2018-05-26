@@ -82,4 +82,14 @@ sed -i "s|/system/vendor/framework/qti-vzw-ims-internal.jar|/vendor/framework/qt
 QTI_LIBPERMISSIONS="$BLOB_ROOT"/vendor/etc/permissions/qti_libpermissions.xml
 sed -i "s|name=\"android.hidl.manager-V1.0-java|name=\"android.hidl.manager@1.0-java|g" "$QTI_LIBPERMISSIONS"
 
+#
+# Remove android.hidl.base@1.0 & android.hidl.manager@1.0
+#
+for HIDL_BASE_LIB in $(grep -lr "android\.hidl\.base@1\.0\.so" $BLOB_ROOT); do
+    patchelf --remove-needed android.hidl.base@1.0.so "$HIDL_BASE_LIB" || true
+done
+ for HIDL_MANAGER_LIB in $(grep -lr "android\.hidl\.@1\.0\.so" $BLOB_ROOT); do
+    patchelf --remove-needed android.hidl.manager@1.0.so "$HIDL_MANAGER_LIB" || true
+done
+
 "$MY_DIR"/setup-makefiles.sh
