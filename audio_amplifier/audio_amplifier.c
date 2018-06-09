@@ -17,6 +17,7 @@
 
 #include <time.h>
 #include <cutils/properties.h>
+#include <cutils/str_parms.h>
 #include <system/audio.h>
 #include <platform.h>
 
@@ -56,6 +57,7 @@ typedef struct tfa9890_device {
     int (*ex_speaker_on)(int mode);
     void (*ex_speaker_off)(void);
     int (*ex_calibration)(int);
+    int *device_to_amp_device;
     void (*set_device)(int);
     int (*calibration)(int);
     void (*set_mode)(int);
@@ -276,35 +278,118 @@ static int tfa9890_dev_close(hw_device_t *device) {
         pthread_mutex_destroy(&tfa9890->amp_update);
         sem_destroy(&tfa9890->trigger_update);
         sem_destroy(&tfa9890->trigger_exit);
+        free(tfa9890->device_to_amp_device);
         free(tfa9890);
     }
     return 0;
 }
 
+#define DEFAULT 0
+#define STEREO_SPEAKER 1
+#define MONO_SPEAKER 2
+
+const int device_to_amp_device_default[] = {
+    [SND_DEVICE_OUT_HANDSET]                        = MONO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER]                        = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_REVERSE]                = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_VBAT]                   = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES]         = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_LINE]               = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_HANDSET]                  = MONO_SPEAKER,
+    // Example: setprop persist.axon7.amp_hal_device_map "16,2;17,2;18,2;19,2"
+    //     sets the 4 annotated use cases below to MONO_SPEAKER
+    [SND_DEVICE_OUT_VOICE_SPEAKER]                  = STEREO_SPEAKER, //16
+    [SND_DEVICE_OUT_VOICE_SPEAKER_VBAT]             = STEREO_SPEAKER, //17
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2]                = STEREO_SPEAKER, //18
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_VBAT]           = STEREO_SPEAKER, //19
+    [SND_DEVICE_OUT_SPEAKER_AND_HDMI]               = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_DISPLAY_PORT]       = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_BT_A2DP]            = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_BT_SCO]             = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_BT_SCO_WB]          = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_USB_HEADSET]        = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_ANC_HEADSET]        = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_AND_ANC_FB_HEADSET]     = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_PROTECTED]              = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED]        = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED]      = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_PROTECTED_VBAT]         = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED_VBAT]   = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED_VBAT] = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_WSA]                    = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_WSA]              = MONO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_WSA]            = MONO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_PROTECTED_RAS]          = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_SPEAKER_PROTECTED_VBAT_RAS]     = STEREO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_HEADPHONES] = MONO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_HEADSET] = MONO_SPEAKER,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET] = MONO_SPEAKER,
+};
+#define LAST SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET
+
+static void tfa9890_populate_device_map(tfa9890_device_t *tfa9890) {
+    char buffer[PROPERTY_VALUE_MAX];
+    size_t len = sizeof(device_to_amp_device_default);
+
+    int *dev_map = malloc(len);
+    memcpy(dev_map, device_to_amp_device_default, len);
+    tfa9890->device_to_amp_device = dev_map;
+
+    if (property_get("persist.axon7.amp_hal_device_map", buffer, "")) {
+        // Gross hacks, don't judge this.
+        char *end, *ptr = buffer;
+        while (*ptr != '\0') {
+            int adevice = 0, mode = 0;
+            if (*ptr != ';') {
+                adevice = strtol(ptr, &end, 10);
+                if (*end != ',') {
+                    ALOGE("Error parsing adevice.  Remaining string was %s", ptr);
+                    return;
+                }
+                ptr = end + 1;
+                mode = strtol(ptr, &end, 10);
+                if (*end != ';' && *end != '\0') {
+                    ALOGE("Error parsing mode.  Remaining string was %s", ptr);
+                    return;
+                }
+                // Should sanity check here.  #YOLO
+                ALOGD("Overriding device(%d): mode(%d->%d)\n", adevice, dev_map[adevice], mode);
+                dev_map[adevice] = mode;
+            } else {
+                end = ptr + 1;
+            }
+            ptr = end;
+        }
+    }
+}
+
 static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t devices) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
+
+    if (devices == SND_DEVICE_NONE)
+        return 0;
+
     pthread_mutex_lock(&tfa9890->amp_update);
     ALOGD("%s: %u\n", __func__, devices);
-    switch (devices) {
-        default:
-            ALOGE("%s: Unhandled output device: %d\n", __func__, devices);
-        case SND_DEVICE_OUT_SPEAKER:
-        case SND_DEVICE_OUT_SPEAKER_REVERSE:
-        case SND_DEVICE_OUT_VOICE_SPEAKER:
-            tfa9890->state.device = 0;
-            break;
-        case SND_DEVICE_OUT_HANDSET:
-        case SND_DEVICE_OUT_VOICE_HANDSET:
-            tfa9890->state.device = 1;
-            break;
-        case SND_DEVICE_NONE:
-            break;
 
+    if (devices > LAST) {
+        ALOGD("%s: Device out of range, mapping needs updated: %d\n", __func__, devices);
+        ALOGD("%s: Routing as STEREO_SPEAKER\n", __func__);
+        devices = SND_DEVICE_OUT_SPEAKER;
     }
-    if (devices != SND_DEVICE_NONE) {
-        tfa9890->state.reversed = (devices == SND_DEVICE_OUT_SPEAKER_REVERSE);
-        sem_post(&tfa9890->trigger_update);
+
+    int out_device = tfa9890->device_to_amp_device[devices];
+
+    if (out_device == DEFAULT) {
+        ALOGD("%s: Device not routed %d\n", __func__, devices);
+        ALOGD("%s: Routing as STEREO_SPEAKER\n", __func__);
+        out_device = STEREO_SPEAKER;
     }
+
+    tfa9890->state.device = out_device - 1;
+    tfa9890->state.reversed = (devices == SND_DEVICE_OUT_SPEAKER_REVERSE);
+    sem_post(&tfa9890->trigger_update);
+
     pthread_mutex_unlock(&tfa9890->amp_update);
     return 0;
 }
@@ -381,6 +466,7 @@ int tfa9890_set_parameters(struct amplifier_device *device, struct str_parms *pa
     // todo, dump parms.  Might be more stuff we need to do here
     pthread_mutex_lock(&tfa9890->amp_update);
     ALOGD("%s: %p\n", __func__, parms);
+    str_parms_dump(parms);
     pthread_mutex_unlock(&tfa9890->amp_update);
     return 0;
 }
@@ -456,6 +542,7 @@ static int tfa9890_module_open(const hw_module_t *module,
     }
 
     tfa9890_switch_amp_control_mode(tfa9890_dev);
+    tfa9890_populate_device_map(tfa9890_dev);
 
     sem_init(&tfa9890_dev->trigger_update, 0, 0);
     sem_init(&tfa9890_dev->trigger_exit, 0, 0);
