@@ -312,7 +312,17 @@ on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
     write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
 
+on property:vold.decrypt=trigger_reset_main
+    stop audio-hal-2-0
+
+on property:vold.decrypt=trigger_shutdown_framework
+    stop audio-hal-2-0
+
+on property:vold.decrypt=trigger_restart_min_framework
+    start audio-hal-2-0
+
 on property:vold.decrypt=trigger_restart_framework
+    start audio-hal-2-0
     start config_bt_addr
     start config_bluetooth
 
