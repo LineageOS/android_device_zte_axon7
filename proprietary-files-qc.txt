@@ -493,7 +493,9 @@ vendor/lib/libsensor_reg.so
 vendor/lib/sensors.ssc.so
 
 # Thermal
-vendor/etc/thermal-engine.conf
+etc/thermal-engine-8996-normal.conf
+etc/thermal-engine-8996-perf.conf
+etc/thermal-engine.conf
 vendor/bin/thermal-engine
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
