@@ -9,6 +9,10 @@
 /dev/goodix_fp                              u:object_r:gx_fpd_device:s0
 /dev/pn5xx                                  u:object_r:nfc_device:s0
 
+# Input devices
+/(vendor|system/vendor)/usr/idc(/.*)?                         u:object_r:idc_file:s0
+/(vendor|system/vendor)/usr/keylayout(/.*)?                   u:object_r:keylayout_file:s0
+
 # Sys files
 /sys/devices/soc/75b7000\.i2c/i2c-9/9-[0-9a-f]+/leds(/.*)?    u:object_r:sysfs_leds:s0
 /sys/devices/soc/leds-qpnp-25/leds(/.*)?                      u:object_r:sysfs_leds:s0
