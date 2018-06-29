@@ -27,17 +27,14 @@
 
 import /vendor/etc/init/hw/init.qcom.power.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
-import /vendor/etc/init/hw/init.msm.usb.configfs.rc
 
 on early-init
-    mkdir /firmware 0771 system system
-    mkdir /bt_firmware 0771 system system
-    symlink /data/tombstones /tombstones
-    mkdir /dsp 0771 media media
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
     chown root system /dev/kmsg
     chmod 0620 /dev/kmsg
+
+    symlink /data/tombstones /tombstones
 
     # ZRAM setup
     write /sys/block/zram0/comp_algorithm lz4
@@ -47,7 +44,6 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 root system
 
-    # Support legacy paths
     symlink /sdcard /storage/sdcard0
 
     # Create cgroup mount point for memory
@@ -57,10 +53,7 @@ on init
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
-    write sys/module/qpnp_rtc/parameters/poweron_alarm 1
-
-    # Wifi firmware reload path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
+    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -68,29 +61,32 @@ on fs
 
     mount_all /vendor/etc/fstab.qcom
 
-    mkdir /persist/data 0700 system system
-    restorecon_recursive /persist
+on late-fs
+    # boot time fs tune
+    write /sys/block/sda/queue/iostats 0
+    write /sys/block/sda/queue/scheduler cfq
+    write /sys/block/sda/queue/iosched/slice_idle 0
+    write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/nr_requests 256
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
 
-on post-fs
+on post-fs-data
+    mkdir /data/vendor/misc 01771 system system
+
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
     # Create directory used by media clients
     mkdir /data/vendor/media 0770 mediacodec media
 
-    chmod 0755 /sys/kernel/debug/tracing
-
-# msm specific files that need to be created on /data
-on post-fs-data
-    mkdir /data/vendor/misc 01771 system system
+    # Create directories for fingerprint
+    mkdir /data/system/fingerprint 0700 system system
 
     # Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
 
-    #Create directories for Fingerprint
-    mkdir /data/system/fingerprint 0700 system system
-
-    #Create folder for mm-qcamera-daemon
+    # Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
     mkdir /data/vendor/camera 0770 camera camera
 
@@ -100,6 +96,13 @@ on post-fs-data
     mkdir /data/vendor/ramdump 0771 root system
     mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/ramdump/bluetooth 0770 bluetooth bluetooth
+
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
 
     # Create netmgr log dir
     mkdir /data/vendor/netmgr 0770 radio radio
@@ -123,30 +126,11 @@ on post-fs-data
     # Create directory for radio
     mkdir /data/vendor/radio 0770 system radio
 
-    # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
-    # We chown/chmod /persist again so because mount is run as root + defaults
-    chown root system /persist
-    chmod 0771 /persist
-
-    #Create directories for Location services
+    # Create directories for Location services
     mkdir /data/vendor/location 0770 gps gps
     mkdir /data/vendor/location/mq 0770 gps gps
     mkdir /data/vendor/location/xtwifi 0770 gps gps
 
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
-
-    mkdir /data/audio/ 0770 media audio
-
-    # Create a folder for audio delta files
-    mkdir /data/audio/acdbdata 0770 media audio
-    mkdir /data/audio/acdbdata/delta 0770 media audio
-
-    setprop vold.post_fs_data_done 1
-
-    #Create a folder for SRS to be able to create a usercfg file
-    mkdir /data/data/media 0770 media media
-	
     # SSC/SLPI sensors
     mkdir /persist/sensors
     chown root system /persist/sensors
@@ -164,6 +148,11 @@ on post-fs-data
     # allow the sensors daemon to perform this as non-root
     chown root system /dev/sensors
     chmod 0660 /dev/sensors
+
+    # Create /data/time folder for time-services
+    mkdir /data/time/ 0700 system system
+
+    setprop vold.post_fs_data_done 1
 
     # Create PERFD deamon related dirs
     mkdir /data/vendor/perfd 0770 root system
@@ -184,11 +173,6 @@ on post-fs-data
     chown radio radio /data/vendor/radio/copy_complete
     chmod 0660 /data/vendor/radio/copy_complete
 
-    # copy prebuilt qcril.db files always
-    copy /system/vendor/qcril.db /data/misc/radio/qcril_prebuilt.db
-    chown radio radio /data/misc/radio/qcril_prebuilt.db
-    chmod 0660 /data/misc/radio/qcril_prebuilt.db
-
     # File flags for prebuilt ril db file
     write /data/vendor/radio/prebuilt_db_support 1
     chown radio radio /data/vendor/radio/prebuilt_db_support
@@ -197,25 +181,11 @@ on post-fs-data
     chown radio radio /data/vendor/radio/db_check_done
     chmod 0660 /data/vendor/radio/db_check_done
 
-on late-fs
-    # boot time fs tune
-    write /sys/block/sda/queue/iostats 0
-    write /sys/block/sda/queue/scheduler cfq
-    write /sys/block/sda/queue/iosched/slice_idle 0
-    write /sys/block/sda/queue/read_ahead_kb 2048
-    write /sys/block/sda/queue/nr_requests 256
-    write /sys/block/dm-0/queue/read_ahead_kb 2048
-    write /sys/block/dm-1/queue/read_ahead_kb 2048
-
 on early-boot
-    # set RLIMIT_MEMLOCK to 64MB
+    # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
     # Allow subsystem (modem etc) debugging
-    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
-    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
-    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
-    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
     chown root audio /sys/kernel/boot_adsp/boot
@@ -229,21 +199,23 @@ on early-boot
     write /sys/bus/msm_subsys/devices/subsys5/restart_level "related"
 
 on boot
+    # Access permission for Bluetooth
+    chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt /dev/ttyHS0
-    chmod 0660 /dev/ttyHS0
-    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
+    chown bluetooth net_bt /dev/ttyHS0
+    chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /dev/ttyHS0
 
     chown system system /sys/module/msm_core/parameters/polling_interval
     chown system system /sys/module/msm_core/parameters/disabled
     chown system system /sys/kernel/debug/msm_core/enable
     chown system system /sys/kernel/debug/msm_core/ptable
 
-    #Create QMUX deamon socket area
+    # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
@@ -258,15 +230,26 @@ on boot
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
     mkdir /persist/time 0770 system system
+    mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+    mkdir /persist/qc_senseid 0700 system system
+    mkdir /persist/bms 0700 root system
+    mkdir /persist/wlan_bt 0700 system system
+    mkdir /persist/audio 0777 media audio
     mkdir /persist/display 0770 system graphics
+    restorecon_recursive /persist
 
-    #Create NETMGR daemon socket area
+    # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
-#   Assign TCP buffer thresholds to be ceiling value of technology maximums
-#   Increased technology maximums should be reflected here.
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  8388608
     write /proc/sys/net/core/wmem_max  8388608
+
+    # Enable default router information in RA
+    write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -276,9 +259,8 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # Set the console loglevel to < KERN_INFO
-    # Set the default message loglevel to KERN_INFO
-    write /proc/sys/kernel/printk "6 6 1 7"
+    # Allow access for CCID command/response timeout configuration
+    chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
     # Allow access to dload sysfs node
     chown root system /sys/kernel/dload/emmc_dload
@@ -301,11 +283,11 @@ on boot
     chown system system /proc/touchscreen/forcetouch_vendor
     chmod 0644 /proc/touchscreen/forcetouch_vendor
 
-    # add for Fingerprint wakeup accelerate
+    # Add for fingerprint wakeup accelerate
     chmod 0660 /sys/module/zte_misc/parameters/fp_msg_type
     chown system system /sys/module/zte_misc/parameters/fp_msg_type
 
-    # add for HALL interface permissions
+    # Add for HALL interface permissions
     chmod 0660 /sys/module/zte_hall/parameters/factory_mode
     chmod 0660 /sys/module/zte_hall/parameters/hall_timer_debug
     chmod 0660 /sys/module/zte_hall/parameters/hall_interrupt_count
@@ -313,10 +295,13 @@ on boot
     chown root system /sys/module/zte_hall/parameters/hall_timer_debug
     chown root system /sys/module/zte_hall/parameters/hall_interrupt_count
 
-    #WAPI
-    mkdir /data/misc/wapi_certificate 0770 system wifi
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
 
 on property:sys.boot_completed=1
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.qcom
+
     # end boot time fs tune
     write /sys/block/sda/queue/read_ahead_kb 128
     write /sys/block/sda/queue/nr_requests 128
@@ -328,11 +313,6 @@ on property:sys.boot_completed=1
     chown media audio /sys/kernel/wdsp0/boot
     #CPE fw_name used by sound trigger HAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
-
-# corefile limit
-on property:persist.debug.trace=1
-    mkdir /data/core 0777 root root
-    write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
 
 on property:vold.decrypt=trigger_reset_main
     stop audio-hal-2-0
@@ -360,7 +340,7 @@ service cnd /system/vendor/bin/cnd
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
-    group system
+    group radio system
 
 service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class core
@@ -370,15 +350,15 @@ service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
-    group root wakelock
+    group system wakelock
     shutdown critical
     ioprio rt 0
     writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /system/vendor/bin/tftp_server
-   class core
-   user root
-   writepid /dev/cpuset/system-background/tasks
+    class core
+    user root
+    writepid /dev/cpuset/system-background/tasks
 
 on property:wc_transport.start_hci=true
     start start_hci_filter
@@ -389,7 +369,7 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950 wakelock
+    group bluetooth oem_2950
     disabled
 
 on property:wc_transport.start_root=true
@@ -401,7 +381,7 @@ on property:wc_transport.start_root=false
 service hci_filter_root /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950 system wakelock
+    group bluetooth oem_2950 system
     disabled
 
 service config_bt_addr /system/vendor/bin/bt_mac_writer -O
@@ -436,12 +416,6 @@ service netmgrd /system/vendor/bin/netmgrd
     group root wifi wakelock radio inet
     writepid /dev/cpuset/system-background/tasks
 
-service ipacm-diag /system/bin/ipacm-diag
-    class main
-    user system
-    socket ipacm_log_file dgram 660 system net_admin
-    group net_admin oem_2950
-
 service ipacm /system/vendor/bin/ipacm
     class main
     user radio
@@ -451,7 +425,7 @@ service ipacm /system/vendor/bin/ipacm
 service qti /system/vendor/bin/qti
     class main
     user radio
-    group radio net_raw oem_2950 usb net_admin
+    group radio oem_2950 usb
     writepid /dev/cpuset/system-background/tasks
 
 service sensors /system/vendor/bin/sensors.qcom
@@ -482,20 +456,14 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -I/vendor/etc/wifi/wpa_supplicant_overlay.conf \
     -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-#   we will start as root and wpa_supplicant will switch to user wifi
-#   after setting up the capabilities required for WEXT
-#   user wifi
-#   group wifi inet keystore
+    #   we will start as root and wpa_supplicant will switch to user wifi
+    #   after setting up the capabilities required for WEXT
+    #   user wifi
+    #   group wifi inet keystore
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
-
-service cnss_diag /system/vendor/bin/cnss_diag -q -f
-    class main
-    user system
-    group system wifi inet net_admin sdcard_rw media_rw diag
-    disabled
 
 service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
     class late_start
@@ -526,11 +494,29 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock oem_2901
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
+service qseecomd /system/vendor/bin/qseecomd
+    class core
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
+service time_daemon /system/vendor/bin/time_daemon
+    class main
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
+# Start camera server as daemon
+service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
+    class late_start
+    user camera
+    group camera system inet input graphics
+    writepid /dev/cpuset/system-background/tasks
+
 service charger /charger
     class charger
     group system graphics
     seclabel u:r:charger:s0
-    writepid /dev/cpuset/system-background/tasks
 
 service qbcharger /charger -m 1
     disabled
@@ -552,39 +538,25 @@ service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/m
 on charger
     setprop persist.sys.usb.config charging
 
-#start camera server as daemon
-service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
-    class late_start
-    user camera
-    group camera system inet input graphics
-    writepid /dev/cpuset/camera-daemon/tasks
-
-#Start up peripheral manager
-service per_mgr system/vendor/bin/pm-service
+# Start up peripheral manager
+service per_mgr /system/vendor/bin/pm-service
     class core
     user system
     group system
-    ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
 service per_proxy /system/vendor/bin/pm-proxy
     class core
     user system
     group system
-    disabled
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
 on property:init.svc.per_mgr=running
     start per_proxy
 
 on property:sys.shutdown.requested=*
     stop per_proxy
-
-service qseecomd /system/vendor/bin/qseecomd
-    class core
-    user root
-    group root
-    writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-normal.conf
    class main
@@ -630,11 +602,6 @@ service adsprpcd /system/vendor/bin/adsprpcd
     user media
     group media
 
-service audiod /system/bin/audiod
-    class late_start
-    user system
-    group system
-
 service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
@@ -647,19 +614,8 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
     user system
     socket ims_datad stream 0660 system radio
     group system wifi radio inet log diag
-    disabled
     writepid /dev/cpuset/system-background/tasks
-
-service pd_mapper /system/vendor/bin/pd-mapper
-    class core
     disabled
-
-on property:persist.sys.pd_enable=1
-    start pd_mapper
-    write /sys/class/service_locator/service_locator_status 1
-
-on property:persist.sys.pd_enable=0
-    write /sys/class/service_locator/service_locator_status 0
 
 on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
@@ -667,7 +623,6 @@ on property:vendor.ims.QMI_DAEMON_STATUS=1
 service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
     class main
     user system
-    socket ims_rtpd stream 0660 system radio
     group radio diag inet log
     disabled
 
@@ -675,8 +630,8 @@ service vendor.imsrcsservice /system/vendor/bin/imsrcsd
     class main
     user system
     group radio diag inet log
-    disabled
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
@@ -698,20 +653,16 @@ service energy-awareness /system/vendor/bin/energy-awareness
     group system
     oneshot
 
+on property:slpi.restart=1
+    write /sys/kernel/debug/msm_subsys/slpi restart
+
 service hvdcp_opti /system/vendor/bin/hvdcp_opti
     class main
     user root
     group system wakelock
-    writepid /dev/cpuset/system-background/tasks
 
 service gx_fpd /system/vendor/bin/gx_fpd
     class late_start
     user root
     group system
-    writepid /dev/cpuset/system-background/tasks
-
-service time_daemon /system/vendor/bin/time_daemon
-    class main
-    user root
-    group root
     writepid /dev/cpuset/system-background/tasks
