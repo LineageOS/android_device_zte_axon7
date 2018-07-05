@@ -70,5 +70,16 @@ sed -i "s|/etc/settings/mono_qcom_spk_r.cnt|/vendor/etc/tfa/mono_qc_spk_r.cnt|g"
 sed -i "s|/etc/settings/stereo_qcom_spk_l.cnt|/vendor/etc/tfa/stereo_qc_spk_l.cnt|g" "$LIBTFA9890"
 sed -i "s|/etc/settings/stereo_qcom_spk_r.cnt|/vendor/etc/tfa/stereo_qc_spk_r.cnt|g" "$LIBTFA9890"
 
+#
+# Correct VZW IMS library location
+#
+QTI_VZW_IMS_INTERNAL="$COMMON_BLOB_ROOT"/vendor/etc/permissions/qti-vzw-ims-internal.xml
+sed -i "s|/system/vendor/framework/qti-vzw-ims-internal.jar|/vendor/framework/qti-vzw-ims-internal.jar|g" "$QTI_VZW_IMS_INTERNAL"
+
+#
+# Correct android.hidl.manager@1.0-java jar name
+#
+QTI_LIBPERMISSIONS="$COMMON_BLOB_ROOT"/vendor/etc/permissions/qti_libpermissions.xml
+sed -i "s|name=\"android.hidl.manager-V1.0-java|name=\"android.hidl.manager@1.0-java|g" "$QTI_LIBPERMISSIONS"
 
 "$MY_DIR"/setup-makefiles.sh

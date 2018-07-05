@@ -341,7 +341,7 @@ vendor/lib/vendor.display.postproc@1.0_vendor.so|a710a9d7f93892961ff71420fe222ad
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|04bf21220673630ebaa4c8e7a84adbcdcf08f0dc
 
 # QMI
-etc/permissions/qti_libpermissions.xml:vendor/etc/permissions/qti_libpermissions.xml|ef3c88495f2f61a2d16e1445113a9d80f8db0e0a
+etc/permissions/qti_libpermissions.xml:vendor/etc/permissions/qti_libpermissions.xml
 etc/permissions/qti_permissions.xml:vendor/etc/permissions/qti_permissions.xml
 lib/libqmi_cci_system.so:vendor/lib/libqmi_cci_system.so
 lib64/libqmi_cci_system.so:vendor/lib64/libqmi_cci_system.so
@@ -437,7 +437,7 @@ vendor/radio/qcril_database/qcril.db
 # ims.apk - from tissot - OPR1.170623.026
 -app/ims/ims.apk|42881dc3adfd5e4f716bdb4d510ca45a0b415b74
 -app/imssettings/imssettings.apk
-etc/permissions/qti-vzw-ims-internal.xml:vendor/etc/permissions/qti-vzw-ims-internal.xml|89409c5f355acbd65a45b13f12e1baafb13baf46
+etc/permissions/qti-vzw-ims-internal.xml:vendor/etc/permissions/qti-vzw-ims-internal.xml
 lib64/com.qualcomm.qti.imscmservice@1.0.so
 lib64/libdiag_system.so
 lib64/libimscamera_jni.so
