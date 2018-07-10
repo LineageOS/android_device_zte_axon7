@@ -386,6 +386,7 @@ etc/permissions/telephonyservice.xml
 -framework/QtiTelephonyServicelibrary.jar
 -framework/uimlpalibrary.jar
 lib64/libmodemapi.so
+lib64/libvendorcfg.so
 lib64/libvendorutils.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/ipacm-diag
