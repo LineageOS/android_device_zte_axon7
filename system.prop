@@ -6,7 +6,6 @@ af.fast_track_multiplier=1
 audio.deep_buffer.media=true
 audio.offload.disable=1
 audio.offload.video=true
-config.disable_soundtrigger=true
 persist.axon7.amp_hal_device_map="16,2;17,2;18,2;19,2"
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.voicecall=true
