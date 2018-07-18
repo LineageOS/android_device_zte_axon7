@@ -139,8 +139,11 @@ persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 
 # Sensors
-ro.vendor.sensors.dev_ori=true
-ro.vendor.sensors.dpc=true
+ro.vendor.sensors.dev_ori=false
+ro.vendor.sensors.dpc=false
+ro.vendor.sensors.mot_detect=false
+ro.vendor.sensors.pmd=false
+ro.vendor.sensors.sta_detect=false
 
 # TimeService
 persist.timed.enable=true
