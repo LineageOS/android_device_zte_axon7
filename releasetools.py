@@ -26,6 +26,14 @@ def IncrementalOTA_Assertions(info):
   AddTrustZoneAssertion(info, info.target_zip)
   return
 
+def FullOTA_InstallBegin(info):
+  CreateVendorPartition(info)
+  return
+
+def IncrementalOTA_InstallBegin(info):
+  CreateVendorPartition(info)
+  return
+
 def AddTrustZoneAssertion(info, input_zip):
   android_info = info.input_zip.read("OTA/android-info.txt")
   m = re.search(r'require\s+version-trustzone\s*=\s*(\S+)', android_info)
@@ -35,3 +43,21 @@ def AddTrustZoneAssertion(info, input_zip):
       cmd = 'assert(axon7.verify_trustzone(' + ','.join(['"%s"' % tz for tz in versions]) + ') == "1");'
       info.script.AppendExtra(cmd)
   return
+
+def CreateVendorPartition(info):
+  info.script.AppendExtra('package_extract_file("install/bin/sgdisk_msm8996", "/tmp/sgdisk");');
+  info.script.AppendExtra('package_extract_file("install/bin/toybox_msm8996", "/tmp/toybox");');
+  info.script.AppendExtra('package_extract_file("install/bin/e2fsck_msm8996", "/tmp/e2fsck");');
+  info.script.AppendExtra('package_extract_file("install/bin/mke2fs_msm8996", "/tmp/mke2fs");');
+  info.script.AppendExtra('package_extract_file("install/bin/resize2fs_static", "/tmp/resize2fs");');
+  info.script.AppendExtra('package_extract_file("install/bin/vendor.sh", "/tmp/vendor.sh");');
+  info.script.AppendExtra('set_metadata("/tmp/sgdisk", "uid", 0, "gid", 0, "mode", 0755);');
+  info.script.AppendExtra('set_metadata("/tmp/toybox", "uid", 0, "gid", 0, "mode", 0755);');
+  info.script.AppendExtra('set_metadata("/tmp/e2fsck", "uid", 0, "gid", 0, "mode", 0755);');
+  info.script.AppendExtra('set_metadata("/tmp/mke2fs", "uid", 0, "gid", 0, "mode", 0755);');
+  info.script.AppendExtra('set_metadata("/tmp/resize2fs", "uid", 0, "gid", 0, "mode", 0755);');
+  info.script.AppendExtra('set_metadata("/tmp/vendor.sh", "uid", 0, "gid", 0, "mode", 0755);');
+  info.script.AppendExtra('ui_print("Checking for vendor partition...");');
+  info.script.AppendExtra('if run_program("/tmp/vendor.sh") != 0 then');
+  info.script.AppendExtra('abort("Create /vendor partition failed.");');
+  info.script.AppendExtra('endif;');
