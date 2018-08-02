@@ -525,4 +525,3 @@ vendor/lib/libwvhidl.so|f7288f7a7ed6765bd1d80d639a0aeb0c31eda795
 
 # Wifi
 vendor/bin/cnss-daemon
-vendor/bin/cnss_diag
