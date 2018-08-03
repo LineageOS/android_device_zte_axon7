@@ -299,6 +299,9 @@ vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
 
+# Camera service
+vendor/etc/init/android.hardware.camera.provider@2.4-service.rc
+
 # Graphics firmware
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw
@@ -324,6 +327,9 @@ vendor/lib64/libfpservice.so
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
+
+# OMX service
+vendor/etc/init/android.hardware.media.omx@1.0-service.rc
 
 # Sensors
 vendor/etc/sensors/sensor_def_qcomdev.conf
