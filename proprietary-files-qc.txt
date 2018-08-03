@@ -504,14 +504,15 @@ vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
 vendor/lib/sensors.ssc.so
 
-# Thermal - axon7 - B32
+# Thermal
+# thermal configs - from - axon7 - B32
 etc/thermal-engine-8996-normal.conf|138bae6c8b6384ce35b49d789788fe440d7d7322
 etc/thermal-engine-8996-perf.conf|16a680b3e1ab9545d65317a9990f67418d053527
-etc/thermal-engine.conf|c6c9312b7c7b52926cf7d0fc9bff933d90967100
-vendor/bin/thermal-engine|13987dce2b568c673569d5f2864c4da4f9f7d45b
--vendor/lib64/libthermalclient.so|a4a29167ae69f54982e20f708d3345e87d0eb143
-vendor/lib64/libthermalioctl.so|d258a357982de9abec4454099f36beb7b21eb4b9
--vendor/lib/libthermalclient.so|8b244aa54544e5af15abe5c9580756b95e8bd6cd
+etc/thermal-engine.conf
+vendor/bin/thermal-engine
+-vendor/lib64/libthermalclient.so
+vendor/lib64/libthermalioctl.so
+-vendor/lib/libthermalclient.so
 
 # Time services
 -vendor/app/TimeService/TimeService.apk|5055619766db32fe499cda86b892c9f3081219c5
