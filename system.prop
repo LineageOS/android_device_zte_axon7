@@ -109,7 +109,7 @@ ro.vendor.qti.sys.fw.bg_apps_limit=32
 # Radio
 DEVICE_PROVISIONED=1
 persist.data.qmi.adb_logmask=0
-persist.net.doxlat=false
+persist.net.doxlat=true
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.multisim.config=dsds
 persist.radio.sap_silent_pin=true
