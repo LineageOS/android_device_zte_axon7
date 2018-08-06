@@ -8,38 +8,38 @@ vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
 # Audio AKM Firmware
-vendor/firmware/ak4961_aram_karaoke_spk.bin
-vendor/firmware/ak4961_cram_interview_record.bin
-vendor/firmware/ak4961_cram_karaoke_cave.bin
-vendor/firmware/ak4961_cram_karaoke_cloister.bin
-vendor/firmware/ak4961_cram_karaoke_heavy.bin
-vendor/firmware/ak4961_cram_karaoke_light.bin
-vendor/firmware/ak4961_cram_karaoke_live.bin
-vendor/firmware/ak4961_cram_karaoke_middle.bin
-vendor/firmware/ak4961_cram_karaoke_room.bin
-vendor/firmware/ak4961_cram_karaoke_spk_live.bin
-vendor/firmware/ak4961_cram_karaoke_spk_room.bin
-vendor/firmware/ak4961_cram_karaoke_spk_theater.bin
-vendor/firmware/ak4961_cram_karaoke_theater.bin
-vendor/firmware/ak4961_cram_karaoke_valley.bin
-vendor/firmware/ak4961_cram_music_speaker.bin
-vendor/firmware/ak4961_cram_sound_record.bin
-vendor/firmware/ak4961_cram_voice_recognition.bin
-vendor/firmware/ak4961_cram_voice_record.bin
-vendor/firmware/ak4961_cram_wchat_record.bin
-vendor/firmware/ak4961_cram_wide_hf.bin
-vendor/firmware/ak4961_cram_wide_hp.bin
-vendor/firmware/ak4961_cram_wide_hs.bin
-vendor/firmware/ak4961_oram_karaoke_heavy.bin
-vendor/firmware/ak4961_oram_karaoke_light.bin
-vendor/firmware/ak4961_oram_karaoke_middle.bin
-vendor/firmware/ak4961_pram_interview_record.bin
-vendor/firmware/ak4961_pram_karaoke.bin
-vendor/firmware/ak4961_pram_karaoke_spk.bin
-vendor/firmware/ak4961_pram_music_speaker.bin
-vendor/firmware/ak4961_pram_sound_record.bin
-vendor/firmware/ak4961_pram_voice_recognition.bin
-vendor/firmware/ak4961_pram_wide.bin
+etc/firmware/ak4961_aram_karaoke_spk.bin:vendor/firmware/ak4961_aram_karaoke_spk.bin
+etc/firmware/ak4961_cram_interview_record.bin:vendor/firmware/ak4961_cram_interview_record.bin
+etc/firmware/ak4961_cram_karaoke_cave.bin:vendor/firmware/ak4961_cram_karaoke_cave.bin
+etc/firmware/ak4961_cram_karaoke_cloister.bin:vendor/firmware/ak4961_cram_karaoke_cloister.bin
+etc/firmware/ak4961_cram_karaoke_heavy.bin:vendor/firmware/ak4961_cram_karaoke_heavy.bin
+etc/firmware/ak4961_cram_karaoke_light.bin:vendor/firmware/ak4961_cram_karaoke_light.bin
+etc/firmware/ak4961_cram_karaoke_live.bin:vendor/firmware/ak4961_cram_karaoke_live.bin
+etc/firmware/ak4961_cram_karaoke_middle.bin:vendor/firmware/ak4961_cram_karaoke_middle.bin
+etc/firmware/ak4961_cram_karaoke_room.bin:vendor/firmware/ak4961_cram_karaoke_room.bin
+etc/firmware/ak4961_cram_karaoke_spk_live.bin:vendor/firmware/ak4961_cram_karaoke_spk_live.bin
+etc/firmware/ak4961_cram_karaoke_spk_room.bin:vendor/firmware/ak4961_cram_karaoke_spk_room.bin
+etc/firmware/ak4961_cram_karaoke_spk_theater.bin:vendor/firmware/ak4961_cram_karaoke_spk_theater.bin
+etc/firmware/ak4961_cram_karaoke_theater.bin:vendor/firmware/ak4961_cram_karaoke_theater.bin
+etc/firmware/ak4961_cram_karaoke_valley.bin:vendor/firmware/ak4961_cram_karaoke_valley.bin
+etc/firmware/ak4961_cram_music_speaker.bin:vendor/firmware/ak4961_cram_music_speaker.bin
+etc/firmware/ak4961_cram_sound_record.bin:vendor/firmware/ak4961_cram_sound_record.bin
+etc/firmware/ak4961_cram_voice_recognition.bin:vendor/firmware/ak4961_cram_voice_recognition.bin
+etc/firmware/ak4961_cram_voice_record.bin:vendor/firmware/ak4961_cram_voice_record.bin
+etc/firmware/ak4961_cram_wchat_record.bin:vendor/firmware/ak4961_cram_wchat_record.bin
+etc/firmware/ak4961_cram_wide_hf.bin:vendor/firmware/ak4961_cram_wide_hf.bin
+etc/firmware/ak4961_cram_wide_hp.bin:vendor/firmware/ak4961_cram_wide_hp.bin
+etc/firmware/ak4961_cram_wide_hs.bin:vendor/firmware/ak4961_cram_wide_hs.bin
+etc/firmware/ak4961_oram_karaoke_heavy.bin:vendor/firmware/ak4961_oram_karaoke_heavy.bin
+etc/firmware/ak4961_oram_karaoke_light.bin:vendor/firmware/ak4961_oram_karaoke_light.bin
+etc/firmware/ak4961_oram_karaoke_middle.bin:vendor/firmware/ak4961_oram_karaoke_middle.bin
+etc/firmware/ak4961_pram_interview_record.bin:vendor/firmware/ak4961_pram_interview_record.bin
+etc/firmware/ak4961_pram_karaoke.bin:vendor/firmware/ak4961_pram_karaoke.bin
+etc/firmware/ak4961_pram_karaoke_spk.bin:vendor/firmware/ak4961_pram_karaoke_spk.bin
+etc/firmware/ak4961_pram_music_speaker.bin:vendor/firmware/ak4961_pram_music_speaker.bin
+etc/firmware/ak4961_pram_sound_record.bin:vendor/firmware/ak4961_pram_sound_record.bin
+etc/firmware/ak4961_pram_voice_recognition.bin:vendor/firmware/ak4961_pram_voice_recognition.bin
+etc/firmware/ak4961_pram_wide.bin:vendor/firmware/ak4961_pram_wide.bin
 
 # Audio NXP
 etc/settings/mono_qcom_rcv.cnt
@@ -316,7 +316,7 @@ vendor/firmware/a530_zap.mdt
 
 # Fingerprint sensor (Goodix)
 vendor/bin/gx_fpd
-vendor/lib64/hw/fingerprint.msm8996.so
+vendor/lib64/hw/fingerprint.goodix.so:vendor/lib64/hw/fingerprint.msm8996.so
 vendor/lib64/hw/gxfingerprint.default.so
 vendor/lib64/libfp_client.so
 vendor/lib64/libfpnav.so
@@ -328,6 +328,6 @@ vendor/firmware/libpn548ad_fw.so
 # Sensors
 vendor/etc/sensors/sensor_def_qcomdev.conf
 
-# VR
-lib64/hw/vr.default.so
-lib/hw/vr.default.so
+# VR - axon7 - B32
+lib64/hw/vr.default.so|02bacbcce3501df81cbc9e1d1eb7e1c6314dd26b
+lib/hw/vr.default.so|c17c6814b921f212e2dfbb2045a4fe3a9ced5493
