@@ -1,0 +1,20 @@
+# Block devices
+/dev/block/platform/soc/624000.ufshc/by-name/cryptkey         u:object_r:metadata_block_device:s0
+
+# Data files
+/data/system/fingerprint(/.*)?              u:object_r:gx_fpd_data_file:s0
+/data/vendor/nfc(/.*)?                      u:object_r:nfc_data_file:s0
+
+# Devices
+/dev/goodix_fp                              u:object_r:gx_fpd_device:s0
+/dev/pn5xx                                  u:object_r:nfc_device:s0
+
+# Sys files
+/sys/devices/soc/75b7000\.i2c/i2c-9/9-[0-9a-f]+/leds(/.*)?    u:object_r:sysfs_leds:s0
+/sys/devices/soc/leds-qpnp-25/leds(/.*)?                      u:object_r:sysfs_leds:s0
+
+# Binaries
+/(vendor|system/vendor)/bin/gx_fpd          u:object_r:gx_fpd_exec:s0
+
+# HALs
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.zte_8996    u:object_r:hal_light_default_exec:s0

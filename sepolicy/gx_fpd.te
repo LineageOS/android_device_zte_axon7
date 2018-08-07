@@ -1,0 +1,45 @@
+type gx_fpd, domain;
+type gx_fpd_exec, exec_type, vendor_file_type, file_type;
+
+# gx_fpd
+init_daemon_domain(gx_fpd)
+vndbinder_use(gx_fpd)
+
+# callback to hal_fingerprint_default with binder
+binder_call(gx_fpd, hal_fingerprint_default)
+
+# need to find KeyStore and add self
+allow gx_fpd gx_fpd_service:service_manager { add find };
+allow gx_fpd self:capability dac_override;
+
+# allow HAL module to read dir contents
+#allow gx_fpd gx_fpd_data_file:file create_file_perms;
+
+# allow HAL module to read/write/unlink contents of this dir
+#allow gx_fpd gx_fpd_data_file:dir rw_dir_perms;
+
+# Need to add auth tokens to KeyStore
+#use_keystore(gx_fpd)
+#allow gx_fpd keystore:keystore_key { add_auth };
+
+# For permissions checking
+#binder_call(gx_fpd, system_server);
+#allow gx_fpd permission_service:service_manager find;
+
+# allow system_file
+#allow gx_fpd system_file:file rx_file_perms;
+
+# allow TEE
+allow gx_fpd tee_device:chr_file rw_file_perms;
+
+# allow goodix to read write device
+allow gx_fpd gx_fpd_device:chr_file { read write ioctl open };
+
+# For memory allocation
+allow gx_fpd ion_device:chr_file { read open ioctl };
+
+# Allow setting debug.fp.fail_count
+set_prop(gx_fpd, debug_prop)
+
+# R dir perms for firmware dir
+r_dir_file(gx_fpd, firmware_file)

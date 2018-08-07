@@ -27,36 +27,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#######################start###############################################
-# zte set the download mode flag: 0 means disable;1 means enable
-# default is zero=disable download when user mode(ro.debuggable=0), and enabled when userdebug or eng (ro.debuggable=1)
-#
-
-zte_tmp_ver=`getprop ro.debuggable`
-dlctrl=`getprop persist.sys.dlctrl`
-
-case "$zte_tmp_ver" in
-  "1")
-        case "$dlctrl" in
-             "0")
-                 echo 0 > /sys/module/msm_poweroff/parameters/download_mode;;
-             *)
-                 echo 1 > /sys/module/msm_poweroff/parameters/download_mode;;
-        esac
-        ;;
-
-  "0")
-        case "$dlctrl" in
-             "1")
-                 echo 1 > /sys/module/msm_poweroff/parameters/download_mode;;
-             *)
-                 echo 0 > /sys/module/msm_poweroff/parameters/download_mode;;
-        esac
-        ;;
-
-esac
-####################end#######################################################
-
 target=`getprop ro.board.platform`
 if [ -f /sys/devices/soc0/soc_id ]; then
     platformid=`cat /sys/devices/soc0/soc_id`

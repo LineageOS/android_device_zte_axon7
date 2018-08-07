@@ -1,0 +1,4 @@
+genfscon debugfs /rmt_storage          u:object_r:debugfs_rmt:s0
+
+genfscon proc /gloved_finger_switch    u:object_r:proc_touchscreen:s0
+genfscon proc /touchscreen             u:object_r:proc_touchscreen:s0
