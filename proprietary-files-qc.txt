@@ -343,8 +343,8 @@ vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|04bf21220673630ebaa4c8
 # QMI
 etc/permissions/qti_libpermissions.xml|ef3c88495f2f61a2d16e1445113a9d80f8db0e0a
 etc/permissions/qti_permissions.xml
-lib/libqmi_cci_system.so
-lib64/libqmi_cci_system.so
+lib/libqmi_cci_system.so:vendor/lib/libqmi_cci_system.so
+lib64/libqmi_cci_system.so:vendor/lib64/libqmi_cci_system.so
 vendor/bin/irsc_util
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
@@ -389,9 +389,7 @@ etc/permissions/telephonyservice.xml
 -framework/qti-telephony-common.jar|2eba987ae297a892e895ec1e9a302b41dbe0232e
 -framework/QtiTelephonyServicelibrary.jar
 -framework/uimlpalibrary.jar
-lib64/libmodemapi.so
-lib64/libvendorcfg.so
-lib64/libvendorutils.so
+lib64/libvendorcfg.so:vendor/lib64/libvendorcfg.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/ipacm-diag
 vendor/bin/netmgrd

@@ -52,7 +52,7 @@ lib64/libtfa9890.so:vendor/lib64/libtfa9890.so
 lib/libtfa9890.so:vendor/lib/libtfa9890.so
 
 # Camera
-lib/libtrueportrait.so
+lib/libtrueportrait.so:vendor/lib/libtrueportrait.so
 vendor/bin/mm-qcamera-daemon
 vendor/etc/camera/beautiful_fn/fn_default.xml
 vendor/etc/camera/beautiful_fn/fn_ov8856.xml
