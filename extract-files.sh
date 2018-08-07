@@ -57,4 +57,18 @@ extract "$MY_DIR"/proprietary-files-qc.txt "$SRC"
 extract "$MY_DIR"/proprietary-files-qc-perf.txt "$SRC"
 extract "$MY_DIR"/proprietary-files.txt "$SRC"
 
+BLOB_ROOT="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary
+
+#
+# Load NXP container profiles from vendor
+#
+LIBTFA9890="$BLOB_ROOT"/vendor/lib/libtfa9890.so
+sed -i "s|/etc/settings/stereo_qcom_spk.cnt|/vendor/etc/tfa/stereo_qc_spk.cnt|g" "$LIBTFA9890"
+sed -i "s|/etc/settings/mono_qcom_rcv.cnt|/vendor/etc/tfa/mono_qc_rcv.cnt|g" "$LIBTFA9890"
+sed -i "s|/etc/settings/mono_qcom_spk_l.cnt|/vendor/etc/tfa/mono_qc_spk_l.cnt|g" "$LIBTFA9890"
+sed -i "s|/etc/settings/mono_qcom_spk_r.cnt|/vendor/etc/tfa/mono_qc_spk_r.cnt|g" "$LIBTFA9890"
+sed -i "s|/etc/settings/stereo_qcom_spk_l.cnt|/vendor/etc/tfa/stereo_qc_spk_l.cnt|g" "$LIBTFA9890"
+sed -i "s|/etc/settings/stereo_qcom_spk_r.cnt|/vendor/etc/tfa/stereo_qc_spk_r.cnt|g" "$LIBTFA9890"
+
+
 "$MY_DIR"/setup-makefiles.sh
