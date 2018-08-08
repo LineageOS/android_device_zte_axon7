@@ -331,23 +331,23 @@ on property:vold.decrypt=trigger_restart_framework
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service cnd /system/vendor/bin/cnd
+service cnd /vendor/bin/cnd
     class main
     user system
     group system wifi inet radio wakelock net_admin
     writepid /dev/cpuset/system-background/tasks
 
-service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
+service dpmQmiMgr /vendor/bin/dpmQmiMgr
     class main
     user system
     group radio system
 
-service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
     class core
     user root
     oneshot
 
-service rmt_storage /system/vendor/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
@@ -355,7 +355,7 @@ service rmt_storage /system/vendor/bin/rmt_storage
     ioprio rt 0
     writepid /dev/cpuset/system-background/tasks
 
-service tftp_server /system/vendor/bin/tftp_server
+service tftp_server /vendor/bin/tftp_server
     class core
     user root
     writepid /dev/cpuset/system-background/tasks
@@ -366,31 +366,31 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop start_hci_filter
 
-service start_hci_filter /system/vendor/bin/wcnss_filter
+service start_hci_filter /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
     group bluetooth diag system wakelock
     disabled
 
-service netmgrd /system/vendor/bin/netmgrd
+service netmgrd /vendor/bin/netmgrd
     class main
     user root
     group root wifi wakelock radio inet
     writepid /dev/cpuset/system-background/tasks
 
-service ipacm /system/vendor/bin/ipacm
+service ipacm /vendor/bin/ipacm
     class main
     user radio
     group radio inet
     writepid /dev/cpuset/system-background/tasks
 
-service qti /system/vendor/bin/qti
+service qti /vendor/bin/qti
     class main
     user radio
     group radio oem_2950 usb
     writepid /dev/cpuset/system-background/tasks
 
-service sensors /system/vendor/bin/sensors.qcom
+service sensors /vendor/bin/sensors.qcom
     class core
     user system
     group system
@@ -427,7 +427,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
+service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
     user system
     group system inet net_admin wifi
@@ -435,7 +435,7 @@ service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
 on property:sys.powerctl=*
     stop cnss-daemon
 
-service loc_launcher /system/vendor/bin/loc_launcher
+service loc_launcher /vendor/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet diag wifi
@@ -456,20 +456,20 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock oem_2901
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-service qseecomd /system/vendor/bin/qseecomd
+service qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service time_daemon /system/vendor/bin/time_daemon
+service time_daemon /vendor/bin/time_daemon
     class main
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
 # Start camera server as daemon
-service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
+service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
@@ -490,7 +490,7 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     class core
     user root
     group root
@@ -501,13 +501,13 @@ on charger
     setprop persist.sys.usb.config charging
 
 # Start up peripheral manager
-service per_mgr /system/vendor/bin/pm-service
+service per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service per_proxy /system/vendor/bin/pm-proxy
+service per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system
@@ -520,7 +520,7 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service thermal-engine /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-normal.conf
+service thermal-engine /vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-normal.conf
    class main
    user root
    socket thermal-send-client stream 0666 system system
@@ -533,7 +533,7 @@ service thermal-engine /system/vendor/bin/thermal-engine -c /system/etc/thermal-
    socket thermal-recv-passive-client stream 0666 system system
    writepid /dev/cpuset/system-background/tasks
 
-service thermal-perf /system/vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-perf.conf
+service thermal-perf /vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-perf.conf
    class main
    user root
    socket thermal-send-client stream 0666 system system
@@ -561,19 +561,19 @@ on property:debug.zte.vr_mode=0
     stop thermal-perf
     start thermal-engine
 
-service adsprpcd /system/vendor/bin/adsprpcd
+service adsprpcd /vendor/bin/adsprpcd
     class main
     user media
     group media
 
-service imsqmidaemon /system/vendor/bin/imsqmidaemon
+service imsqmidaemon /vendor/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group radio log diag
     writepid /dev/cpuset/system-background/tasks
 
-service imsdatadaemon /system/vendor/bin/imsdatadaemon
+service imsdatadaemon /vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
@@ -584,13 +584,13 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
 on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
-service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
+service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
     class main
     user system
     group radio diag inet log
     disabled
 
-service vendor.imsrcsservice /system/vendor/bin/imsrcsd
+service vendor.imsrcsservice /vendor/bin/imsrcsd
     class main
     user system
     group radio diag inet log
@@ -601,7 +601,7 @@ on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
     start vendor.imsrcsservice
 
-service ppd /system/vendor/bin/mm-pp-dpps
+service ppd /vendor/bin/mm-pp-dpps
     class hal
     user system
     group system graphics
@@ -611,7 +611,7 @@ on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1
     start hwcomposer-2-1
 
-service energy-awareness /system/vendor/bin/energy-awareness
+service energy-awareness /vendor/bin/energy-awareness
     class main
     user root
     group system
@@ -620,12 +620,12 @@ service energy-awareness /system/vendor/bin/energy-awareness
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
 
-service hvdcp_opti /system/vendor/bin/hvdcp_opti
+service hvdcp_opti /vendor/bin/hvdcp_opti
     class main
     user root
     group system wakelock
 
-service gx_fpd /system/vendor/bin/gx_fpd
+service gx_fpd /vendor/bin/gx_fpd
     class late_start
     user root
     group system
