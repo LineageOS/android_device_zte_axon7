@@ -390,6 +390,7 @@ PRODUCT_PACKAGES += \
 
 # VNDK
 PRODUCT_PACKAGES += \
+    libicuuc.vendor \
     libstdc++.vendor \
     vndk_package
 
