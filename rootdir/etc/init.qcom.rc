@@ -520,7 +520,7 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service thermal-engine /vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-normal.conf
+service thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-8996-normal.conf
    class main
    user root
    socket thermal-send-client stream 0666 system system
@@ -533,7 +533,7 @@ service thermal-engine /vendor/bin/thermal-engine -c /system/etc/thermal-engine-
    socket thermal-recv-passive-client stream 0666 system system
    writepid /dev/cpuset/system-background/tasks
 
-service thermal-perf /vendor/bin/thermal-engine -c /system/etc/thermal-engine-8996-perf.conf
+service thermal-perf /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-8996-perf.conf
    class main
    user root
    socket thermal-send-client stream 0666 system system
