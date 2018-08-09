@@ -388,6 +388,12 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
+# Thermal
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf \
+    $(LOCAL_PATH)/configs/thermal-engine-8996-normal.conf:system/etc/thermal-engine-8996-normal.conf \
+    $(LOCAL_PATH)/configs/thermal-engine-8996-perf.conf:$system/etc/thermal-engine-8996-perf.conf
+
 # VNDK
 PRODUCT_PACKAGES += \
     libicuuc.vendor \

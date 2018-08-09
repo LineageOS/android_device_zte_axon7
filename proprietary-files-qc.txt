@@ -497,10 +497,6 @@ vendor/lib/libsensor_reg.so
 vendor/lib/sensors.ssc.so
 
 # Thermal
-# thermal configs - from - axon7 - B32
-etc/thermal-engine-8996-normal.conf|138bae6c8b6384ce35b49d789788fe440d7d7322
-etc/thermal-engine-8996-perf.conf|16a680b3e1ab9545d65317a9990f67418d053527
-etc/thermal-engine.conf
 vendor/bin/thermal-engine
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
