@@ -28,6 +28,8 @@
  */
 
 #include <stdlib.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
 
 #include <android-base/file.h>
 #include <android-base/properties.h>
@@ -40,6 +42,23 @@ using android::base::GetProperty;
 using android::base::ReadFileToString;
 using android::base::Trim;
 using android::init::property_set;
+
+void property_override(char const prop[], char const value[]) {
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
+void property_override_dual(char const system_prop[], char const vendor_prop[],
+    char const value[])
+{
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
 
 static void init_alarm_boot_properties()
 {
@@ -78,4 +97,10 @@ static void init_alarm_boot_properties()
 void vendor_load_properties()
 {
     init_alarm_boot_properties();
+
+    property_override("ro.build.description", "P996A01_O-user 8.0.0 OPR1.170623.032 474 release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "ZTE/P996A01_O/ailsa_ii:8.0.0/OPR1.170623.032/20180718.100630:user/release-keys");
+    property_override_dual("ro.product.name", "ro.vendor.product.name", "P996A01_O");
+    property_override_dual("ro.product.device", "ro.vendor.product.device", "ailsa_ii");
+
 }
