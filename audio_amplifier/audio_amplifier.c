@@ -45,9 +45,11 @@ typedef struct tfa9890_state {
     int streams;
     int in_call;
     int device;
+    int in_device;
     int mode;
     int reversed;
     int enabled;
+    int enableds[SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET];
     int calibration_done;
 } tfa9890_state_t;
 
@@ -115,11 +117,11 @@ void tfa9890_set_amp_state(void *device, tfa9890_state_t rstate, int reinitializ
         tfa9890->set_device(rstate.device);
         reverse(tfa9890, tfa9890->state.reversed);
     }
-    if(rstate.enabled && (rstate.streams || rstate.in_call)) {
+    if(rstate.enableds[rstate.in_device] && (rstate.streams || rstate.in_call)) {
         int again = 1;
         while (again && tfa9890->ex_speaker_on(rstate.mode)){
             pthread_mutex_unlock(&tfa9890->amp_update);
-            usleep(5*1000);
+            usleep((5 + again)*1000);
             ALOGD("%s: Failed turning amp on %d times", __func__, again);
             again = (sem_trywait(&tfa9890->trigger_update) == -1) ? again + 1 : 0;
             pthread_mutex_lock(&tfa9890->amp_update);
@@ -143,7 +145,7 @@ void tfa9890_set_amp_state_legacy(void *device, tfa9890_state_t rstate, int rein
         tfa9890->set_device(rstate.device);
         reverse(tfa9890, tfa9890->state.reversed);
     }
-    if(rstate.enabled && (rstate.streams || rstate.in_call)) {
+    if(rstate.enableds[rstate.in_device] && (rstate.streams || rstate.in_call)) {
         int again = 1;
         if (rstate.in_call) {
             // Wait for a clock to become available from the modem
@@ -186,7 +188,7 @@ void tfa9890_set_amp_state_legacy(void *device, tfa9890_state_t rstate, int rein
 // The 'original' amp hal method that kinda worked.
 void tfa9890_set_amp_state_bypass(void *device, tfa9890_state_t rstate, __attribute__((unused)) int reinit) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
-    if (rstate.enabled) {
+    if (rstate.enableds[rstate.in_device]) {
         if (rstate.in_call) {
             tfa9890->stereo_speaker_needed(1, 0);
         } else {
@@ -231,7 +233,7 @@ void tfa9890_switch_amp_control_mode(void *device) {
 
 void *tfa9890_update_amp(void *device) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
-    tfa9890_state_t rstate = {0,0,0,0,0,0,0,};
+    tfa9890_state_t rstate = {0,0,0,0,0,0,0,{0},0,};
     bool reinitialize = true;
     do {
         sem_wait(&tfa9890->trigger_update);
@@ -248,6 +250,10 @@ void *tfa9890_update_amp(void *device) {
         }
         rstate.device = tfa9890->state.device;
         rstate.enabled = tfa9890->state.enabled;
+        for (int i = 0; i < SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET; i++) {
+            rstate.enableds[i] = tfa9890->state.enableds[i];
+        }
+        rstate.in_device = tfa9890->state.in_device;
         rstate.streams = tfa9890->state.streams;
         rstate.in_call = tfa9890->state.in_call;
         rstate.mode = tfa9890->state.mode;
@@ -257,7 +263,7 @@ void *tfa9890_update_amp(void *device) {
         rstate.reversed = tfa9890->state.reversed;
 
         tfa9890->set_amp_state(device, rstate, reinitialize);
-        if (!rstate.enabled) {
+        if (!rstate.enableds[rstate.in_device]) {
             tfa9890_switch_amp_control_mode(tfa9890);
         }
         reinitialize = false;
@@ -325,6 +331,23 @@ const int device_to_amp_device_default[] = {
     [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_HEADSET] = MONO_SPEAKER,
     [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET] = MONO_SPEAKER,
 };
+const int device_to_call[] = {
+    [SND_DEVICE_OUT_HANDSET]                        = true,
+    [SND_DEVICE_OUT_VOICE_HANDSET]                  = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER]                  = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_VBAT]             = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2]                = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_VBAT]           = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED]        = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED]      = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED_VBAT]   = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED_VBAT] = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_WSA]              = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_2_WSA]            = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_HEADPHONES] = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_HEADSET] = true,
+    [SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET] = true,
+};
 #define LAST SND_DEVICE_OUT_VOICE_SPEAKER_AND_VOICE_ANC_FB_HEADSET
 
 static void tfa9890_populate_device_map(tfa9890_device_t *tfa9890) {
@@ -387,6 +410,7 @@ static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t 
     }
 
     tfa9890->state.device = out_device - 1;
+    tfa9890->state.in_device = devices;
     tfa9890->state.reversed = (devices == SND_DEVICE_OUT_SPEAKER_REVERSE);
     sem_post(&tfa9890->trigger_update);
 
@@ -396,25 +420,20 @@ static int tfa9890_set_output_devices(struct amplifier_device *device, uint32_t 
 
 static int tfa9890_enable_output_devices(struct amplifier_device *device, uint32_t devices, bool enable) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
+    int out_device = tfa9890->device_to_amp_device[devices];
+    if (out_device == DEFAULT)
+        return 0;
+
     pthread_mutex_lock(&tfa9890->amp_update);
     ALOGD("%s: %u %d\n", __func__, devices, enable);
-    switch (devices) {
-        default:
-            ALOGE("%s: Unhandled audio device: %d\n", __func__, devices);
-        case SND_DEVICE_OUT_SPEAKER:
-        case SND_DEVICE_OUT_SPEAKER_REVERSE:
-            tfa9890->state.in_call = 0;
-            break;
-        case SND_DEVICE_OUT_VOICE_SPEAKER:
-            tfa9890->state.in_call = enable;
-            break;
-        case SND_DEVICE_OUT_HANDSET:
-        case SND_DEVICE_OUT_VOICE_HANDSET:
-            tfa9890->state.in_call = enable;
-            break;
+    if (device_to_call[devices]) {
+        tfa9890->state.in_call = enable;
+    } else {
+        tfa9890->state.in_call = false;
     }
-    // 'enabled' should probably be tracked based on devices
+    tfa9890->state.enableds[devices] = enable;
     tfa9890->state.enabled = enable;
+
     sem_post(&tfa9890->trigger_update);
     pthread_mutex_unlock(&tfa9890->amp_update);
     return 0;
