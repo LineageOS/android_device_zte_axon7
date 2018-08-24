@@ -333,7 +333,3 @@ vendor/etc/init/android.hardware.media.omx@1.0-service.rc
 
 # Sensors
 vendor/etc/sensors/sensor_def_qcomdev.conf
-
-# VR - axon7 - B32
-lib64/hw/vr.default.so|02bacbcce3501df81cbc9e1d1eb7e1c6314dd26b
-lib/hw/vr.default.so|c17c6814b921f212e2dfbb2045a4fe3a9ced5493

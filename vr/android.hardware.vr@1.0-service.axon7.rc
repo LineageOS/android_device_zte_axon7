@@ -1,0 +1,19 @@
+service vr-axon7-1-0 /vendor/bin/hw/android.hardware.vr@1.0-service.axon7
+    class hal
+    user system
+    group system
+
+#smart cpu enable
+on property:sys.qcom.thermalcfg=/vendor/etc/thermal-engine-vr.conf
+    write /d/spmi/spmi-0/address 0x00000843
+    write /d/spmi/spmi-0/data  0x0
+
+#smart cpu disable
+on property:sys.qcom.thermalcfg=/vendor/etc/thermal-engine.conf
+    write /d/spmi/spmi-0/address 0x00000843
+    write /d/spmi/spmi-0/data  0x80
+
+# reset thermal-engine when framework died and thermal-engine is in VR mode
+on property:init.svc.zygote=restarting && property:sys.qcom.thermalcfg=/vendor/etc/thermal-engine-vr.conf
+   setprop sys.qcom.thermalcfg "/vendor/etc/thermal-engine.conf"
+   restart thermal-engine

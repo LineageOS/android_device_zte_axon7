@@ -175,9 +175,6 @@
          Must be in the range specified by minimum and maximum. -->
     <integer name="config_screenBrightnessSettingDefault">98</integer>
 
-    <!-- Default screen brightness for VR setting. Default value: 0x56 => 86. -->
-    <integer name="config_screenBrightnessForVrSettingDefault">86</integer>
-
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
     <integer name="config_screenBrightnessSettingMinimum">4</integer>

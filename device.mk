@@ -390,9 +390,8 @@ PRODUCT_PACKAGES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf \
-    $(LOCAL_PATH)/configs/thermal-engine-8996-normal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-8996-normal.conf \
-    $(LOCAL_PATH)/configs/thermal-engine-8996-perf.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-8996-perf.conf
+    $(LOCAL_PATH)/configs/thermal-engine-8996-normal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf \
+    $(LOCAL_PATH)/configs/thermal-engine-8996-perf.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-vr.conf
 
 # VNDK
 PRODUCT_PACKAGES += \
@@ -403,6 +402,10 @@ PRODUCT_PACKAGES += \
 # Vibrator
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-service.lineage
+
+# VR
+PRODUCT_PACKAGES += \
+    android.hardware.vr@1.0-service.axon7
 
 # Wifi
 PRODUCT_PACKAGES += \

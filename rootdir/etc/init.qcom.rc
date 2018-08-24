@@ -520,7 +520,7 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-8996-normal.conf
+service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class main
    user root
    socket thermal-send-client stream 0666 system system
@@ -532,34 +532,6 @@ service thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    writepid /dev/cpuset/system-background/tasks
-
-service thermal-perf /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine-8996-perf.conf
-   class main
-   user root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   socket thermal-send-rule stream 0660 system system
-   group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   disabled
-   writepid /dev/cpuset/system-background/tasks
-
- #smart cpu enable
-on property:debug.zte.vr_mode=1
-    write /d/spmi/spmi-0/address 0x00000843
-    write /d/spmi/spmi-0/data  0x0
-    stop thermal-engine
-    start thermal-perf
-
- #smart cpu disable
-on property:debug.zte.vr_mode=0
-    write /d/spmi/spmi-0/address 0x00000843
-    write /d/spmi/spmi-0/data  0x80
-    stop thermal-perf
-    start thermal-engine
 
 service adsprpcd /vendor/bin/adsprpcd
     class main
