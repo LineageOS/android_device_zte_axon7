@@ -152,9 +152,9 @@ etc/permissions/com.qualcomm.location.xml|e837966b6a1a63430ac7ff648e84b0312cd3a4
 etc/permissions/izat.xt.srv.xml|a0f460056f27b5495a4d6e959eecf0e429c42a57
 framework/com.qti.location.sdk.jar|f2e9f1d49201e1bad83008445fdafe9541e9b2bd
 framework/izat.xt.srv.jar|e10f1baf6ae0f70c4a529e5711559cebbc3644c9
-lib64/liblocationservice_jni.so|84fddd9ace2be661d26cad1864281c386b709cb2
-lib64/libxt_native.so|900aa51d3d2f731b906a321e25c259fbab656f1c
-lib64/vendor.qti.gnss@1.0.so|716a812a9f4cdb45c57eb0a6fabb17624a91d553
+lib64/liblocationservice_jni.so|8572372679605c7653407bbd3fbeff6c4a8fc370
+lib64/libxt_native.so|d7a50e7daf0b5f3948c33ab53fd0eb4cab761f94
+lib64/vendor.qti.gnss@1.0.so|88ab96630e0ff06a2456feb8abf2a498f510cc48
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk|397314f080f553489440c63da44d01f482e6b761
 vendor/bin/hw/vendor.qti.gnss@1.0-service|bdf23fe2af07c2afb74721023431446104fd828d
 vendor/bin/loc_launcher|0675f4524d2c9e94f7e978b5e00734c0835ddf15
@@ -164,7 +164,7 @@ vendor/bin/xtra-daemon|059bade8d40396f05fd414b3778cbbeabc5d26e1
 vendor/etc/cacert_location.pem|0789bf799c7e45d352a83e2f79ddb0cea86db85b
 vendor/etc/init/vendor.qti.gnss@1.0-service.rc|98655e2adc2158a052b0ecf06b065535f0a2aac7
 vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
-vendor/lib64/hw/vendor.qti.gnss@1.0-impl.so|3a66e268286ebfad3f1e35f54b041d6b3d2ed191
+vendor/lib64/hw/vendor.qti.gnss@1.0-impl.so|2ce4cbeae7e20e79e989997fd4fba874cde29f46
 vendor/lib64/libalarmservice_jni.so|2791b868e4f145e05d3405b99e40692e87d0a3c6
 vendor/lib64/libdataitems.so|e175d6254907cde80b1352da2874d88c3607d77f
 vendor/lib64/libdrplugin_client.so|bcd1266f5775888824a925c65020cac65b4124df
@@ -179,7 +179,7 @@ vendor/lib64/liblbs_core.so|3f55ad81c6eaa76c9a8cdc436808692e3d12fe44
 -vendor/lib64/libloc_api_v02.so|548d3280b4b340803cc7cdbd794dfcffd65012bf
 vendor/lib64/libloc_ds_api.so|88bd00eef7b3e052e2725ce8883a8da0d95028f0
 vendor/lib64/libloc_externalDr.so|9165f1621d9d34034c4921c96bf45849429f32fd
-vendor/lib64/liblocationservice_glue.so|9f56f0e9089f0eadc29036c2cffd5a06852f4cb0
+vendor/lib64/liblocationservice_glue.so|8d892cf3ef7834b21cfd48cb87d3e0af6575d75d
 vendor/lib64/liblocationservice.so|13eae193a44f991daf2c54eb2311901bd32a6d8b
 vendor/lib64/liblowi_client.so|b6a6e3315ff02115fba6a3c7c023ef94530cf272
 vendor/lib64/liblowi_wifihal.so|831095ee8091008db81af836cafc8a90b210d4bc
@@ -187,7 +187,7 @@ vendor/lib64/libquipc_os_api.so|12ffd3e3a2d566d68c1ee45b0879597822df7971
 vendor/lib64/libulp2.so|1a92023fbe40d5042239f3efbdcd82f3299e8b17
 vendor/lib64/libxtadapter.so|7705b2c895dfc91f459f9e69860bc312c16b4216
 vendor/lib64/libxtwifi_ulp_adaptor.so|d2e768c4d5f44a101b12ef668f8b7393a42541ce
-vendor/lib64/vendor.qti.gnss@1.0_vendor.so|249c76153f8de014bf2dd2ab623ee3d87741fbc8
+vendor/lib64/vendor.qti.gnss@1.0_vendor.so|07fffa6ef6d22981cd37d2067e9e8f20490213be
 
 # Graphics - from cheeseburger - OPR6.170623.013
 vendor/lib/egl/eglSubDriverAndroid.so|df793571f098118d17791ba41ef6665622537420
@@ -319,26 +319,26 @@ vendor/lib/libperipheral_client.so
 etc/permissions/com.qti.snapdragon.sdk.display.xml|0bff16d681e75f203c1e11ff33afba82490e49b3
 framework/com.qti.snapdragon.sdk.display.jar|cc367fe3c3525bc580f0d3ab41e43190dcee60dc
 lib/libsd_sdk_display.so|35f948fad2633f8cf2c004655e1c24fa4a2b4eaf
-lib/vendor.display.color@1.0.so|3ace5cf91dd9686a2250dfb7c50f883f81f38b74
-lib/vendor.display.postproc@1.0.so|d6069ae2c43121117acf976c79b1ce59735cfe3b
-lib/vendor.qti.hardware.qdutils_disp@1.0.so|a12b9e484ce9f7ab590b3fee91d320cba903badc
+lib/vendor.display.color@1.0.so|e07031564f47349395afa92336b96898c69878d2
+lib/vendor.display.postproc@1.0.so|387ca21bd25d99aa8e840c9c237a8862d02dda5c
+lib/vendor.qti.hardware.qdutils_disp@1.0.so|7229e2e8779e4b2cace48cef6f2ab52c75e907bc
 lib64/libsd_sdk_display.so|8b79762452896eaa9ff97b7ae72646bfcf06423d
-lib64/vendor.display.color@1.0.so|ecd9bfd4e7f416218c172481a7192328f5c2a48f
-lib64/vendor.display.postproc@1.0.so|67e865d2c463d36c8eda8528ef4f36462b973eef
-lib64/vendor.qti.hardware.qdutils_disp@1.0.so|182817148907df624dcea5af27fd8d8256e02442
-vendor/bin/hw/vendor.display.color@1.0-service|d425553ff762338a67e3d8b6b98db46357099657
+lib64/vendor.display.color@1.0.so|f229cf1bbaf11a93a7cc694ea26562b75f7850f4
+lib64/vendor.display.postproc@1.0.so|b20e70a7559d8b4b1ef919d1371656418640848b
+lib64/vendor.qti.hardware.qdutils_disp@1.0.so|37724c5aeeae81196aab06e38fd86aa94f9a7b34
+vendor/bin/hw/vendor.display.color@1.0-service|2f14bfbe6aeee2a2823757ead3cd1e14008812d5
 vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti|90992c4c9a036a1964f6b90acd16fb3e5bb050ad
 vendor/bin/mm-pp-dpps|25195ef9f617154420c9ce5d57499e671c4e6d6a
 vendor/etc/init/vendor.display.color@1.0-service.rc|5ad673f879b3685a0e79b5633437e5499cb94f48
 vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc|69d9cbc54f8ac0a0fb010f92bfa7de5981d643cf
 vendor/lib64/libdisp-aba.so|fc7f1b0104c05fb8b9bec65778542f3a79fec035
-vendor/lib64/vendor.display.color@1.0_vendor.so|25c717f3004a5932dcbb2f55d5165c010f7eac1a
-vendor/lib64/vendor.display.postproc@1.0_vendor.so|503ef07fcfbbfcd8db096de79dfd822c8ada5e9b
-vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|d101774878c0374ad805d964c3d00c71b44456d9
+vendor/lib64/vendor.display.color@1.0_vendor.so|6d175a042347cf16edf50e7a5c86617e363560c6
+vendor/lib64/vendor.display.postproc@1.0_vendor.so|91ca586d8ffac3e6ee9fbc732f8432eddd9bec75
+vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|e6d544ab1cdfe23606b61f7da288edbdb3dddf28
 vendor/lib/libdisp-aba.so|1e3115378afe16e1150f5c9750c6c63dfff7de94
-vendor/lib/vendor.display.color@1.0_vendor.so|7ca706d322a38084ea2e6b103efe1acd33183400
-vendor/lib/vendor.display.postproc@1.0_vendor.so|a710a9d7f93892961ff71420fe222add0bfcf57e
-vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|04bf21220673630ebaa4c8e7a84adbcdcf08f0dc
+vendor/lib/vendor.display.color@1.0_vendor.so|a89b370886206972118465d3499b724abdbfe868
+vendor/lib/vendor.display.postproc@1.0_vendor.so|ff9ae0654b42fed39d869866edd8368e721ba2af
+vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|12baa8987e35928f46d17c5f6fd0d3b060bf6625
 
 # QMI
 etc/permissions/qti_libpermissions.xml:vendor/etc/permissions/qti_libpermissions.xml
