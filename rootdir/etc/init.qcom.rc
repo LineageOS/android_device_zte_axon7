@@ -475,30 +475,12 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
     group camera system inet input graphics
     writepid /dev/cpuset/system-background/tasks
 
-service charger /charger
-    class charger
-    group system graphics
-    seclabel u:r:charger:s0
-
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
-
 service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     class core
     user root
     group root
     disabled
     writepid /dev/cpuset/system-background/tasks
-
-on charger
-    setprop persist.sys.usb.config charging
 
 # Start up peripheral manager
 service per_mgr /vendor/bin/pm-service
@@ -611,19 +593,8 @@ on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1
     start hwcomposer-2-1
 
-service energy-awareness /vendor/bin/energy-awareness
-    class main
-    user root
-    group system
-    oneshot
-
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
-
-service hvdcp_opti /vendor/bin/hvdcp_opti
-    class main
-    user root
-    group system wakelock
 
 service gx_fpd /vendor/bin/gx_fpd
     class late_start
