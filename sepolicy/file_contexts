@@ -13,9 +13,6 @@
 /(vendor|system/vendor)/usr/idc(/.*)?                         u:object_r:idc_file:s0
 /(vendor|system/vendor)/usr/keylayout(/.*)?                   u:object_r:keylayout_file:s0
 
-# WiFi MAC
-/persist/wifimac(2)?.dat                    u:object_r:radio_data_file:s0
-
 # Sys files
 /sys/devices/soc/75b7000\.i2c/i2c-9/9-[0-9a-f]+/leds(/.*)?    u:object_r:sysfs_leds:s0
 /sys/devices/soc/leds-qpnp-25/leds(/.*)?                      u:object_r:sysfs_leds:s0
