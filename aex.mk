@@ -22,11 +22,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from ailsa_ii device
 $(call inherit-product, device/zte/axon7/device.mk)
 
-# Inherit some common Aicp stuff.
-$(call inherit-product, vendor/aicp/config/common_full_phone.mk)
+# Inherit some common Aex stuff.
+$(call inherit-product, vendor/aex/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := aicp_axon7
+PRODUCT_NAME := aex_axon7
 PRODUCT_DEVICE := axon7
 PRODUCT_BRAND := ZTE
 PRODUCT_MODEL := ZTE A2017U
