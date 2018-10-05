@@ -73,7 +73,7 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/zte/msm8996
-TARGET_KERNEL_CONFIG := lineageos_axon7_defconfig
+TARGET_KERNEL_CONFIG := eas_axon7_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
 # Qualcomm support
@@ -132,11 +132,6 @@ TARGET_TAP_TO_WAKE_NODE := "/proc/touchscreen/wake_gesture"
 
 # CNE and DPM
 BOARD_USES_QCNE := true
-
-# CPU
-ENABLE_CPUSETS := true
-ENABLE_SCHEDBOOST := true
-TARGET_USES_INTERACTION_BOOST := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
@@ -206,7 +201,6 @@ TARGET_USES_MKE2FS := true
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 TARGET_HAS_NO_WIFI_STATS := true
-TARGET_USES_INTERACTION_BOOST := true
 
 # RIL
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
