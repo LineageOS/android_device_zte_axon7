@@ -1,0 +1,4 @@
+# communicate with perfd
+allow hal_power perfd:unix_stream_socket connectto;
+allow hal_power perfd_data_file:dir search;
+allow hal_power perfd_data_file:sock_file write;

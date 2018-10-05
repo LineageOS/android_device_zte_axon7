@@ -13,6 +13,9 @@
 /(vendor|system/vendor)/usr/idc(/.*)?                         u:object_r:idc_file:s0
 /(vendor|system/vendor)/usr/keylayout(/.*)?                   u:object_r:keylayout_file:s0
 
+# WiFi MAC
+/persist/wifimac(2)?.dat                    u:object_r:radio_data_file:s0
+
 # Sys files
 /sys/devices/soc/75b7000\.i2c/i2c-9/9-[0-9a-f]+/leds(/.*)?    u:object_r:sysfs_leds:s0
 /sys/devices/soc/leds-qpnp-25/leds(/.*)?                      u:object_r:sysfs_leds:s0
@@ -22,3 +25,12 @@
 
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.zte_8996    u:object_r:hal_light_default_exec:s0
+
+# CPU tunable for EAS
+/sys/devices/system/cpu/cpu[0-3]/cpufreq/schedutil(/.*)?            u:object_r:sysfs_devices_system_cpu:s0
+
+# perfd
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.0-service.marlin         u:object_r:hal_power_default_exec:s0
+/(vendor|system/vendor)/bin/perfd                                   u:object_r:perfd_exec:s0
+/data/misc/perfd(/.*)?                                              u:object_r:perfd_data_file:s0
+/data/system/perfd(/.*)?                                            u:object_r:perfd_data_file:s0
