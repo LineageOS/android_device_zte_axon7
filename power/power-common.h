@@ -42,6 +42,8 @@
 #define HINT_HANDLED (0)
 #define HINT_NONE (-1)
 
+#define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
+
 enum CPU_GOV_CHECK {
     CPU0 = 0,
     CPU1 = 1,

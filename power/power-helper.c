@@ -53,32 +53,34 @@
 #define USINSEC 1000000L
 #define NSINUS 1000L
 
-#ifndef RPM_STAT
-#define RPM_STAT "/d/rpm_stats"
+#ifndef RPM_SYSTEM_STAT
+#define RPM_SYSTEM_STAT "/d/system_stats"
 #endif
 
-#ifndef RPM_MASTER_STAT
-#define RPM_MASTER_STAT "/d/rpm_master_stats"
-#endif
+#define LINE_SIZE 128
 
-static const char *rpm_param_names[] = {
-    "vlow_count",
-    "accumulated_vlow_time",
-    "vmin_count",
-    "accumulated_vmin_time"
+const char *rpm_stat_params[MAX_RPM_PARAMS] = {
+    "count",
+    "actual last sleep(msec)",
 };
 
-static const char *rpm_master_param_names[] = {
-    "xo_accumulated_duration",
-    "xo_count",
-    "xo_accumulated_duration",
-    "xo_count",
-    "xo_accumulated_duration",
-    "xo_count",
-    "xo_accumulated_duration",
-    "xo_count"
+const char *master_stat_params[MAX_RPM_PARAMS] = {
+    "Accumulated XO duration",
+    "XO Count",
 };
 
+struct stat_pair rpm_stat_map[] = {
+    { RPM_MODE_XO,   "RPM Mode:vlow", rpm_stat_params, ARRAY_SIZE(rpm_stat_params) },
+    { RPM_MODE_VMIN, "RPM Mode:vmin", rpm_stat_params, ARRAY_SIZE(rpm_stat_params) },
+    { VOTER_APSS,    "APSS",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_MPSS,    "MPSS",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_ADSP,    "ADSP",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_SLPI,    "SLPI",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_PRONTO,  "PRONTO",  master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_TZ,      "TZ",      master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_LPASS,   "LPASS",   master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_SPSS,    "SPSS",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+};
 
 static int saved_dcvs_cpu0_slack_max = -1;
 static int saved_dcvs_cpu0_slack_min = -1;
@@ -659,72 +661,87 @@ void power_set_interactive(int on)
 }
 
 
-static int extract_stats(uint64_t *list, char *file, const char**param_names,
-                         unsigned int num_parameters, int isHex) {
-    FILE *fp;
-    ssize_t read;
-    size_t len;
-    size_t index = 0;
+static int parse_stats(const char **params, size_t params_size,
+                       uint64_t *list, FILE *fp) {
+    ssize_t nread;
+    size_t len = LINE_SIZE;
     char *line;
-    int ret;
+    size_t params_read = 0;
+    size_t i;
 
-    fp = fopen(file, "r");
-    if (fp == NULL) {
-        ret = -errno;
-        ALOGE("%s: failed to open: %s Error = %s", __func__, file, strerror(errno));
-        return ret;
+    line = malloc(len);
+    if (!line) {
+        ALOGE("%s: no memory to hold line", __func__);
+        return -ENOMEM;
     }
 
-    for (line = NULL, len = 0;
-         ((read = getline(&line, &len, fp) != -1) && (index < num_parameters));
-         free(line), line = NULL, len = 0) {
-        uint64_t value;
-        char* offset;
-
-        size_t begin = strspn(line, " \t");
-        if (strncmp(line + begin, param_names[index], strlen(param_names[index]))) {
+    while ((params_read < params_size) &&
+        (nread = getline(&line, &len, fp) > 0)) {
+        char *key = line + strspn(line, " \t");
+        char *value = strchr(key, ':');
+        if (!value || (value > (line + len)))
             continue;
-        }
+        *value++ = '\0';
 
-        offset = memchr(line, ':', len);
-        if (!offset) {
-            continue;
+        for (i = 0; i < params_size; i++) {
+            if (!strcmp(key, params[i])) {
+                list[i] = strtoull(value, NULL, 0);
+                params_read++;
+                break;
+            }
         }
-
-        if (isHex) {
-            sscanf(offset, ":%" SCNx64, &value);
-        } else {
-            sscanf(offset, ":%" SCNu64, &value);
-        }
-        list[index] = value;
-        index++;
     }
-
     free(line);
-    fclose(fp);
 
     return 0;
 }
 
+static int extract_stats(uint64_t *list, char *file,
+                         struct stat_pair *map, size_t map_size) {
+    FILE *fp;
+    ssize_t read;
+    size_t len = LINE_SIZE;
+    char *line;
+    size_t i, stats_read = 0;
+    int ret = 0;
+
+    fp = fopen(file, "re");
+    if (fp == NULL) {
+        ALOGE("%s: failed to open: %s Error = %s", __func__, file, strerror(errno));
+        return -errno;
+    }
+
+    line = malloc(len);
+    if (!line) {
+        ALOGE("%s: no memory to hold line", __func__);
+        fclose(fp);
+        return -ENOMEM;
+    }
+
+    while ((stats_read < map_size) && (read = getline(&line, &len, fp) != -1)) {
+        size_t begin = strspn(line, " \t");
+
+        for (i = 0; i < map_size; i++) {
+            if (!strncmp(line + begin, map[i].label, strlen(map[i].label))) {
+                stats_read++;
+                break;
+            }
+        }
+
+        if (i == map_size)
+            continue;
+
+        ret = parse_stats(map[i].parameters, map[i].num_parameters,
+                          &list[map[i].stat * MAX_RPM_PARAMS], fp);
+        if (ret < 0)
+            break;
+    }
+    free(line);
+    fclose(fp);
+
+    return ret;
+}
 
 int extract_platform_stats(uint64_t *list) {
-
-    int ret;
-
-    //Data is located in two files
-
-    ret = extract_stats(list, RPM_STAT, rpm_param_names, RPM_PARAM_COUNT, false);
-    if (ret) {
-        for (size_t i=0; i < RPM_PARAM_COUNT; i++)
-            list[i] = 0;
-    }
-
-    ret = extract_stats(list + RPM_PARAM_COUNT, RPM_MASTER_STAT,
-                        rpm_master_param_names, PLATFORM_PARAM_COUNT - RPM_PARAM_COUNT, true);
-    if (ret) {
-        for (size_t i=RPM_PARAM_COUNT; i < PLATFORM_PARAM_COUNT; i++)
-        list[i] = 0;
-    }
-
-    return 0;
+    return extract_stats(list, RPM_SYSTEM_STAT, rpm_stat_map, ARRAY_SIZE(rpm_stat_map));
 }

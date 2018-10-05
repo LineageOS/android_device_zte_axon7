@@ -321,7 +321,7 @@ PRODUCT_PACKAGES += \
 
 # Power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.marlin
+    android.hardware.power@1.0-service.axon7
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml

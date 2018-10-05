@@ -22,8 +22,8 @@ LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_OWNER := qcom
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_MODULE := android.hardware.power@1.0-service.marlin
-LOCAL_INIT_RC := android.hardware.power@1.0-service.marlin.rc
+LOCAL_MODULE := android.hardware.power@1.0-service.axon7
+LOCAL_INIT_RC := android.hardware.power@1.0-service.axon7.rc
 LOCAL_SRC_FILES := service.cpp Power.cpp power-helper.c metadata-parser.c utils.c list.c hint-data.c
 
 # Include target-specific files.
