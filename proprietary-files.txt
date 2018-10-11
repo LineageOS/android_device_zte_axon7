@@ -328,9 +328,6 @@ vendor/lib64/libfpservice.so
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
 
-# OMX service
-vendor/etc/init/android.hardware.media.omx@1.0-service.rc
-
 # Sensors
 vendor/etc/sensors/sensor_def_qcomdev.conf
 
