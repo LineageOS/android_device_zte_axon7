@@ -447,6 +447,8 @@
     <ctl name="VoLTE_Tx Mixer AFE_PCM_TX_VoLTE" value="0" />
     <!-- VoLTE end-->
 
+    <!-- Voice-call status -->
+    <ctl name="Voice Call Status" value="Off" />
     <!-- Multimode Voice1 -->
     <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode1" value="0" />
     <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="0" />
@@ -1717,6 +1719,7 @@
     <path name="voicemmode1-call">
         <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode1" value="1" />
         <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1" />
+        <ctl name="Voice Call Status" value="On" />
     </path>
 
     <path name="voicemmode1-call hdmi">
@@ -1757,6 +1760,7 @@
     <path name="voicemmode2-call">
         <ctl name="SLIM_0_RX_Voice Mixer VoiceMMode2" value="1" />
         <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1" />
+        <ctl name="Voice Call Status" value="On" />
     </path>
 
     <path name="voicemmode2-call hdmi">
