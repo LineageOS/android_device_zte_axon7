@@ -3,3 +3,8 @@ type gx_fpd_data_file, data_file_type, file_type;
 type idc_file, file_type, vendor_file_type;
 type keylayout_file, file_type, vendor_file_type;
 type proc_touchscreen, sysfs_type, fs_type;
+
+type perfd_data_file, file_type, data_file_type;
+type proc_irq, fs_type;
+type proc_kernel_sched, fs_type;
+type sysfs_power_management, sysfs_type, fs_type;

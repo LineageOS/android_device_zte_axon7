@@ -31,6 +31,9 @@ import /vendor/etc/init/hw/init.qcom.usb.rc
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+    chmod 0644 /sys/kernel/debug/rpm_stats
+    chmod 0644 /sys/kernel/debug/rpm_master_stats
+    chmod 0644 /sys/kernel/debug/system_stats
     chown root system /dev/kmsg
     chmod 0620 /dev/kmsg
 
@@ -155,9 +158,12 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
     # Create PERFD deamon related dirs
-    mkdir /data/vendor/perfd 0770 root system
-    chmod 2770 /data/vendor/perfd
-    rm /data/vendor/perfd/default_values
+    setprop ro.min_freq_0 384000
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    rm /data/system/perfd/default_values
+    chmod 2770 /data/system/perfd
 
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
