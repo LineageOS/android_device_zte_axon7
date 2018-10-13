@@ -177,9 +177,15 @@ on init-cpus
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 307200
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif 0
 
-    # EAS: Switch to sched governor (no effect if not EAS)
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "sched"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "sched"
+    # if EAS is present, switch to schedutil governor (no effect if not EAS)
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "schedutil"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "schedutil"
+
+    # set schedutil adjustments
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 10000
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 250
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/down_rate_limit_us 10000
+    write /sys/devices/system/cpu/cpu2/cpufreq/schedutil/up_rate_limit_us 250
 
     # Re-enable thermal hotplug
     write /sys/module/msm_thermal/core_control/enabled 1
