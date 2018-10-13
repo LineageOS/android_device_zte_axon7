@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power@1.0-service.marlin"
+#define LOG_TAG "android.hardware.power@1.0-service.axon7"
 
 #include <android/log.h>
 #include <utils/Log.h>
@@ -26,6 +26,8 @@
 
 /* RPM runs at 19.2Mhz. Divide by 19200 for msec */
 #define RPM_CLK 19200
+
+extern struct stat_pair rpm_stat_map[];
 
 namespace android {
 namespace hardware {
@@ -67,7 +69,8 @@ Return<void> Power::setFeature(Feature /*feature*/, bool /*activate*/)  {
 Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_cb) {
 
     hidl_vec<PowerStatePlatformSleepState> states;
-    uint64_t stats[platform_param_id::PLATFORM_PARAM_COUNT] = {0};
+    uint64_t stats[MAX_PLATFORM_STATS * MAX_RPM_PARAMS] = {0};
+    uint64_t *values;
     struct PowerStatePlatformSleepState *state;
     int ret;
 
@@ -77,48 +80,32 @@ Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_c
         goto done;
     }
 
-    states.resize(platform_mode_id::RPM_MODE_COUNT);
+    states.resize(PLATFORM_SLEEP_MODES_COUNT);
 
     /* Update statistics for XO_shutdown */
-    state = &states[platform_mode_id::RPM_MODE_XO];
+    state = &states[RPM_MODE_XO];
     state->name = "XO_shutdown";
+    values = stats + (RPM_MODE_XO * MAX_RPM_PARAMS);
 
-    state->residencyInMsecSinceBoot = stats[platform_param_id::ACCUMULATED_VLOW_TIME];
-    state->totalTransitions = stats[platform_param_id::VLOW_COUNT];
+    state->residencyInMsecSinceBoot = values[1];
+    state->totalTransitions = values[0];
     state->supportedOnlyInSuspend = false;
     state->voters.resize(XO_VOTERS);
-
-    /* Update statistics for APSS voter */
-    state->voters[0].name = "APSS";
-    state->voters[0].totalTimeInMsecVotedForSinceBoot =
-        stats[platform_param_id::XO_ACCUMULATED_DURATION_APSS] / RPM_CLK;
-    state->voters[0].totalNumberOfTimesVotedSinceBoot = stats[platform_param_id::XO_COUNT_APSS];
-
-    /* Update statistics for MPSS voter */
-    state->voters[1].name = "MPSS";
-    state->voters[1].totalTimeInMsecVotedForSinceBoot =
-        stats[platform_param_id::XO_ACCUMULATED_DURATION_MPSS] / RPM_CLK;
-    state->voters[1].totalNumberOfTimesVotedSinceBoot = stats[platform_param_id::XO_COUNT_MPSS];
-
-    /* Update statistics for ADSP voter */
-    state->voters[2].name = "ADSP";
-    state->voters[2].totalTimeInMsecVotedForSinceBoot =
-        stats[platform_param_id::XO_ACCUMULATED_DURATION_ADSP] / RPM_CLK;
-    state->voters[2].totalNumberOfTimesVotedSinceBoot = stats[platform_param_id::XO_COUNT_ADSP];
-
-    /* Update statistics for SLPI voter */
-    state->voters[3].name = "SLPI";
-    state->voters[3].totalTimeInMsecVotedForSinceBoot =
-        stats[platform_param_id::XO_ACCUMULATED_DURATION_SLPI] / RPM_CLK;
-    state->voters[3].totalNumberOfTimesVotedSinceBoot = stats[platform_param_id::XO_COUNT_SLPI];
-
+    for(size_t i = 0; i < XO_VOTERS; i++) {
+        int voter = i + XO_VOTERS_START;
+        state->voters[i].name = rpm_stat_map[voter].label;
+        values = stats + (voter * MAX_RPM_PARAMS);
+        state->voters[i].totalTimeInMsecVotedForSinceBoot = values[0] / RPM_CLK;
+        state->voters[i].totalNumberOfTimesVotedSinceBoot = values[1];
+    }
 
     /* Update statistics for VMIN state */
-    state = &states[platform_mode_id::RPM_MODE_VMIN];
+    state = &states[RPM_MODE_VMIN];
     state->name = "VMIN";
+    values = stats + (RPM_MODE_VMIN * MAX_RPM_PARAMS);
 
-    state->residencyInMsecSinceBoot = stats[platform_param_id::ACCUMULATED_VMIN_TIME];
-    state->totalTransitions = stats[platform_param_id::VMIN_COUNT];
+    state->residencyInMsecSinceBoot = values[1];
+    state->totalTransitions = values[0];
     state->supportedOnlyInSuspend = false;
     state->voters.resize(VMIN_VOTERS);
     //Note: No filling of state voters since VMIN_VOTERS = 0
