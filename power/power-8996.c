@@ -38,7 +38,7 @@
 
 #define ATRACE_TAG (ATRACE_TAG_POWER | ATRACE_TAG_HAL)
 #define LOG_TAG "QCOM PowerHAL"
-#include <utils/Log.h>
+#include <log/log.h>
 #include <cutils/trace.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>

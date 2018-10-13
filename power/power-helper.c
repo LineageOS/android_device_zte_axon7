@@ -37,9 +37,11 @@
 #include <fcntl.h>
 #include <dlfcn.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 #define LOG_TAG "QCOM PowerHAL"
-#include <utils/Log.h>
+#include <log/log.h>
 #include <hardware/power.h>
 #include <cutils/properties.h>
 

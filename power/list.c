@@ -32,7 +32,7 @@
 #include <string.h>
 
 #include "list.h"
-#include <utils/Log.h>
+#include <log/log.h>
 
 int init_list_head(struct list_node *head)
 {
