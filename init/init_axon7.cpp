@@ -98,8 +98,8 @@ void vendor_load_properties()
 {
     init_alarm_boot_properties();
 
-    property_override("ro.build.description", "P996A01_O-user 8.0.0 OPR1.170623.032 474 release-keys");
-    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "ZTE/P996A01_O/ailsa_ii:8.0.0/OPR1.170623.032/20180718.100630:user/release-keys");
+    property_override("ro.build.description", "P996A01_O-user 8.0.0 OPR1.170623.032 28 release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "ZTE/P996A01_O/ailsa_ii:8.0.0/OPR1.170623.032/20180815.171922:user/release-keys");
     property_override_dual("ro.product.name", "ro.vendor.product.name", "P996A01_O");
     property_override_dual("ro.product.device", "ro.vendor.product.device", "ailsa_ii");
 
