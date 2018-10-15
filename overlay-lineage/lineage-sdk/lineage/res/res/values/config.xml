@@ -58,4 +58,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">64</integer>
 
+	    <!-- Disable Button backlight settings -->
+    <integer name="config_buttonBrightnessSettingDefault">0</integer>
+
 </resources>
